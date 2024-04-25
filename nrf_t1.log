@@ -1,0 +1,261 @@
++ cd /free5gc
++ cat config/nrfcfg.conf
+configuration:
+  DefaultPlmnId:
+    mcc: "208"
+    mnc: "93"
+  MongoDBName: free5gc
+  MongoDBUrl: mongodb://mongodb-arbiter-headless
+  mongoDBStreamEnable: false
+  mongodb:
+    name: free5gc
+    url: mongodb://mongodb-arbiter-headless
+  nfKeepAliveTime: 60
+  nfProfileExpiryEnable: false
+  sbi:
+    bindingIPv4: 0.0.0.0
+    port: 29510
+    registerIPv4: nrf
+    scheme: http
+  serviceNameList:
+  - nnrf-nfm
+  - nnrf-disc
+info:
+  description: NRF initial local configuration
+  version: 1.0.0
+logger:
+  AMF:
+    ReportCaller: false
+    debugLevel: info
+  AUSF:
+    ReportCaller: false
+    debugLevel: info
+  Aper:
+    ReportCaller: false
+    debugLevel: info
+  CommonConsumerTest:
+    ReportCaller: false
+    debugLevel: info
+  FSM:
+    ReportCaller: false
+    debugLevel: info
+  MongoDBLibrary:
+    ReportCaller: false
+    debugLevel: info
+  N3IWF:
+    ReportCaller: false
+    debugLevel: info
+  NAS:
+    ReportCaller: false
+    debugLevel: info
+  NGAP:
+    ReportCaller: false
+    debugLevel: info
+  NRF:
+    ReportCaller: false
+    debugLevel: info
+  NamfComm:
+    ReportCaller: false
+    debugLevel: info
+  NamfEventExposure:
+    ReportCaller: false
+    debugLevel: info
+  NsmfPDUSession:
+    ReportCaller: false
+    debugLevel: info
+  NudrDataRepository:
+    ReportCaller: false
+    debugLevel: info
+  OpenApi:
+    ReportCaller: false
+    debugLevel: info
+  PCF:
+    ReportCaller: false
+    debugLevel: info
+  PFCP:
+    ReportCaller: false
+    debugLevel: info
+  PathUtil:
+    ReportCaller: false
+    debugLevel: info
+  SMF:
+    ReportCaller: false
+    debugLevel: info
+  UDM:
+    ReportCaller: false
+    debugLevel: info
+  UDR:
+    ReportCaller: false
+    debugLevel: info
+  WEBUI:
+    ReportCaller: false
+    debugLevel: info+ GOTRACEBACK=crash ./nrf/nrf -nrfcfg config/nrfcfg.conf
+nrf
+2024-03-24T14:28:21Z[36m [INFO][NRF][App] [0mNRF version:  
+	Not specify ldflags (which link version) during go build
+	go version: go1.19.13 linux/amd64
+2024-03-24T14:28:21Z[36m [INFO][NRF][Init] [0mDefaultPlmnId Mnc 93 , Mcc 208
+2024-03-24T14:28:21Z[36m [INFO][NRF][Init] [0mMANAGED_BY_CONFIG_POD is true
+2024-03-24T14:28:21Z[36m [INFO][CONN][GRPC] [0mConfig Client : Creating
+2024-03-24T14:28:21Z[36m [INFO][CONN][GRPC] [0mDialing GRPC Connection -  webui:9876
+2024-03-24T14:28:21Z[36m [INFO][CONN][GRPC] [0mConnecting to GRPC ...
+2024-03-24T14:28:41Z[36m [INFO][CONN][GRPC] [0mConnecting to GRPC ...
+2024-03-24T14:29:01Z[36m [INFO][CONN][GRPC] [0mConnecting to GRPC ...
+2024-03-24T14:29:21Z[36m [INFO][CONN][GRPC] [0mConnecting to GRPC ...
+2024-03-24T14:29:41Z[36m [INFO][CONN][GRPC] [0mConnecting to GRPC ...
+2024/03/24 14:30:01 INFO: [core] [Channel #1] Channel created
+2024/03/24 14:30:01 INFO: [core] [Channel #1] original dial target is: "webui:9876"
+2024/03/24 14:30:01 INFO: [core] [Channel #1] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"webui", Opaque:"9876", User:(*url.Userinfo)(nil), Host:"", Path:"", RawPath:"", OmitHost:false, ForceQuery:false, RawQuery:"", Fragment:"", RawFragment:""}}
+2024/03/24 14:30:01 INFO: [core] [Channel #1] fallback to scheme "passthrough"
+2024/03/24 14:30:01 INFO: [core] [Channel #1] parsed dial target is: passthrough:///webui:9876
+2024/03/24 14:30:01 INFO: [core] [Channel #1] Channel authority set to "webui:9876"
+2024/03/24 14:30:01 INFO: [core] [Channel #1] Resolver state updated: {
+  "Addresses": [
+    {
+      "Addr": "webui:9876",
+      "ServerName": "",
+      "Attributes": null,
+      "BalancerAttributes": null,
+      "Metadata": null
+    }
+  ],
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "webui:9876",
+          "ServerName": "",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": null,
+  "Attributes": null
+} (resolver returned new addresses)
+2024/03/24 14:30:01 INFO: [core] [Channel #1] Channel switches to new LB policy "pick_first"
+2024/03/24 14:30:01 INFO: [core] [pick-first-lb 0xc0004abd40] Received new config {
+  "shuffleAddressList": false
+}, resolver state {
+  "Addresses": [
+    {
+      "Addr": "webui:9876",
+      "ServerName": "",
+      "Attributes": null,
+      "BalancerAttributes": null,
+      "Metadata": null
+    }
+  ],
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "webui:9876",
+          "ServerName": "",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": null,
+  "Attributes": null
+}
+2024/03/24 14:30:01 INFO: [core] [Channel #1 SubChannel #2] Subchannel created
+2024/03/24 14:30:01 INFO: [core] [Channel #1] Channel Connectivity change to CONNECTING
+2024/03/24 14:30:01 INFO: [core] [Channel #1] Channel exiting idle mode
+2024-03-24T14:30:01Z[36m [INFO][NRF][Init] [0mNRF Log level is set to [info] level
+2024/03/24 14:30:01 INFO: [core] [Channel #1 SubChannel #2] Subchannel Connectivity change to CONNECTING
+2024/03/24 14:30:01 INFO: [core] [Channel #1 SubChannel #2] Subchannel picks a new address "webui:9876" to connect
+2024-03-24T14:30:01Z[36m [INFO][LIB][Path] [0mset log level : info
+2024-03-24T14:30:01Z[36m [INFO][LIB][Path] [0mset report call : false
+2024/03/24 14:30:01 INFO: [core] [pick-first-lb 0xc0004abd40] Received SubConn state update: 0xc0004abe60, {ConnectivityState:CONNECTING ConnectionError:<nil>}
+2024-03-24T14:30:01Z[36m [INFO][CONN][GRPC] [0mSubscribing to Config POD
+2024-03-24T14:30:01Z[36m [INFO][LIB][MonDB] [0mset log level : info
+2024-03-24T14:30:01Z[36m [INFO][LIB][MonDB] [0mset report call : false
+2024-03-24T14:30:01Z[36m [INFO][NRF][CFG] [0mconfig version [1.0.0]
+2024-03-24T14:30:01Z[36m [INFO][NRF][Init] [0mServer started
+2024-03-24T14:30:01Z[31m [ERRO][CONN][GRPC] [0mConnectivity status: Not Ready
+2024/03/24 14:30:01 MongoDB Connection Successful
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /                         --> github.com/omec-project/nrf/accesstoken.Index (3 handlers)
+[GIN-debug] POST   /oauth2/token             --> github.com/omec-project/nrf/accesstoken.HTTPAccessTokenRequest (3 handlers)
+[GIN-debug] GET    /nnrf-disc/v1/            --> github.com/omec-project/nrf/discovery.Index (3 handlers)
+[GIN-debug] GET    /nnrf-disc/v1/nf-instances --> github.com/omec-project/nrf/discovery.HTTPSearchNFInstances (3 handlers)
+[GIN-debug] GET    /nnrf-nfm/v1/             --> github.com/omec-project/nrf/management.Index (3 handlers)
+[GIN-debug] DELETE /nnrf-nfm/v1/nf-instances/:nfInstanceID --> github.com/omec-project/nrf/management.HTTPDeregisterNFInstance (3 handlers)
+[GIN-debug] GET    /nnrf-nfm/v1/nf-instances/:nfInstanceID --> github.com/omec-project/nrf/management.HTTPGetNFInstance (3 handlers)
+[GIN-debug] PUT    /nnrf-nfm/v1/nf-instances/:nfInstanceID --> github.com/omec-project/nrf/management.HTTPRegisterNFInstance (3 handlers)
+[GIN-debug] PATCH  /nnrf-nfm/v1/nf-instances/:nfInstanceID --> github.com/omec-project/nrf/management.HTTPUpdateNFInstance (3 handlers)
+[GIN-debug] GET    /nnrf-nfm/v1/nf-instances --> github.com/omec-project/nrf/management.HTTPGetNFInstances (3 handlers)
+[GIN-debug] DELETE /nnrf-nfm/v1/subscriptions/:subscriptionID --> github.com/omec-project/nrf/management.HTTPRemoveSubscription (3 handlers)
+[GIN-debug] PATCH  /nnrf-nfm/v1/subscriptions/:subscriptionID --> github.com/omec-project/nrf/management.HTTPUpdateSubscription (3 handlers)
+[GIN-debug] POST   /nnrf-nfm/v1/subscriptions --> github.com/omec-project/nrf/management.HTTPCreateSubscription (3 handlers)
+2024-03-24T14:30:01Z[36m [INFO][NRF][Init] [0mnrfconfig Info: Version[1.0.0] Description[NRF initial local configuration]
+2024-03-24T14:30:01Z[36m [INFO][NRF][Init] [0mMANAGED_BY_CONFIG_POD is true
+2024-03-24T14:30:01Z[36m [INFO][NRF][Init] [0mBinding addr: [0.0.0.0:29510]
+2024/03/24 14:30:01 INFO: [core] [Channel #1 SubChannel #2] Subchannel Connectivity change to READY
+2024/03/24 14:30:01 INFO: [core] [pick-first-lb 0xc0004abd40] Received SubConn state update: 0xc0004abe60, {ConnectivityState:READY ConnectionError:<nil>}
+2024/03/24 14:30:01 INFO: [core] [Channel #1] Channel Connectivity change to READY
+2024-03-24T14:30:01Z[36m [INFO][NRF][MGMT] [0mHandle NFRegisterRequest
+2024-03-24T14:30:01Z[36m [INFO][NRF][MGMT] [0mHearBeat Timer value: %v sec 86400
+2024-03-24T14:30:01Z[36m [INFO][NRF][MGMT] [0murilist create
+2024-03-24T14:30:01Z[36m [INFO][NRF][MGMT] [0mCreate NF Profile  UDM
+2024-03-24T14:30:01Z[36m [INFO][NRF][MGMT] [0mLocation header:  http://nrf:29510/nnrf-nfm/v1/nf-instances/e2a69353-8652-4ca1-810a-a5e4a131ac14
+2024-03-24T14:30:01Z[36m [INFO][NRF][GIN] [0m| 201 |  192.168.84.165 | PUT     | /nnrf-nfm/v1/nf-instances/e2a69353-8652-4ca1-810a-a5e4a131ac14 |
+2024-03-24T14:30:02Z[36m [INFO][NRF][MGMT] [0mHandle NFRegisterRequest
+2024-03-24T14:30:02Z[36m [INFO][NRF][MGMT] [0mHearBeat Timer value: %v sec 86400
+2024-03-24T14:30:02Z[36m [INFO][NRF][MGMT] [0murilist create
+2024-03-24T14:30:02Z[36m [INFO][NRF][MGMT] [0mCreate NF Profile  PCF
+2024-03-24T14:30:02Z[36m [INFO][NRF][MGMT] [0mLocation header:  http://nrf:29510/nnrf-nfm/v1/nf-instances/09d84b8a-3d8c-4bf1-ba7d-585f54321cb8
+2024-03-24T14:30:02Z[36m [INFO][NRF][GIN] [0m| 201 |  192.168.84.161 | PUT     | /nnrf-nfm/v1/nf-instances/09d84b8a-3d8c-4bf1-ba7d-585f54321cb8 |
+2024-03-24T14:30:02Z[36m [INFO][NRF][DSCV] [0mHandle NFDiscoveryRequest
+2024-03-24T14:30:02Z[36m [INFO][NRF][GIN] [0m| 200 |  192.168.84.161 | GET     | /nnrf-disc/v1/nf-instances?requester-nf-type=PCF&service-names=nudr-dr&target-nf-type=UDR |
+2024-03-24T14:30:02Z[36m [INFO][CONN][GRPC] [0mConnectivity status: Ready
+2024-03-24T14:30:02Z[36m [INFO][CONN][GRPC] [0mConfig Message received
+2024-03-24T14:30:02Z[36m [INFO][CONN][GRPC] [0mInitial Config Received  RestartCounter:2984895646  NetworkSlice:{Name:"default"  Nssai:{Sst:"1"  Sd:"010203"}  DeviceGroup:{Name:"5g-gnbsim-user-group1"  IpDomainDetails:{Name:"pool1"  DnnName:"internet"  UePool:"172.250.1.0/16"  DnsPrimary:"8.8.8.8"  Mtu:1460  UeDnnQos:{DnnMbrUplink:20000000  DnnMbrDownlink:200000000  TrafficClass:{Name:"platinum"  Qci:9  Arp:6  Pdb:300  Pelr:6}}}  Imsi:"208930100007487"  Imsi:"208930100007488"  Imsi:"208930100007489"  Imsi:"208930100007490"  Imsi:"208930100007491"  Imsi:"208930100007492"  Imsi:"208930100007493"  Imsi:"208930100007494"  Imsi:"208930100007495"  Imsi:"208930100007496"  Imsi:"208930100007497"  Imsi:"208930100007498"  Imsi:"208930100007499"  Imsi:"208930100007500"}  DeviceGroup:{Name:"5g-gnbsim-user-group2"  IpDomainDetails:{Name:"pool2"  DnnName:"internet"  UePool:"172.250.1.0/16"  DnsPrimary:"8.8.8.8"  Mtu:1460  UeDnnQos:{DnnMbrUplink:10000000  DnnMbrDownlink:400000000  TrafficClass:{Name:"platinum"  Qci:8  Arp:6  Pdb:300  Pelr:6}}}  Imsi:"208930100007501"  Imsi:"208930100007502"  Imsi:"208930100007503"  Imsi:"208930100007504"  Imsi:"208930100007505"  Imsi:"208930100007506"  Imsi:"208930100007507"  Imsi:"208930100007508"  Imsi:"208930100007509"  Imsi:"208930100007510"}  Site:{SiteName:"aiab"  Gnb:{Name:"aiab-gnb1"  Tac:1}  Gnb:{Name:"aiab-gnb2"  Tac:2}  Plmn:{mcc:"208"  mnc:"93"}  Upf:{UpfName:"upf"}}  AppFilters:{PccRuleBase:{FlowInfos:{FlowDesc:"permit out ip from any to assigned"  TosTrafficClass:"IPV4"  FlowDir:BIDIRECTIONAL  FlowStatus:ENABLED}  RuleId:"ALLOW-ALL"  Qos:{Var5qi:9  Arp:{PL:6  PC:MAY_PREEMPT  PV:PREEMPTABLE}}  Priority:250}}}  ConfigUpdated:1
+2024-03-24T14:30:02Z[36m [INFO][CONN][GRPC] [0mRestartCounter:2984895646  NetworkSlice:{Name:"default"  Nssai:{Sst:"1"  Sd:"010203"}  DeviceGroup:{Name:"5g-gnbsim-user-group1"  IpDomainDetails:{Name:"pool1"  DnnName:"internet"  UePool:"172.250.1.0/16"  DnsPrimary:"8.8.8.8"  Mtu:1460  UeDnnQos:{DnnMbrUplink:20000000  DnnMbrDownlink:200000000  TrafficClass:{Name:"platinum"  Qci:9  Arp:6  Pdb:300  Pelr:6}}}  Imsi:"208930100007487"  Imsi:"208930100007488"  Imsi:"208930100007489"  Imsi:"208930100007490"  Imsi:"208930100007491"  Imsi:"208930100007492"  Imsi:"208930100007493"  Imsi:"208930100007494"  Imsi:"208930100007495"  Imsi:"208930100007496"  Imsi:"208930100007497"  Imsi:"208930100007498"  Imsi:"208930100007499"  Imsi:"208930100007500"}  DeviceGroup:{Name:"5g-gnbsim-user-group2"  IpDomainDetails:{Name:"pool2"  DnnName:"internet"  UePool:"172.250.1.0/16"  DnsPrimary:"8.8.8.8"  Mtu:1460  UeDnnQos:{DnnMbrUplink:10000000  DnnMbrDownlink:400000000  TrafficClass:{Name:"platinum"  Qci:8  Arp:6  Pdb:300  Pelr:6}}}  Imsi:"208930100007501"  Imsi:"208930100007502"  Imsi:"208930100007503"  Imsi:"208930100007504"  Imsi:"208930100007505"  Imsi:"208930100007506"  Imsi:"208930100007507"  Imsi:"208930100007508"  Imsi:"208930100007509"  Imsi:"208930100007510"}  Site:{SiteName:"aiab"  Gnb:{Name:"aiab-gnb1"  Tac:1}  Gnb:{Name:"aiab-gnb2"  Tac:2}  Plmn:{mcc:"208"  mnc:"93"}  Upf:{UpfName:"upf"}}  AppFilters:{PccRuleBase:{FlowInfos:{FlowDesc:"permit out ip from any to assigned"  TosTrafficClass:"IPV4"  FlowDir:BIDIRECTIONAL  FlowStatus:ENABLED}  RuleId:"ALLOW-ALL"  Qos:{Var5qi:9  Arp:{PL:6  PC:MAY_PREEMPT  PV:PREEMPTABLE}}  Priority:250}}}  ConfigUpdated:1
+2024-03-24T14:30:02Z[36m [INFO][NRF][GRPC] [0mReceived updateConfig in the nrf app :  RestartCounter:2984895646  NetworkSlice:{Name:"default"  Nssai:{Sst:"1"  Sd:"010203"}  DeviceGroup:{Name:"5g-gnbsim-user-group1"  IpDomainDetails:{Name:"pool1"  DnnName:"internet"  UePool:"172.250.1.0/16"  DnsPrimary:"8.8.8.8"  Mtu:1460  UeDnnQos:{DnnMbrUplink:20000000  DnnMbrDownlink:200000000  TrafficClass:{Name:"platinum"  Qci:9  Arp:6  Pdb:300  Pelr:6}}}  Imsi:"208930100007487"  Imsi:"208930100007488"  Imsi:"208930100007489"  Imsi:"208930100007490"  Imsi:"208930100007491"  Imsi:"208930100007492"  Imsi:"208930100007493"  Imsi:"208930100007494"  Imsi:"208930100007495"  Imsi:"208930100007496"  Imsi:"208930100007497"  Imsi:"208930100007498"  Imsi:"208930100007499"  Imsi:"208930100007500"}  DeviceGroup:{Name:"5g-gnbsim-user-group2"  IpDomainDetails:{Name:"pool2"  DnnName:"internet"  UePool:"172.250.1.0/16"  DnsPrimary:"8.8.8.8"  Mtu:1460  UeDnnQos:{DnnMbrUplink:10000000  DnnMbrDownlink:400000000  TrafficClass:{Name:"platinum"  Qci:8  Arp:6  Pdb:300  Pelr:6}}}  Imsi:"208930100007501"  Imsi:"208930100007502"  Imsi:"208930100007503"  Imsi:"208930100007504"  Imsi:"208930100007505"  Imsi:"208930100007506"  Imsi:"208930100007507"  Imsi:"208930100007508"  Imsi:"208930100007509"  Imsi:"208930100007510"}  Site:{SiteName:"aiab"  Gnb:{Name:"aiab-gnb1"  Tac:1}  Gnb:{Name:"aiab-gnb2"  Tac:2}  Plmn:{mcc:"208"  mnc:"93"}  Upf:{UpfName:"upf"}}  AppFilters:{PccRuleBase:{FlowInfos:{FlowDesc:"permit out ip from any to assigned"  TosTrafficClass:"IPV4"  FlowDir:BIDIRECTIONAL  FlowStatus:ENABLED}  RuleId:"ALLOW-ALL"  Qos:{Var5qi:9  Arp:{PL:6  PC:MAY_PREEMPT  PV:PREEMPTABLE}}  Priority:250}}}  ConfigUpdated:1
+2024-03-24T14:30:02Z[36m [INFO][NRF][GRPC] [0mNetwork Slice Name  default
+2024-03-24T14:30:02Z[36m [INFO][NRF][GRPC] [0mNetwork Slice has site name present
+2024-03-24T14:30:02Z[36m [INFO][NRF][GRPC] [0mSite name  aiab
+2024-03-24T14:30:02Z[36m [INFO][NRF][GRPC] [0mPlmn mcc  208
+2024-03-24T14:30:02Z[36m [INFO][NRF][GRPC] [0mminimum config Available
+2024-03-24T14:30:02Z[36m [INFO][NRF][MGMT] [0mHandle NFRegisterRequest
+2024-03-24T14:30:02Z[36m [INFO][NRF][MGMT] [0mHearBeat Timer value: %v sec 86400
+2024-03-24T14:30:02Z[36m [INFO][NRF][MGMT] [0murilist create
+2024-03-24T14:30:02Z[36m [INFO][NRF][MGMT] [0mCreate NF Profile  SMF
+2024-03-24T14:30:02Z[36m [INFO][NRF][MGMT] [0mLocation header:  http://nrf:29510/nnrf-nfm/v1/nf-instances/8b2107a1-3a80-426f-91ca-523e76208a38
+2024-03-24T14:30:02Z[36m [INFO][NRF][GIN] [0m| 201 |  192.168.84.156 | PUT     | /nnrf-nfm/v1/nf-instances/8b2107a1-3a80-426f-91ca-523e76208a38 |
+2024-03-24T14:30:03Z[36m [INFO][NRF][MGMT] [0mHandle NFRegisterRequest
+2024-03-24T14:30:03Z[36m [INFO][NRF][MGMT] [0mHearBeat Timer value: %v sec 86400
+2024-03-24T14:30:03Z[36m [INFO][NRF][MGMT] [0murilist create
+2024-03-24T14:30:03Z[36m [INFO][NRF][MGMT] [0mCreate NF Profile  AUSF
+2024-03-24T14:30:03Z[36m [INFO][NRF][MGMT] [0mLocation header:  http://nrf:29510/nnrf-nfm/v1/nf-instances/152347f4-89db-4968-9cfc-cc1f9e82755a
+2024-03-24T14:30:03Z[36m [INFO][NRF][GIN] [0m| 201 |  192.168.84.167 | PUT     | /nnrf-nfm/v1/nf-instances/152347f4-89db-4968-9cfc-cc1f9e82755a |
+2024-03-24T14:30:03Z[36m [INFO][NRF][MGMT] [0mHandle NFRegisterRequest
+2024-03-24T14:30:03Z[36m [INFO][NRF][MGMT] [0mHearBeat Timer value: %v sec 86400
+2024-03-24T14:30:03Z[36m [INFO][NRF][MGMT] [0mHandle NFRegisterRequest
+2024-03-24T14:30:03Z[36m [INFO][NRF][MGMT] [0mHearBeat Timer value: %v sec 86400
+2024-03-24T14:30:03Z[36m [INFO][NRF][MGMT] [0murilist create
+2024-03-24T14:30:03Z[36m [INFO][NRF][MGMT] [0murilist create
+2024-03-24T14:30:03Z[36m [INFO][NRF][MGMT] [0mCreate NF Profile  UDR
+2024-03-24T14:30:03Z[36m [INFO][NRF][MGMT] [0mCreate NF Profile  AMF
+2024-03-24T14:30:03Z[36m [INFO][NRF][MGMT] [0mLocation header:  http://nrf:29510/nnrf-nfm/v1/nf-instances/824aee00-d3c8-48e1-9c4b-4528feb46f08
+2024-03-24T14:30:03Z[36m [INFO][NRF][GIN] [0m| 201 |  192.168.84.169 | PUT     | /nnrf-nfm/v1/nf-instances/824aee00-d3c8-48e1-9c4b-4528feb46f08 |
+2024-03-24T14:30:03Z[36m [INFO][NRF][MGMT] [0mLocation header:  http://nrf:29510/nnrf-nfm/v1/nf-instances/f084a784-8014-4c73-9512-c10fecf194a1
+2024-03-24T14:30:03Z[36m [INFO][NRF][GIN] [0m| 201 |  192.168.84.168 | PUT     | /nnrf-nfm/v1/nf-instances/f084a784-8014-4c73-9512-c10fecf194a1 |
+2024-03-24T14:30:03Z[36m [INFO][NRF][MGMT] [0mHandle NFRegisterRequest
+2024-03-24T14:30:03Z[36m [INFO][NRF][MGMT] [0mHearBeat Timer value: %v sec 86400
+2024-03-24T14:30:03Z[36m [INFO][NRF][MGMT] [0murilist create
+2024-03-24T14:30:03Z[36m [INFO][NRF][MGMT] [0mCreate NF Profile  NSSF
+2024-03-24T14:30:03Z[36m [INFO][NRF][MGMT] [0mLocation header:  http://nrf:29510/nnrf-nfm/v1/nf-instances/746784fe-5688-412c-aeca-4defc77b3bca
+2024-03-24T14:30:03Z[36m [INFO][NRF][GIN] [0m| 201 |  192.168.84.162 | PUT     | /nnrf-nfm/v1/nf-instances/746784fe-5688-412c-aeca-4defc77b3bca |
