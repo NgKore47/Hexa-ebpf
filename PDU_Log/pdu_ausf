@@ -1,0 +1,217 @@
++ cd /free5gc
++ cat config/ausfcfg.conf
+configuration:
+  groupId: ausfGroup001
+  nrfUri: http://nrf:29510
+  plmnSupportList:
+  - mcc: "208"
+    mnc: "93"
+  sbi:
+    bindingIPv4: 0.0.0.0
+    port: 29509
+    registerIPv4: ausf
+    scheme: http
+  serviceNameList:
+  - nausf-auth
+info:
+  description: AUSF initial local configuration
+  version: 1.0.0
+logger:
+  AMF:
+    ReportCaller: false
+    debugLevel: info
+  AUSF:
+    ReportCaller: false
+    debugLevel: info
+  Aper:
+    ReportCaller: false
+    debugLevel: info
+  CommonConsumerTest:
+    ReportCaller: false
+    debugLevel: info
+  FSM:
+    ReportCaller: false
+    debugLevel: info
+  MongoDBLibrary:
+    ReportCaller: false
+    debugLevel: info
+  N3IWF:
+    ReportCaller: false
+    debugLevel: info
+  NAS:
+    ReportCaller: false
+    debugLevel: info
+  NGAP:
+    ReportCaller: false
+    debugLevel: info
+  NRF:
+    ReportCaller: false
+    debugLevel: info
+  NamfComm:
+    ReportCaller: false
+    debugLevel: info
+  NamfEventExposure:
+    ReportCaller: false
+    debugLevel: info
+  NsmfPDUSession:
+    ReportCaller: false
+    debugLevel: info
+  NudrDataRepository:
+    ReportCaller: false
+    debugLevel: info
+  OpenApi:
+    ReportCaller: false
+    debugLevel: info
+  PCF:
+    ReportCaller: false
+    debugLevel: info
+  PFCP:
+    ReportCaller: false
+    debugLevel: info
+  PathUtil:
+    ReportCaller: false
+    debugLevel: info
+  SMF:
+    ReportCaller: false
+    debugLevel: info
+  UDM:
+    ReportCaller: false
+    debugLevel: info
+  UDR:
+    ReportCaller: false
+    debugLevel: info
+  WEBUI:
+    ReportCaller: false
+    debugLevel: info+ GOTRACEBACK=crash ./ausf/ausf -ausfcfg config/ausfcfg.conf
+NEURA_AUSF
+2024-03-24T11:17:45Z[36m [INFO][AUSF][Init] [0mAUSF Log level is set to [info] level
+2024-03-24T11:17:45Z[36m [INFO][LIB][Path] [0mset log level : info
+2024-03-24T11:17:45Z[36m [INFO][LIB][Path] [0mset report call : false
+2024-03-24T11:17:45Z[36m [INFO][AUSF][CFG] [0mconfig version [1.0.0]
+2024-03-24T11:17:45Z[36m [INFO][AUSF][Init] [0mMANAGED_BY_CONFIG_POD is true
+2024-03-24T11:17:45Z[36m [INFO][Config5g][GRPC] [0mConfig Client : Creating
+2024-03-24T11:17:45Z[36m [INFO][Config5g][GRPC] [0mDialing GRPC Connection -  webui:9876
+2024-03-24T11:17:45Z[36m [INFO][Config5g][GRPC] [0mConnecting to GRPC ...
+2024-03-24T11:18:05Z[36m [INFO][Config5g][GRPC] [0mConnecting to GRPC ...
+2024-03-24T11:18:25Z[36m [INFO][Config5g][GRPC] [0mConnecting to GRPC ...
+2024-03-24T11:18:45Z[36m [INFO][Config5g][GRPC] [0mConnecting to GRPC ...
+2024-03-24T11:19:05Z[36m [INFO][Config5g][GRPC] [0mConnecting to GRPC ...
+2024/03/24 11:19:25 INFO: [core] [Channel #1] Channel created
+2024/03/24 11:19:25 INFO: [core] [Channel #1] original dial target is: "webui:9876"
+2024/03/24 11:19:25 INFO: [core] [Channel #1] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"webui", Opaque:"9876", User:(*url.Userinfo)(nil), Host:"", Path:"", RawPath:"", OmitHost:false, ForceQuery:false, RawQuery:"", Fragment:"", RawFragment:""}}
+2024/03/24 11:19:25 INFO: [core] [Channel #1] fallback to scheme "passthrough"
+2024/03/24 11:19:25 INFO: [core] [Channel #1] parsed dial target is: passthrough:///webui:9876
+2024/03/24 11:19:25 INFO: [core] [Channel #1] Channel authority set to "webui:9876"
+2024/03/24 11:19:25 INFO: [core] [Channel #1] Resolver state updated: {
+  "Addresses": [
+    {
+      "Addr": "webui:9876",
+      "ServerName": "",
+      "Attributes": null,
+      "BalancerAttributes": null,
+      "Metadata": null
+    }
+  ],
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "webui:9876",
+          "ServerName": "",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": null,
+  "Attributes": null
+} (resolver returned new addresses)
+2024/03/24 11:19:25 INFO: [core] [Channel #1] Channel switches to new LB policy "pick_first"
+2024/03/24 11:19:25 INFO: [core] [pick-first-lb 0xc0005cf650] Received new config {
+  "shuffleAddressList": false
+}, resolver state {
+  "Addresses": [
+    {
+      "Addr": "webui:9876",
+      "ServerName": "",
+      "Attributes": null,
+      "BalancerAttributes": null,
+      "Metadata": null
+    }
+  ],
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "webui:9876",
+          "ServerName": "",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": null,
+  "Attributes": null
+}
+2024/03/24 11:19:25 INFO: [core] [Channel #1 SubChannel #2] Subchannel created
+2024/03/24 11:19:25 INFO: [core] [Channel #1] Channel Connectivity change to CONNECTING
+2024/03/24 11:19:25 INFO: [core] [Channel #1] Channel exiting idle mode
+2024/03/24 11:19:25 INFO: [core] [Channel #1 SubChannel #2] Subchannel Connectivity change to CONNECTING
+2024-03-24T11:19:25Z[36m [INFO][AUSF][Init] [0mServer started
+2024/03/24 11:19:25 INFO: [core] [Channel #1 SubChannel #2] Subchannel picks a new address "webui:9876" to connect
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /nausf-auth/v1/           --> github.com/omec-project/ausf/ueauthentication.Index (3 handlers)
+[GIN-debug] POST   /nausf-auth/v1/ue-authentications/:authCtxId/eap-session --> github.com/omec-project/ausf/ueauthentication.HTTPEapAuthMethod (3 handlers)
+[GIN-debug] PUT    /nausf-auth/v1/ue-authentications/:authCtxId/5g-aka-confirmation --> github.com/omec-project/ausf/ueauthentication.HTTPUeAuthenticationsAuthCtxID5gAkaConfirmationPut (3 handlers)
+[GIN-debug] POST   /nausf-auth/v1/ue-authentications --> github.com/omec-project/ausf/ueauthentication.HTTPUeAuthenticationsPost (3 handlers)
+2024-03-24T11:19:25Z[36m [INFO][Config5g][GRPC] [0mSubscribing to Config POD
+2024/03/24 11:19:25 INFO: [core] [pick-first-lb 0xc0005cf650] Received SubConn state update: 0xc0005cf770, {ConnectivityState:CONNECTING ConnectionError:<nil>}
+2024-03-24T11:19:25Z[31m [ERRO][Config5g][GRPC] [0mConnectivity status: Not Ready
+2024-03-24T11:19:25Z[36m [INFO][AUSF][Init] [0mausfconfig Info: Version[1.0.0] Description[AUSF initial local configuration]
+ausf context =  &{{{0 0} {<nil>} map[] 0} {{0 0} {<nil>} map[] 0} 0b387300-d594-4472-a91f-64d2710e0c98 ausfGroup001 29509 ausf 0.0.0.0 http://ausf:29509 http http://nrf:29510 map[nausf-auth:{0b387300-d594-4472-a91f-64d2710e0c98 nausf-auth 0xc00012f110 http REGISTERED   0xc00012f0f8  [] <nil> [] [] <nil> 0 0 0 <nil> <nil> }] []  0xc00062e5a0}
+2024/03/24 11:19:25 INFO: [core] [Channel #1 SubChannel #2] Subchannel Connectivity change to READY
+2024/03/24 11:19:25 INFO: [core] [pick-first-lb 0xc0005cf650] Received SubConn state update: 0xc0005cf770, {ConnectivityState:READY ConnectionError:<nil>}
+2024/03/24 11:19:25 INFO: [core] [Channel #1] Channel Connectivity change to READY
+2024-03-24T11:19:26Z[36m [INFO][Config5g][GRPC] [0mConnectivity status: Ready
+2024-03-24T11:19:26Z[36m [INFO][Config5g][GRPC] [0mConfig Message received
+2024-03-24T11:19:26Z[36m [INFO][Config5g][GRPC] [0mInitial Config Received  RestartCounter:4141576257  NetworkSlice:{Name:"default"  Nssai:{Sst:"1"  Sd:"010203"}  DeviceGroup:{Name:"5g-gnbsim-user-group1"  IpDomainDetails:{Name:"pool1"  DnnName:"internet"  UePool:"172.250.1.0/16"  DnsPrimary:"8.8.8.8"  Mtu:1460  UeDnnQos:{DnnMbrUplink:20000000  DnnMbrDownlink:200000000  TrafficClass:{Name:"platinum"  Qci:9  Arp:6  Pdb:300  Pelr:6}}}  Imsi:"208930100007487"  Imsi:"208930100007488"  Imsi:"208930100007489"  Imsi:"208930100007490"  Imsi:"208930100007491"  Imsi:"208930100007492"  Imsi:"208930100007493"  Imsi:"208930100007494"  Imsi:"208930100007495"  Imsi:"208930100007496"  Imsi:"208930100007497"  Imsi:"208930100007498"  Imsi:"208930100007499"  Imsi:"208930100007500"}  DeviceGroup:{Name:"5g-gnbsim-user-group2"  IpDomainDetails:{Name:"pool2"  DnnName:"internet"  UePool:"172.250.1.0/16"  DnsPrimary:"8.8.8.8"  Mtu:1460  UeDnnQos:{DnnMbrUplink:10000000  DnnMbrDownlink:400000000  TrafficClass:{Name:"platinum"  Qci:8  Arp:6  Pdb:300  Pelr:6}}}  Imsi:"208930100007501"  Imsi:"208930100007502"  Imsi:"208930100007503"  Imsi:"208930100007504"  Imsi:"208930100007505"  Imsi:"208930100007506"  Imsi:"208930100007507"  Imsi:"208930100007508"  Imsi:"208930100007509"  Imsi:"208930100007510"}  Site:{SiteName:"aiab"  Gnb:{Name:"aiab-gnb1"  Tac:1}  Gnb:{Name:"aiab-gnb2"  Tac:2}  Plmn:{mcc:"208"  mnc:"93"}  Upf:{UpfName:"upf"}}  AppFilters:{PccRuleBase:{FlowInfos:{FlowDesc:"permit out ip from any to assigned"  TosTrafficClass:"IPV4"  FlowDir:BIDIRECTIONAL  FlowStatus:ENABLED}  RuleId:"ALLOW-ALL"  Qos:{Var5qi:9  Arp:{PL:6  PC:MAY_PREEMPT  PV:PREEMPTABLE}}  Priority:250}}}  ConfigUpdated:1
+2024-03-24T11:19:26Z[36m [INFO][AUSF][GRPC] [0mReceived updateConfig in the ausf app :  RestartCounter:4141576257  NetworkSlice:{Name:"default"  Nssai:{Sst:"1"  Sd:"010203"}  DeviceGroup:{Name:"5g-gnbsim-user-group1"  IpDomainDetails:{Name:"pool1"  DnnName:"internet"  UePool:"172.250.1.0/16"  DnsPrimary:"8.8.8.8"  Mtu:1460  UeDnnQos:{DnnMbrUplink:20000000  DnnMbrDownlink:200000000  TrafficClass:{Name:"platinum"  Qci:9  Arp:6  Pdb:300  Pelr:6}}}  Imsi:"208930100007487"  Imsi:"208930100007488"  Imsi:"208930100007489"  Imsi:"208930100007490"  Imsi:"208930100007491"  Imsi:"208930100007492"  Imsi:"208930100007493"  Imsi:"208930100007494"  Imsi:"208930100007495"  Imsi:"208930100007496"  Imsi:"208930100007497"  Imsi:"208930100007498"  Imsi:"208930100007499"  Imsi:"208930100007500"}  DeviceGroup:{Name:"5g-gnbsim-user-group2"  IpDomainDetails:{Name:"pool2"  DnnName:"internet"  UePool:"172.250.1.0/16"  DnsPrimary:"8.8.8.8"  Mtu:1460  UeDnnQos:{DnnMbrUplink:10000000  DnnMbrDownlink:400000000  TrafficClass:{Name:"platinum"  Qci:8  Arp:6  Pdb:300  Pelr:6}}}  Imsi:"208930100007501"  Imsi:"208930100007502"  Imsi:"208930100007503"  Imsi:"208930100007504"  Imsi:"208930100007505"  Imsi:"208930100007506"  Imsi:"208930100007507"  Imsi:"208930100007508"  Imsi:"208930100007509"  Imsi:"208930100007510"}  Site:{SiteName:"aiab"  Gnb:{Name:"aiab-gnb1"  Tac:1}  Gnb:{Name:"aiab-gnb2"  Tac:2}  Plmn:{mcc:"208"  mnc:"93"}  Upf:{UpfName:"upf"}}  AppFilters:{PccRuleBase:{FlowInfos:{FlowDesc:"permit out ip from any to assigned"  TosTrafficClass:"IPV4"  FlowDir:BIDIRECTIONAL  FlowStatus:ENABLED}  RuleId:"ALLOW-ALL"  Qos:{Var5qi:9  Arp:{PL:6  PC:MAY_PREEMPT  PV:PREEMPTABLE}}  Priority:250}}}  ConfigUpdated:1
+2024-03-24T11:19:26Z[36m [INFO][AUSF][GRPC] [0mNetwork Slice Name  default
+2024-03-24T11:19:26Z[36m [INFO][AUSF][GRPC] [0mNetwork Slice has site name present
+2024-03-24T11:19:26Z[36m [INFO][AUSF][GRPC] [0mSite name  aiab
+2024-03-24T11:19:26Z[36m [INFO][AUSF][GRPC] [0mPlmn mcc  208
+2024-03-24T11:19:26Z[36m [INFO][AUSF][GRPC] [0mPlmn added in the context [{208 93}]
+2024-03-24T11:19:26Z[36m [INFO][AUSF][GRPC] [0mSend config trigger to main routine first time config
+2024-03-24T11:19:26Z[36m [INFO][AUSF][Init] [0mMinimum configuration from config pod available true
+2024-03-24T11:19:26Z[36m [INFO][AUSF][Init] [0mStarted KeepAlive Timer: 86400 sec
+2024-03-24T11:19:26Z[36m [INFO][AUSF][CFG] [0mSent Register NF Instance with updated profile
+2024-03-24T11:25:04Z[36m [INFO][AUSF][UeAuthPost] [0mHandleUeAuthPostRequest
+2024-03-24T11:25:04Z[36m [INFO][AUSF][UeAuthPost] [0mServing network authorized
+2024-03-24T11:25:04Z[36m [INFO][AUSF][UeAuthPost] [0mAdd SuciSupiPair (suci-0-208-93-0000-0-0-0100007487, imsi-208930100007487) to map.
+2024-03-24T11:25:04Z[36m [INFO][AUSF][UeAuthPost] [0mUse 5G AKA auth method
+2024-03-24T11:25:04Z[36m [INFO][AUSF][5gAkaAuth] [0mXresStar = 3363363230353639326131363462316437303531323830383830663765653638
+2024-03-24T11:25:04Z[36m [INFO][AUSF][GIN] [0m| 201 |  192.168.84.183 | POST    | /nausf-auth/v1/ue-authentications |
+2024-03-24T11:25:04Z[36m [INFO][AUSF][UeAuthPost] [0mHandleUeAuthPostRequest
+2024-03-24T11:25:04Z[36m [INFO][AUSF][UeAuthPost] [0mServing network authorized
+2024-03-24T11:25:04Z[33m [WARN][AUSF][UeAuthPost] [0mAuts:  676bbff8cb7b46695f174cfd13a7
+2024-03-24T11:25:04Z[33m [WARN][AUSF][UeAuthPost] [0mimsi-208930100007487
+2024-03-24T11:25:04Z[33m [WARN][AUSF][UeAuthPost] [0m3eed8638cabf2982c32c23ca8a1833f3
+2024-03-24T11:25:04Z[33m [WARN][AUSF][UeAuthPost] [0mRand:  3eed8638cabf2982c32c23ca8a1833f3
+2024-03-24T11:25:04Z[36m [INFO][AUSF][UeAuthPost] [0mAdd SuciSupiPair (suci-0-208-93-0000-0-0-0100007487, imsi-208930100007487) to map.
+2024-03-24T11:25:04Z[36m [INFO][AUSF][UeAuthPost] [0mUse 5G AKA auth method
+2024-03-24T11:25:04Z[36m [INFO][AUSF][5gAkaAuth] [0mXresStar = 6436643831326138633233623961656633363965303933656266613539613431
+2024-03-24T11:25:04Z[36m [INFO][AUSF][GIN] [0m| 201 |  192.168.84.183 | POST    | /nausf-auth/v1/ue-authentications |
+2024-03-24T11:25:04Z[36m [INFO][AUSF][5gAkaAuth] [0mAuth5gAkaComfirmRequest
+2024-03-24T11:25:04Z[36m [INFO][AUSF][5gAkaAuth] [0mres*: 6436643831326138633233623961656633363965303933656266613539613431
+Xres*: 6436643831326138633233623961656633363965303933656266613539613431
+2024-03-24T11:25:04Z[36m [INFO][AUSF][5gAkaAuth] [0m5G AKA confirmation succeeded
+2024-03-24T11:25:04Z[36m [INFO][AUSF][GIN] [0m| 200 |  192.168.84.183 | PUT     | /nausf-auth/v1/ue-authentications/suci-0-208-93-0000-0-0-0100007487/5g-aka-confirmation |

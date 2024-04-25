@@ -1,0 +1,120 @@
+diff --git a/Makefile b/Makefile
+index 009d6a4..6f07188 100644
+--- a/Makefile
++++ b/Makefile
+@@ -11,6 +11,10 @@ RESOURCEDIR	:= $(MAKEDIR)/resources
+ WORKSPACE	?= $(HOME)
+ VENV		?= $(BUILD)/venv/aiab
+ 
++NS?=hexa
++HELM_ARGS?=--create-namespace
++HELM_ACTION?=install
++
+ 4G_CORE_VALUES       ?= $(MAKEDIR)/sd-core-4g-values.yaml
+ 5G_CORE_VALUES       ?= $(MAKEDIR)/sd-core-5g-values.yaml
+ 5G_UPF_VALUES        ?= $(MAKEDIR)/upf-5g-values.yaml
+@@ -28,14 +32,14 @@ DOCKER_VERSION    ?= '20.10'
+ HELM_VERSION	  ?= v3.10.3
+ KUBECTL_VERSION   ?= v1.23.15
+ 
+-RKE2_K8S_VERSION  ?= v1.23.15+rke2r1
+-K8S_VERSION       ?= v1.21.6
++RKE2_K8S_VERSION  ?= v1.25.15+rke2r2
++K8S_VERSION       ?= v1.25.6
+ LPP_VERSION       ?= v0.0.24
+ 
+ OAISIM_UE_IMAGE ?= andybavier/lte-uesoftmodem:1.1.0-$(shell uname -r)
+ ENABLE_ROUTER ?= true
+ ENABLE_OAISIM ?= true
+-ENABLE_GNBSIM ?= true
++ENABLE_GNBSIM ?= false
+ ENABLE_SUBSCRIBER_PROXY ?= false
+ GNBSIM_COLORS ?= true
+ 
+@@ -228,12 +232,12 @@ $(M)/k8s-ready: | $(M)/setup $(BUILD)/kubespray $(VENV)/bin/activate $(M)/kubesp
+ 	touch $@
+ 
+ $(M)/helm-ready: | $(M)/k8s-ready
+-	helm repo add incubator https://charts.helm.sh/incubator
+-	helm repo add cord https://charts.opencord.org
+-	helm repo add atomix https://charts.atomix.io
+-	helm repo add onosproject https://charts.onosproject.org
+-	helm repo add aether https://charts.aetherproject.org
+-	helm repo add rancher http://charts.rancher.io/
++	# helm repo add incubator https://charts.helm.sh/incubator
++	# helm repo add cord https://charts.opencord.org
++	# helm repo add atomix https://charts.atomix.io
++	# helm repo add onosproject https://charts.onosproject.org
++	# helm repo add aether https://charts.aetherproject.org
++	# helm repo add rancher http://charts.rancher.io/
+ 	touch $@
+ endif
+ 
+@@ -273,6 +277,7 @@ $(M)/k8s-ready: | $(M)/setup
+ 	sudo cp /etc/rancher/rke2/rke2.yaml $(HOME)/.kube/config
+ 	sudo chown -R $(shell id -u):$(shell id -g) $(HOME)/.kube
+ 	touch $@
++	kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.72.0/example/prometheus-operator-crd/monitoring.coreos.com_servicemonitors.yaml
+ 
+ $(M)/helm-ready: | $(M)/k8s-ready
+ 	curl -fsSL -o ${GET_HELM} https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+@@ -337,29 +342,34 @@ $(M)/omec:
+ 	fi
+ 	@touch $@
+ 
+-5g-core: node-prep
++hexa: node-prep
+ ifeq ($(ENABLE_ROUTER),true)
+ ifeq ($(ENABLE_GNBSIM),true)
+-5g-core: $(M)/router-pod
++hexa: $(M)/router-pod
+ else
+-5g-core: $(M)/router-host
++hexa: $(M)/router-host
+ endif
+ endif
+-5g-core: $(M)/5g-core
+-$(M)/5g-core:
+-	@if [[ "${CHARTS}" == "local" || "${CHARTS}" == "local-sdcore" ]]; then \
+-	        helm dep up $(SD_CORE_CHART); \
+-	else \
+-	        helm repo update; \
+-	fi
++hexa: $(M)/hexa
++$(M)/hexa:
+ 	NODE_IP=${NODE_IP} DATA_IFACE=${DATA_IFACE} RAN_SUBNET=${RAN_SUBNET} ENABLE_GNBSIM=${ENABLE_GNBSIM} envsubst < $(5G_CORE_VALUES) | \
+ 	helm upgrade --create-namespace --install --wait $(HELM_GLOBAL_ARGS) \
+-		--namespace omec \
++		--namespace $(NS) \
+ 		--values - \
+-		sd-core \
++		hexa-core \
+ 		$(SD_CORE_CHART)
++		-- timeout 10m
++
+ 	@echo "1" > ${UPF_COUNT}
+ 	touch $@
++	@sleep 50
++	helm $(HELM_ACTION) \
++		hexa-eupf .deploy/helm/eupf \
++		--version 0.5.0 \
++		--values eupf.yaml \
++		-n $(NS) \
++		$(HELM_ARGS)
++
+ 
+ # Install additional UPF(s)
+ 5g-upf:
+@@ -632,9 +642,9 @@ upf-clean:
+ 	done
+ 	@echo "1" > ${UPF_COUNT}
+ 
+-omec-clean: upf-clean
+-	helm delete -n omec $$(helm -n omec ls -qa) || true
+-	kubectl delete namespace omec || true
++hexa-clean: upf-clean
++	helm delete -n hexa $$(helm -n hexa ls -qa) || true
++	kubectl delete namespace hexa || true
+ 	@rm -f $(UPF_COUNT)
+ 	@echo ""
+ 	@echo "Wait for all pods to terminate..."

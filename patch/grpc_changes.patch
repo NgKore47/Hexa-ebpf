@@ -1,0 +1,370 @@
+diff --git a/go.mod b/go.mod
+index 0df3f97..8b57c0e 100644
+--- a/go.mod
++++ b/go.mod
+@@ -1,4 +1,4 @@
+-module github.com/omec-project/config5g
++module github.com/Nikhil690/connsert
+ 
+ go 1.21
+ 
+@@ -7,7 +7,7 @@ require (
+ 	github.com/omec-project/logger_conf v1.1.1
+ 	github.com/omec-project/logger_util v1.2.0
+ 	github.com/sirupsen/logrus v1.9.3
+-	google.golang.org/grpc v1.63.2
++	google.golang.org/grpc v1.62.1
+ 	google.golang.org/protobuf v1.33.0
+ )
+ 
+@@ -22,6 +22,7 @@ require (
+ 	github.com/go-playground/universal-translator v0.18.1 // indirect
+ 	github.com/go-playground/validator/v10 v10.14.0 // indirect
+ 	github.com/goccy/go-json v0.10.2 // indirect
++	github.com/golang/protobuf v1.5.3 // indirect
+ 	github.com/json-iterator/go v1.1.12 // indirect
+ 	github.com/klauspost/cpuid/v2 v2.2.4 // indirect
+ 	github.com/leodido/go-urn v1.2.4 // indirect
+@@ -33,10 +34,10 @@ require (
+ 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
+ 	github.com/ugorji/go/codec v1.2.11 // indirect
+ 	golang.org/x/arch v0.3.0 // indirect
+-	golang.org/x/crypto v0.19.0 // indirect
+-	golang.org/x/net v0.21.0 // indirect
+-	golang.org/x/sys v0.17.0 // indirect
++	golang.org/x/crypto v0.18.0 // indirect
++	golang.org/x/net v0.20.0 // indirect
++	golang.org/x/sys v0.16.0 // indirect
+ 	golang.org/x/text v0.14.0 // indirect
+-	google.golang.org/genproto/googleapis/rpc v0.0.0-20240227224415-6ceb2ff114de // indirect
++	google.golang.org/genproto/googleapis/rpc v0.0.0-20240123012728-ef4313101c80 // indirect
+ 	gopkg.in/yaml.v3 v3.0.1 // indirect
+ )
+diff --git a/go.sum b/go.sum
+index 92f80e4..5aad615 100644
+--- a/go.sum
++++ b/go.sum
+@@ -27,6 +27,10 @@ github.com/go-playground/validator/v10 v10.14.0 h1:vgvQWe3XCz3gIeFDm/HnTIbj6UGmg
+ github.com/go-playground/validator/v10 v10.14.0/go.mod h1:9iXMNT7sEkjXb0I+enO7QXmzG6QCsPWY4zveKFVRSyU=
+ github.com/goccy/go-json v0.10.2 h1:CrxCmQqYDkv1z7lO7Wbh2HN93uovUHgrECaO5ZrCXAU=
+ github.com/goccy/go-json v0.10.2/go.mod h1:6MelG93GURQebXPDq3khkgXZkazVtN9CRI+MGFi0w8I=
++github.com/golang/protobuf v1.5.0/go.mod h1:FsONVRAS9T7sI+LIUmWTfcYkHO4aIWwzhcaSAoJOfIk=
++github.com/golang/protobuf v1.5.3 h1:KhyjKVUg7Usr/dYsdSqoFveMYd5ko72D+zANwlG1mmg=
++github.com/golang/protobuf v1.5.3/go.mod h1:XVQd3VNwM+JqD3oG2Ue2ip4fOMUkwXdXDdiuN0vRsmY=
++github.com/google/go-cmp v0.5.5/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=
+ github.com/google/go-cmp v0.6.0 h1:ofyhxvXcZhMsU5ulbFiLKl/XBFqE1GSq7atu8tAmTRI=
+ github.com/google/go-cmp v0.6.0/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
+ github.com/google/gofuzz v1.0.0/go.mod h1:dBl0BpW6vV/+mYPU4Po3pmUjxk6FQPldtuIdl/M65Eg=
+@@ -74,21 +78,24 @@ github.com/ugorji/go/codec v1.2.11/go.mod h1:UNopzCgEMSXjBc6AOMqYvWC1ktqTAfzJZUZ
+ golang.org/x/arch v0.0.0-20210923205945-b76863e36670/go.mod h1:5om86z9Hs0C8fWVUuoMHwpExlXzs5Tkyp9hOrfG7pp8=
+ golang.org/x/arch v0.3.0 h1:02VY4/ZcO/gBOH6PUaoiptASxtXU10jazRCP865E97k=
+ golang.org/x/arch v0.3.0/go.mod h1:5om86z9Hs0C8fWVUuoMHwpExlXzs5Tkyp9hOrfG7pp8=
+-golang.org/x/crypto v0.19.0 h1:ENy+Az/9Y1vSrlrvBSyna3PITt4tiZLf7sgCjZBX7Wo=
+-golang.org/x/crypto v0.19.0/go.mod h1:Iy9bg/ha4yyC70EfRS8jz+B6ybOBKMaSxLj6P6oBDfU=
+-golang.org/x/net v0.21.0 h1:AQyQV4dYCvJ7vGmJyKki9+PBdyvhkSd8EIx/qb0AYv4=
+-golang.org/x/net v0.21.0/go.mod h1:bIjVDfnllIU7BJ2DNgfnXvpSvtn8VRwhlsaeUTyUS44=
++golang.org/x/crypto v0.18.0 h1:PGVlW0xEltQnzFZ55hkuX5+KLyrMYhHld1YHO4AKcdc=
++golang.org/x/crypto v0.18.0/go.mod h1:R0j02AL6hcrfOiy9T4ZYp/rcWeMxM3L6QYxlOuEG1mg=
++golang.org/x/net v0.20.0 h1:aCL9BSgETF1k+blQaYUBx9hJ9LOGP3gAVemcZlf1Kpo=
++golang.org/x/net v0.20.0/go.mod h1:z8BVo6PvndSri0LbOE3hAn0apkU+1YvI6E70E9jsnvY=
+ golang.org/x/sys v0.0.0-20220704084225-05e143d24a9e/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
+ golang.org/x/sys v0.0.0-20220715151400-c0bba94af5f8/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
+ golang.org/x/sys v0.6.0/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
+-golang.org/x/sys v0.17.0 h1:25cE3gD+tdBA7lp7QfhuV+rJiE9YXTcS3VG1SqssI/Y=
+-golang.org/x/sys v0.17.0/go.mod h1:/VUhepiaJMQUp4+oa/7Zr1D23ma6VTLIYjOOTFZPUcA=
++golang.org/x/sys v0.16.0 h1:xWw16ngr6ZMtmxDyKyIgsE93KNKz5HKmMa3b8ALHidU=
++golang.org/x/sys v0.16.0/go.mod h1:/VUhepiaJMQUp4+oa/7Zr1D23ma6VTLIYjOOTFZPUcA=
+ golang.org/x/text v0.14.0 h1:ScX5w1eTa3QqT8oi6+ziP7dTV1S2+ALU0bI+0zXKWiQ=
+ golang.org/x/text v0.14.0/go.mod h1:18ZOQIKpY8NJVqYksKHtTdi31H5itFRjB5/qKTNYzSU=
+-google.golang.org/genproto/googleapis/rpc v0.0.0-20240227224415-6ceb2ff114de h1:cZGRis4/ot9uVm639a+rHCUaG0JJHEsdyzSQTMX+suY=
+-google.golang.org/genproto/googleapis/rpc v0.0.0-20240227224415-6ceb2ff114de/go.mod h1:H4O17MA/PE9BsGx3w+a+W2VOLLD1Qf7oJneAoU6WktY=
+-google.golang.org/grpc v1.63.2 h1:MUeiw1B2maTVZthpU5xvASfTh3LDbxHd6IJ6QQVU+xM=
+-google.golang.org/grpc v1.63.2/go.mod h1:WAX/8DgncnokcFUldAxq7GeB5DXHDbMF+lLvDomNkRA=
++golang.org/x/xerrors v0.0.0-20191204190536-9bdfabe68543/go.mod h1:I/5z698sn9Ka8TeJc9MKroUUfqBBauWjQqLJ2OPfmY0=
++google.golang.org/genproto/googleapis/rpc v0.0.0-20240123012728-ef4313101c80 h1:AjyfHzEPEFp/NpvfN5g+KDla3EMojjhRVZc1i7cj+oM=
++google.golang.org/genproto/googleapis/rpc v0.0.0-20240123012728-ef4313101c80/go.mod h1:PAREbraiVEVGVdTZsVWjSbbTtSyGbAgIIvni8a8CD5s=
++google.golang.org/grpc v1.62.1 h1:B4n+nfKzOICUXMgyrNd19h/I9oH0L1pizfk1d4zSgTk=
++google.golang.org/grpc v1.62.1/go.mod h1:IWTG0VlJLCh1SkC58F7np9ka9mx/WNkjl4PGJaiq+QE=
++google.golang.org/protobuf v1.26.0-rc.1/go.mod h1:jlhhOSvTdKEhbULTjvd4ARK9grFBp09yW+WbY/TyQbw=
++google.golang.org/protobuf v1.26.0/go.mod h1:9q0QmTI4eRPtz6boOQmLYwt+qCgq0jsYwAQnmE0givc=
+ google.golang.org/protobuf v1.33.0 h1:uNO2rsAINq/JlFpSdYEKIZ0uKD/R9cpdv0T+yoGwGmI=
+ google.golang.org/protobuf v1.33.0/go.mod h1:c6P6GXX6sHbq/GpV6MGZEdwhWPcYBgnhAHhKbcUYpos=
+ gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM=
+diff --git a/logger/logger.go b/logger/logger.go
+index 2cee4fd..31dcaf6 100644
+--- a/logger/logger.go
++++ b/logger/logger.go
+@@ -9,9 +9,10 @@ import (
+ 	"time"
+ 
+ 	formatter "github.com/antonfisher/nested-logrus-formatter"
++	"github.com/sirupsen/logrus"
++
+ 	"github.com/omec-project/logger_conf"
+ 	"github.com/omec-project/logger_util"
+-	"github.com/sirupsen/logrus"
+ )
+ 
+ var (
+@@ -43,8 +44,8 @@ func init() {
+ 		log.Hooks.Add(selfLogHook)
+ 	}
+ 
+-	CfgLog = log.WithFields(logrus.Fields{"component": "Config5g", "category": "CFG"})
+-	GrpcLog = log.WithFields(logrus.Fields{"component": "Config5g", "category": "GRPC"})
++	CfgLog = log.WithFields(logrus.Fields{"component": "CONN", "category": "CFG"})
++	GrpcLog = log.WithFields(logrus.Fields{"component": "CONN", "category": "GRPC"})
+ }
+ 
+ func SetLogLevel(level logrus.Level) {
+diff --git a/proto/client/gClient.go b/proto/client/gClient.go
+index 20e9b4a..f857c7d 100644
+--- a/proto/client/gClient.go
++++ b/proto/client/gClient.go
+@@ -6,22 +6,21 @@ package client
+ 
+ import (
+ 	context "context"
++	// "fmt"
+ 	"math/rand"
+ 	"os"
+ 	"time"
+ 
+-	"github.com/omec-project/config5g/logger"
+-	protos "github.com/omec-project/config5g/proto/sdcoreConfig"
++	"github.com/Nikhil690/connsert/logger"
++	protos "github.com/Nikhil690/connsert/proto/sdcoreConfig"
+ 	"google.golang.org/grpc"
+ 	"google.golang.org/grpc/backoff"
+ 	"google.golang.org/grpc/connectivity"
+ 	"google.golang.org/grpc/keepalive"
+ )
+ 
+-var (
+-	selfRestartCounter      uint32
+-	configPodRestartCounter uint32 = 0
+-)
++var selfRestartCounter uint32
++var configPodRestartCounter uint32 = 0
+ 
+ func init() {
+ 	s1 := rand.NewSource(time.Now().UnixNano())
+@@ -54,10 +53,10 @@ type ConfClient interface {
+ 	// on created channel and returns the channel
+ 	PublishOnConfigChange(bool) chan *protos.NetworkSliceResponse
+ 
+-	// returns grpc connection object
++	//returns grpc connection object
+ 	GetConfigClientConn() *grpc.ClientConn
+ 
+-	// Client Subscribing channel to ConfigPod to receive configuration
++	//Client Subscribing channel to ConfigPod to receive configuration
+ 	subscribeToConfigPod(commChan chan *protos.NetworkSliceResponse)
+ }
+ 
+@@ -80,10 +79,10 @@ func (confClient *ConfigClient) PublishOnConfigChange(mdataFlag bool) chan *prot
+ }
+ 
+ // pass structr which has configChangeUpdate interface
+-func ConfigWatcher(webuiUri string) chan *protos.NetworkSliceResponse {
+-	// var confClient *gClient.ConfigClient
+-	// TODO: use port from configmap.
+-	confClient := CreateChannel(webuiUri, 10000)
++func ConfigWatcher() chan *protos.NetworkSliceResponse {
++	//var confClient *gClient.ConfigClient
++	//TODO: use port from configmap.
++	confClient := CreateChannel("webui:9876", 10000)
+ 	if confClient == nil {
+ 		logger.GrpcLog.Errorf("create grpc channel to config pod failed")
+ 		return nil
+@@ -94,7 +93,7 @@ func ConfigWatcher(webuiUri string) chan *protos.NetworkSliceResponse {
+ }
+ 
+ func CreateChannel(host string, timeout uint32) ConfClient {
+-	logger.GrpcLog.Infoln("create config client")
++	logger.GrpcLog.Infoln("Config Client : Creating")
+ 	// Second, check to see if we can reuse the gRPC connection for a new P4RT client
+ 	conn, err := newClientConnection(host)
+ 	if err != nil {
+@@ -131,7 +130,7 @@ var retryPolicy = `{
+ 
+ func newClientConnection(host string) (conn *grpc.ClientConn, err error) {
+ 	/* get connection */
+-	logger.GrpcLog.Infoln("Dial grpc connection - ", host)
++	logger.GrpcLog.Infoln("Dialing GRPC Connection - ", host)
+ 
+ 	bd := 1 * time.Second
+ 	mltpr := 1.0
+@@ -141,12 +140,26 @@ func newClientConnection(host string) (conn *grpc.ClientConn, err error) {
+ 
+ 	crt := grpc.ConnectParams{Backoff: bc}
+ 	dialOptions := []grpc.DialOption{grpc.WithInsecure(), grpc.WithKeepaliveParams(kacp), grpc.WithDefaultServiceConfig(retryPolicy), grpc.WithConnectParams(crt)}
++	// spin := []string{".     ", " .    ", "  .   ", "   .  ", "    . ", "     ."} // Define spinner animation components
++	// for i := 0; i < 960; i++ {
++	// 	color := "\033[1;34m" // Blue color (change to the desired color code)
++	// 	reset := "\033[0m"    // Reset color
++	// 	currentTime := time.Now().UTC().Format("2006-01-02T15:04:05Z")
++	// 	fmt.Printf("\r%s %s[INFO][CONN][GRPC]%s Connecting to %sGRPC",currentTime, color, reset, spin[i%len(spin)])
++	// 	time.Sleep(100 * time.Millisecond)
++	// }
++	// time.Sleep(time.Second * 60)
++	for i := 0; i < 8; i++ {
++		logger.GrpcLog.Infoln("Connecting to GRPC ...")
++		time.Sleep(time.Second * 10)
++	}
+ 	conn, err = grpc.Dial(host, dialOptions...)
++
+ 	if err != nil {
+ 		logger.GrpcLog.Errorln("grpc dial err: ", err)
+ 		return nil, err
+ 	}
+-	// defer conn.Close()
++	//defer conn.Close()
+ 	return conn, err
+ }
+ 
+@@ -155,15 +168,18 @@ func (confClient *ConfigClient) GetConfigClientConn() *grpc.ClientConn {
+ }
+ 
+ func (confClient *ConfigClient) subscribeToConfigPod(commChan chan *protos.NetworkSliceResponse) {
+-	logger.GrpcLog.Infoln("subscribeToConfigPod ")
++	logger.GrpcLog.Infoln("Subscribing to Config POD")
+ 	myid := os.Getenv("HOSTNAME")
+ 	var stream protos.ConfigService_NetworkSliceSubscribeClient
++	// var rst protos.NetworkSliceResponse
++	// Define a label for the outer loop
++retry:
+ 	for {
+ 		if stream == nil {
+ 			status := confClient.Conn.GetState()
+ 			var err error
+ 			if status == connectivity.Ready {
+-				logger.GrpcLog.Infoln("connectivity ready ")
++				logger.GrpcLog.Infoln("Connectivity status: Ready")
+ 				rreq := &protos.NetworkSliceRequest{RestartCounter: selfRestartCounter, ClientId: myid, MetadataRequested: confClient.MetadataRequested}
+ 				if stream, err = confClient.Client.NetworkSliceSubscribe(context.Background(), rreq); err != nil {
+ 					logger.GrpcLog.Errorf("Failed to subscribe: %v", err)
+@@ -172,33 +188,90 @@ func (confClient *ConfigClient) subscribeToConfigPod(commChan chan *protos.Netwo
+ 					continue
+ 				}
+ 			} else if status == connectivity.Idle {
+-				logger.GrpcLog.Errorf("Connectivity status idle, trying to connect again")
++				logger.GrpcLog.Errorf("connecting...")
+ 				time.Sleep(time.Second * 5)
+ 				continue
+ 			} else {
+-				logger.GrpcLog.Errorf("Connectivity status not ready")
+-				time.Sleep(time.Second * 5)
+-				continue
++				logger.GrpcLog.Errorf("Connectivity status: Not Ready")
++				time.Sleep(time.Second * 1)
++				// Restart the entire loop
++				goto retry
+ 			}
+ 		}
+ 		rsp, err := stream.Recv()
+ 		if err != nil {
+ 			logger.GrpcLog.Errorf("Failed to receive message: %v", err)
+-			// Clearing the stream will force the client to resubscribe on next iteration
++			// Clearing the stream will force the client to resubscribe on the next iteration
+ 			stream = nil
+ 			time.Sleep(time.Second * 5)
+ 			// Retry on failure
+ 			continue
+ 		}
+ 
+-		logger.GrpcLog.Infoln("stream msg received ")
++		logger.GrpcLog.Infoln("Config Message received ")
+ 		logger.GrpcLog.Debugf("#Network Slices %v, RC of configpod %v ", len(rsp.NetworkSlice), rsp.RestartCounter)
+ 		if configPodRestartCounter == 0 || (configPodRestartCounter == rsp.RestartCounter) {
+ 			// first time connection or config update
+ 			configPodRestartCounter = rsp.RestartCounter
+ 			if len(rsp.NetworkSlice) > 0 {
+ 				// always carries full config copy
+-				logger.GrpcLog.Infoln("First time config Received ", rsp)
++				logger.GrpcLog.Infoln("Initial Config Received: ")
++				// logger.GrpcLog.Infoln(rsp)
++				logger.GrpcLog.Info("+---------------------------------------------+")
++				logger.GrpcLog.Infof("| %-43s |\n", "Network Slice")
++				logger.GrpcLog.Infof("|---------------------------------------------|")
++				// logger.GrpcLog.Infof("| %15s | %10d |\n", "RestartCounter", rsp.RestartCounter)
++				// logger.GrpcLog.Infof("| %15s | %10d |\n", "ConfigUpdated", rsp.ConfigUpdated)
++				for _, slice := range rsp.NetworkSlice {
++					logger.GrpcLog.Infof("| %-18s  | %-21s |\n", "Name", slice.Name)
++					logger.GrpcLog.Infof("| %-18s  | %-21s |\n", "Sst", slice.Nssai.Sst)
++					logger.GrpcLog.Infof("| %-18s  | %-21s |\n", "Sd", slice.Nssai.Sd)
++					logger.GrpcLog.Infof("|---------------------------------------------|")
++					for _, group := range slice.DeviceGroup {
++						logger.GrpcLog.Infof("| %-18s  | %-21s |\n", "Device Group", group.Name)
++						logger.GrpcLog.Infof("| %-18s  | %-21s |\n", "IP Domain Details", group.IpDomainDetails.Name)
++						logger.GrpcLog.Infof("| %-18s  | %-21s |\n", "DNN Name", group.IpDomainDetails.DnnName)
++						logger.GrpcLog.Infof("| %-18s  | %-21s |\n", "UE Pool", group.IpDomainDetails.UePool)
++						logger.GrpcLog.Infof("| %-18s  | %-21s |\n", "DNS Primary", group.IpDomainDetails.DnsPrimary)
++						logger.GrpcLog.Infof("| %-18s  | %-21d |\n", "MTU", group.IpDomainDetails.Mtu)
++						logger.GrpcLog.Infof("| %-18s  | %-21d |\n", "DnnMbrUplink", group.IpDomainDetails.UeDnnQos.DnnMbrUplink)
++						logger.GrpcLog.Infof("| %-18s  | %-21d |\n", "DnnMbrDownlink", group.IpDomainDetails.UeDnnQos.DnnMbrDownlink)
++						logger.GrpcLog.Infof("| %-18s  | %-21s |\n", "Traffic Class", group.IpDomainDetails.UeDnnQos.TrafficClass.Name)
++						// logger.GrpcLog.Infof("| %-18s  | %-21d |\n", "QCI", group.IpDomainDetails.UeDnnQos.TrafficClass.Qci)
++						// logger.GrpcLog.Infof("| %-18s  | %-21d |\n", "ARP", group.IpDomainDetails.UeDnnQos.TrafficClass.Arp)
++						// logger.GrpcLog.Infof("| %-18s  | %-21d |\n", "PDB", group.IpDomainDetails.UeDnnQos.TrafficClass.Pdb)
++						// logger.GrpcLog.Infof("| %-18s  | %-21d |\n", "PELR", group.IpDomainDetails.UeDnnQos.TrafficClass.Pelr)
++						for i, imdetails := range group.Imsi {
++							label := ""
++							if i == len(group.Imsi)/2 {
++								label = "IMSI_LIST"
++							}
++							logger.GrpcLog.Infof("| %-18s  | %-21s |\n", label, imdetails)
++						}
++						logger.GrpcLog.Info("|---------------------------------------------|")
++					}
++					logger.GrpcLog.Infof("| %-18s  | %-21s |\n", "Site", slice.Site.SiteName)
++					for _, gnb := range slice.Site.Gnb {
++						logger.GrpcLog.Infof("| %-18s  | %-21s |\n", "GNB", gnb.Name)
++						logger.GrpcLog.Infof("| %-18s  | %-21d |\n", "TAC", gnb.Tac)
++						logger.GrpcLog.Info("|---------------------------------------------|")
++					}
++					logger.GrpcLog.Infof("| %-18s  | %-21s |\n", "MCC", slice.Site.Plmn.Mcc)
++					logger.GrpcLog.Infof("| %-18s  | %-21s |\n", "MNC", slice.Site.Plmn.Mnc)
++					logger.GrpcLog.Infof("| %-18s  | %-21s |\n", "UPF", slice.Site.Upf.UpfName)
++					for _, appfilter := range slice.AppFilters.PccRuleBase {
++						for _, flowinfo := range appfilter.FlowInfos {
++							// logger.GrpcLog.Infof("| %-18s  | %-21s |\n", "Flow Description", flowinfo.FlowDesc)
++							logger.GrpcLog.Infof("| %-18s  | %-21s |\n", "Traffic Class", flowinfo.TosTrafficClass)
++							logger.GrpcLog.Infof("| %-18s  | %-21s |\n", "Flow Direction", flowinfo.FlowDir)
++							logger.GrpcLog.Infof("| %-18s  | %-21s |\n", "Flow Status", flowinfo.FlowStatus)
++						}
++						logger.GrpcLog.Infof("| %-18s  | %-21s |\n", "Rule ID", appfilter.RuleId)
++						logger.GrpcLog.Infof("| %-18s  | %-21d |\n", "Priority", appfilter.Priority)
++					}
++					logger.GrpcLog.Info("|---------------------------------------------|")
++				}
++				logger.GrpcLog.Info("+---------------------------------------------+")
+ 				commChan <- rsp
+ 			} else if rsp.ConfigUpdated == 1 {
+ 				// config delete , all slices deleted
+@@ -207,7 +280,7 @@ func (confClient *ConfigClient) subscribeToConfigPod(commChan chan *protos.Netwo
+ 			}
+ 		} else if len(rsp.NetworkSlice) > 0 {
+ 			logger.GrpcLog.Errorf("Config received after config Pod restart")
+-			// config received after config pod restart
++			//config received after config pod restart
+ 			configPodRestartCounter = rsp.RestartCounter
+ 			commChan <- rsp
+ 		} else {
+@@ -215,7 +288,6 @@ func (confClient *ConfigClient) subscribeToConfigPod(commChan chan *protos.Netwo
+ 		}
+ 	}
+ }
+-
+ func readConfigInLoop(confClient *ConfigClient, commChan chan *protos.NetworkSliceResponse) {
+ 	myid := os.Getenv("HOSTNAME")
+ 	configReadTimeout := time.NewTicker(5000 * time.Millisecond)
+@@ -245,7 +317,7 @@ func readConfigInLoop(confClient *ConfigClient, commChan chan *protos.NetworkSli
+ 					}
+ 				} else if len(rsp.NetworkSlice) > 0 {
+ 					logger.GrpcLog.Errorf("Config received after config Pod restart")
+-					// config received after config pod restart
++					//config received after config pod restart
+ 					configPodRestartCounter = rsp.RestartCounter
+ 					commChan <- rsp
+ 				} else {

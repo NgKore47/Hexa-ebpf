@@ -1,0 +1,456 @@
+configuration:
+  amfDBName: sdcore_amf
+  amfName: AMF
+  debugProfilePort: 5001
+  enableDBStore: false
+  enableNrfCaching: false
+  enableSctpLb: false
+  kafkaInfo:
+    brokerPort: 9092
+    brokerUri: kafka-headless
+    topicName: sdcore-data-source-amf
+  mongodb:
+    name: free5gc
+    url: mongodb://mongodb-arbiter-headless
+  networkFeatureSupport5GS:
+    emc: 0
+    emcN3: 0
+    emf: 0
+    enable: true
+    imsVoPS: 0
+    iwkN26: 0
+    mcsi: 0
+    mpsi: 0
+  networkName:
+    full: Aether5G
+    short: Aether
+  nfKafka:
+    enable: true
+    topic: sdcore-nf-data-source
+    urls:
+    - kafka-headless:9092
+  ngapIpList:
+  - 0.0.0.0
+  ngappPort: 38412
+  non3gppDeregistrationTimerValue: 3240
+  nrfUri: http://nrf:29510
+  plmnSupportList:
+  - plmnId:
+      mcc: "208"
+      mnc: "93"
+    snssaiList:
+    - sd: "010203"
+      sst: 1
+  sbi:
+    bindingIPv4: 0.0.0.0
+    port: 29518
+    registerIPv4: amf
+    scheme: http
+  sctpGrpcPort: 9000
+  security:
+    cipheringOrder:
+    - NEA0
+    integrityOrder:
+    - NIA1
+    - NIA2
+  servedGuamiList:
+  - amfId: cafe00
+    plmnId:
+      mcc: "208"
+      mnc: "93"
+  serviceNameList:
+  - namf-comm
+  - namf-evts
+  - namf-mt
+  - namf-loc
+  - namf-oam
+  supportDnnList:
+  - internet
+  supportTaiList:
+  - plmnId:
+      mcc: "208"
+      mnc: "93"
+    tac: 1
+  t3502Value: 720
+  t3512Value: 3600
+  t3513:
+    enable: true
+    expireTime: 6s
+    maxRetryTimes: 4
+  t3522:
+    enable: true
+    expireTime: 6s
+    maxRetryTimes: 4
+  t3550:
+    enable: true
+    expireTime: 6s
+    maxRetryTimes: 4
+  t3560:
+    enable: true
+    expireTime: 6s
+    maxRetryTimes: 4
+  t3565:
+    enable: true
+    expireTime: 6s
+    maxRetryTimes: 4
+info:
+  description: AMF initial configuration
+  version: 1.0.0
+logger:
+  AMF:
+    ReportCaller: false
+    debugLevel: info
+  AUSF:
+    ReportCaller: false
+    debugLevel: info
+  Aper:
+    ReportCaller: false
+    debugLevel: info
+  CommonConsumerTest:
+    ReportCaller: false
+    debugLevel: info
+  FSM:
+    ReportCaller: false
+    debugLevel: info
+  MongoDBLibrary:
+    ReportCaller: false
+    debugLevel: info
+  N3IWF:
+    ReportCaller: false
+    debugLevel: info
+  NAS:
+    ReportCaller: false
+    debugLevel: info
+  NGAP:
+    ReportCaller: false
+    debugLevel: info
+  NRF:
+    ReportCaller: false
+    debugLevel: info
+  NamfComm:
+    ReportCaller: false
+    debugLevel: info
+  NamfEventExposure:
+    ReportCaller: false
+    debugLevel: info
+  NsmfPDUSession:
+    ReportCaller: false
+    debugLevel: info
+  NudrDataRepository:
+    ReportCaller: false
+    debugLevel: info
+  OpenApi:
+    ReportCaller: false
+    debugLevel: info
+  PCF:
+    ReportCaller: false
+    debugLevel: info
+  PFCP:
+    ReportCaller: false
+    debugLevel: info
+  PathUtil:
+    ReportCaller: false
+    debugLevel: info
+  SMF:
+    ReportCaller: false
+    debugLevel: info
+  UDM:
+    ReportCaller: false
+    debugLevel: info
+  UDR:
+    ReportCaller: false
+    debugLevel: info
+  WEBUI:
+    ReportCaller: false
+    debugLevel: info2024-03-24T11:16:09Z[36m [INFO][AMF][App] [0mNeura_amf
+2024-03-24T11:16:09Z[36m [INFO][AMF][Init] [0mAMF Log level is set to [info] level
+2024-03-24T11:16:09Z[36m [INFO][LIB][NAS] [0mset log level : info
+2024-03-24T11:16:09Z[36m [INFO][LIB][NAS] [0mset report call : false
+2024-03-24T11:16:09Z[36m [INFO][LIB][NGAP] [0mset log level : info
+2024-03-24T11:16:09Z[36m [INFO][LIB][NGAP] [0mset report call : false
+2024-03-24T11:16:09Z[36m [INFO][LIB][FSM] [0mset log level : info
+2024-03-24T11:16:09Z[36m [INFO][LIB][FSM] [0mset report call : false
+2024-03-24T11:16:09Z[36m [INFO][LIB][Aper] [0mset log level : info
+2024-03-24T11:16:09Z[36m [INFO][LIB][Aper] [0mset report call : false
+2024-03-24T11:16:09Z[36m [INFO][LIB][Path] [0mset log level : info
+2024-03-24T11:16:09Z[36m [INFO][LIB][Path] [0mset report call : false
+2024-03-24T11:16:09Z[36m [INFO][AMF][CFG] [0mconfig version [1.0.0]
+2024-03-24T11:16:09Z[36m [INFO][AMF][Init] [0mReading Amf related configuration from ROC
+2024-03-24T11:16:09Z[36m [INFO][Config5g][GRPC] [0mConfig Client : Creating
+2024-03-24T11:16:09Z[36m [INFO][Config5g][GRPC] [0mDialing GRPC Connection -  webui:9876
+2024-03-24T11:16:09Z[36m [INFO][Config5g][GRPC] [0mConnecting to GRPC ...
+2024-03-24T11:16:29Z[36m [INFO][Config5g][GRPC] [0mConnecting to GRPC ...
+2024-03-24T11:16:49Z[36m [INFO][Config5g][GRPC] [0mConnecting to GRPC ...
+2024-03-24T11:17:09Z[36m [INFO][Config5g][GRPC] [0mConnecting to GRPC ...
+2024-03-24T11:17:29Z[36m [INFO][Config5g][GRPC] [0mConnecting to GRPC ...
+2024/03/24 11:17:49 INFO: [core] [Channel #1] Channel created
+2024/03/24 11:17:49 INFO: [core] [Channel #1] original dial target is: "webui:9876"
+2024/03/24 11:17:49 INFO: [core] [Channel #1] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"webui", Opaque:"9876", User:(*url.Userinfo)(nil), Host:"", Path:"", RawPath:"", OmitHost:false, ForceQuery:false, RawQuery:"", Fragment:"", RawFragment:""}}
+2024/03/24 11:17:49 INFO: [core] [Channel #1] fallback to scheme "passthrough"
+2024/03/24 11:17:49 INFO: [core] [Channel #1] parsed dial target is: passthrough:///webui:9876
+2024/03/24 11:17:49 INFO: [core] [Channel #1] Channel authority set to "webui:9876"
+2024/03/24 11:17:49 INFO: [core] [Channel #1] Resolver state updated: {
+  "Addresses": [
+    {
+      "Addr": "webui:9876",
+      "ServerName": "",
+      "Attributes": null,
+      "BalancerAttributes": null,
+      "Metadata": null
+    }
+  ],
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "webui:9876",
+          "ServerName": "",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": null,
+  "Attributes": null
+} (resolver returned new addresses)
+2024/03/24 11:17:49 INFO: [core] [Channel #1] Channel switches to new LB policy "pick_first"
+2024/03/24 11:17:49 INFO: [core] [pick-first-lb 0xc000241380] Received new config {
+  "shuffleAddressList": false
+}, resolver state {
+  "Addresses": [
+    {
+      "Addr": "webui:9876",
+      "ServerName": "",
+      "Attributes": null,
+      "BalancerAttributes": null,
+      "Metadata": null
+    }
+  ],
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "webui:9876",
+          "ServerName": "",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": null,
+  "Attributes": null
+}
+2024/03/24 11:17:49 INFO: [core] [Channel #1 SubChannel #2] Subchannel created
+2024/03/24 11:17:49 INFO: [core] [Channel #1] Channel Connectivity change to CONNECTING
+2024/03/24 11:17:49 INFO: [core] [Channel #1] Channel exiting idle mode
+2024/03/24 11:17:49 INFO: [core] [Channel #1 SubChannel #2] Subchannel Connectivity change to CONNECTING
+2024/03/24 11:17:49 INFO: [core] [Channel #1 SubChannel #2] Subchannel picks a new address "webui:9876" to connect
+2024-03-24T11:17:49Z[36m [INFO][AMF][Init] [0mServer started
+2024/03/24 11:17:49 INFO: [core] [pick-first-lb 0xc000241380] Received SubConn state update: 0xc000241920, {ConnectivityState:CONNECTING ConnectionError:<nil>}
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+2024-03-24T11:17:49Z[36m [INFO][Config5g][GRPC] [0mSubscribing to Config POD
+2024-03-24T11:17:49Z[31m [ERRO][Config5g][GRPC] [0mConnectivity status: Not Ready
+[GIN-debug] GET    /namf-callback/v1/        --> github.com/omec-project/amf/httpcallback.Index (4 handlers)
+[GIN-debug] POST   /namf-callback/v1/smContextStatus/:guti/:pduSessionId --> github.com/omec-project/amf/httpcallback.HTTPSmContextStatusNotify (4 handlers)
+[GIN-debug] POST   /namf-callback/v1/am-policy/:polAssoId/update --> github.com/omec-project/amf/httpcallback.HTTPAmPolicyControlUpdateNotifyUpdate (4 handlers)
+[GIN-debug] POST   /namf-callback/v1/am-policy/:polAssoId/terminate --> github.com/omec-project/amf/httpcallback.HTTPAmPolicyControlUpdateNotifyTerminate (4 handlers)
+[GIN-debug] POST   /namf-callback/v1/n1-message-notify --> github.com/omec-project/amf/httpcallback.HTTPN1MessageNotify (4 handlers)
+[GIN-debug] POST   /namf-callback/v1/nf-status-notify --> github.com/omec-project/amf/httpcallback.HTTPNfSubscriptionStatusNotify (4 handlers)
+[GIN-debug] GET    /namf-oam/v1/             --> github.com/omec-project/amf/oam.Index (4 handlers)
+[GIN-debug] GET    /namf-oam/v1/registered-ue-context --> github.com/omec-project/amf/oam.HTTPRegisteredUEContext (4 handlers)
+[GIN-debug] GET    /namf-oam/v1/registered-ue-context/:supi --> github.com/omec-project/amf/oam.HTTPRegisteredUEContext (4 handlers)
+[GIN-debug] DELETE /namf-oam/v1/purge-ue-context/:supi --> github.com/omec-project/amf/oam.HTTPPurgeUEContext (4 handlers)
+[GIN-debug] GET    /namf-oam/v1/active-ues   --> github.com/omec-project/amf/oam.HTTPGetActiveUes (4 handlers)
+[GIN-debug] POST   /namf-oam/v1/amfInstanceDown/:nfid --> github.com/omec-project/amf/oam.HTTPAmfInstanceDown (4 handlers)
+[GIN-debug] GET    /namf-comm/v1/            --> github.com/omec-project/amf/communication.Index (4 handlers)
+[GIN-debug] PUT    /namf-comm/v1/subscriptions/:subscriptionId --> github.com/omec-project/amf/communication.HTTPAMFStatusChangeSubscribeModify (4 handlers)
+[GIN-debug] DELETE /namf-comm/v1/subscriptions/:subscriptionId --> github.com/omec-project/amf/communication.HTTPAMFStatusChangeUnSubscribe (4 handlers)
+[GIN-debug] PUT    /namf-comm/v1/ue-contexts/:ueContextId --> github.com/omec-project/amf/communication.HTTPCreateUEContext (4 handlers)
+[GIN-debug] POST   /namf-comm/v1/ue-contexts/:ueContextId/assign-ebi --> github.com/omec-project/amf/communication.HTTPEBIAssignment (4 handlers)
+[GIN-debug] POST   /namf-comm/v1/ue-contexts/:ueContextId/transfer-update --> github.com/omec-project/amf/communication.HTTPRegistrationStatusUpdate (4 handlers)
+[GIN-debug] POST   /namf-comm/v1/ue-contexts/:ueContextId/release --> github.com/omec-project/amf/communication.HTTPReleaseUEContext (4 handlers)
+[GIN-debug] POST   /namf-comm/v1/ue-contexts/:ueContextId/transfer --> github.com/omec-project/amf/communication.HTTPUEContextTransfer (4 handlers)
+[GIN-debug] DELETE /namf-comm/v1/ue-contexts/:ueContextId/n1-n2-messages/subscriptions/:subscriptionId --> github.com/omec-project/amf/communication.HTTPN1N2MessageUnSubscribe (4 handlers)
+[GIN-debug] POST   /namf-comm/v1/ue-contexts/:ueContextId/n1-n2-messages --> github.com/omec-project/amf/communication.HTTPN1N2MessageTransfer (4 handlers)
+[GIN-debug] GET    /namf-comm/v1/ue-contexts/:ueContextId/n1-n2-messages/:n1N2MessageId --> github.com/omec-project/amf/communication.HTTPN1N2MessageTransferStatus (4 handlers)
+[GIN-debug] POST   /namf-comm/v1/ue-contexts/:ueContextId/n1-n2-messages/subscriptions --> github.com/omec-project/amf/communication.HTTPN1N2MessageSubscribe (4 handlers)
+[GIN-debug] DELETE /namf-comm/v1/non-ue-n2-messages/subscriptions/:n2NotifySubscriptionId --> github.com/omec-project/amf/communication.HTTPNonUeN2InfoUnSubscribe (4 handlers)
+[GIN-debug] POST   /namf-comm/v1/non-ue-n2-messages/transfer --> github.com/omec-project/amf/communication.HTTPNonUeN2MessageTransfer (4 handlers)
+[GIN-debug] POST   /namf-comm/v1/non-ue-n2-messages/subscriptions --> github.com/omec-project/amf/communication.HTTPNonUeN2InfoSubscribe (4 handlers)
+[GIN-debug] POST   /namf-comm/v1/subscriptions --> github.com/omec-project/amf/communication.HTTPAMFStatusChangeSubscribe (4 handlers)
+[GIN-debug] GET    /namf-evts/v1/            --> github.com/omec-project/amf/eventexposure.Index (4 handlers)
+[GIN-debug] DELETE /namf-evts/v1/subscriptions/:subscriptionId --> github.com/omec-project/amf/eventexposure.HTTPDeleteSubscription (4 handlers)
+[GIN-debug] PATCH  /namf-evts/v1/subscriptions/:subscriptionId --> github.com/omec-project/amf/eventexposure.HTTPModifySubscription (4 handlers)
+[GIN-debug] POST   /namf-evts/v1/subscriptions --> github.com/omec-project/amf/eventexposure.HTTPCreateSubscription (4 handlers)
+[GIN-debug] GET    /namf-mt/v1/              --> github.com/omec-project/amf/mt.Index (4 handlers)
+[GIN-debug] GET    /namf-mt/v1/ue-contexts/:ueContextId --> github.com/omec-project/amf/mt.HTTPProvideDomainSelectionInfo (4 handlers)
+[GIN-debug] POST   /namf-mt/v1/ue-contexts/:ueContextId/ue-reachind --> github.com/omec-project/amf/mt.HTTPEnableUeReachability (4 handlers)
+[GIN-debug] GET    /namf-loc/v1/             --> github.com/omec-project/amf/location.Index (4 handlers)
+[GIN-debug] POST   /namf-loc/v1/:ueContextId/provide-loc-info --> github.com/omec-project/amf/location.HTTPProvideLocationInfo (4 handlers)
+[GIN-debug] POST   /namf-loc/v1/:ueContextId/provide-pos-info --> github.com/omec-project/amf/location.HTTPProvidePositioningInfo (4 handlers)
+2024-03-24T11:17:49Z[36m [INFO][AMF][Util] [0mamfconfig Info: Version[1.0.0] Description[AMF initial configuration]
+2024-03-24T11:17:49Z[36m [INFO][AMF][Util] [0mNfId Instance: 56aa634c-3941-4cfd-b18a-01d84dd99d87
+2024-03-24T11:17:49Z[37m [DEBU][DRSM][App] [0mCLIENT ID:  {amf-78b4b7b6cf-8977n 56aa634c-3941-4cfd-b18a-01d84dd99d87 192.168.84.183}
+2024-03-24T11:17:49Z[37m [DEBU][DRSM][App] [0mdrsm mode set to  0
+2024/03/24 11:17:49 ChunkId in the range of 0 to 16384 
+2024-03-24T11:17:49Z[37m [DEBU][DRSM][App] [0mipmodule  &{24 0 <nil> map[]}
+2024/03/24 11:17:49 INFO: [core] [Channel #1 SubChannel #2] Subchannel Connectivity change to READY
+2024/03/24 11:17:49 INFO: [core] [pick-first-lb 0xc000241380] Received SubConn state update: 0xc000241920, {ConnectivityState:READY ConnectionError:<nil>}
+2024/03/24 11:17:49 INFO: [core] [Channel #1] Channel Connectivity change to READY
+2024-03-24T11:17:49Z[37m [DEBU][DRSM][App] [0mipmodule  &{{0 0} 0xc0003e00c0}
+2024-03-24T11:17:49Z[37m [DEBU][DRSM][App] [0mip module prefix  map[]
+2024-03-24T11:17:49Z[37m [DEBU][DRSM][App] [0mMongoClient is created. sdcore_amf
+Started Pod Down goroutine
+2024-03-24T11:17:49Z[36m [INFO][AMF][Context] [0mMondbName: sdcore_amf, Url: mongodb://mongodb-arbiter-headless
+2024-03-24T11:17:49Z[37m [DEBU][DRSM][App] [0mdocument expiry enabled
+2024-03-24T11:17:49Z[36m [INFO][AMF][Context] [0mSuccessfully connected to Mongodb
+2024-03-24T11:17:49Z[36m [INFO][AMF][NGAP] [0mListen on 127.0.0.1/[::1%lo]/[fe80::8826:70ff:fe8b:fff%eth0]/192.168.84.183:38412
+2024-03-24T11:17:49Z[37m [DEBU][DRSM][App] [0miterate change stream for podData  &{{0 0} amfid {amf-78b4b7b6cf-8977n 56aa634c-3941-4cfd-b18a-01d84dd99d87 192.168.84.183} {mongodb://mongodb-arbiter-headless sdcore_amf} 0 24 map[] map[] map[] 0xc0006f8420 map[] 16384 <nil> 0xc0002067c8 map[] 0xc000597f20 {0 0}}
+2024-03-24T11:17:49Z[37m [DEBU][DRSM][App] [0mTTL Index created for Field : expireAt in Collection
+2024-03-24T11:17:49Z[36m [INFO][LIB][MonDB] [0mCreated index :  supi_1  on keyField :  supi  for Collection :  amf.data.amfState
+2024-03-24T11:17:49Z[36m [INFO][LIB][MonDB] [0mCreated index :  guti_1  on keyField :  guti  for Collection :  amf.data.amfState
+2024-03-24T11:17:49Z[36m [INFO][LIB][MonDB] [0mCreated index :  tmsi_1  on keyField :  tmsi  for Collection :  amf.data.amfState
+2024-03-24T11:17:50Z[36m [INFO][Config5g][GRPC] [0mConnectivity status: Ready
+2024-03-24T11:17:50Z[36m [INFO][Config5g][GRPC] [0mConfig Message received
+2024-03-24T11:17:50Z[36m [INFO][Config5g][GRPC] [0mInitial Config Received  RestartCounter:4141576257  NetworkSlice:{Name:"default"  Nssai:{Sst:"1"  Sd:"010203"}  DeviceGroup:{Name:"5g-gnbsim-user-group1"  IpDomainDetails:{Name:"pool1"  DnnName:"internet"  UePool:"172.250.1.0/16"  DnsPrimary:"8.8.8.8"  Mtu:1460  UeDnnQos:{DnnMbrUplink:20000000  DnnMbrDownlink:200000000  TrafficClass:{Name:"platinum"  Qci:9  Arp:6  Pdb:300  Pelr:6}}}  Imsi:"208930100007487"  Imsi:"208930100007488"  Imsi:"208930100007489"  Imsi:"208930100007490"  Imsi:"208930100007491"  Imsi:"208930100007492"  Imsi:"208930100007493"  Imsi:"208930100007494"  Imsi:"208930100007495"  Imsi:"208930100007496"  Imsi:"208930100007497"  Imsi:"208930100007498"  Imsi:"208930100007499"  Imsi:"208930100007500"}  DeviceGroup:{Name:"5g-gnbsim-user-group2"  IpDomainDetails:{Name:"pool2"  DnnName:"internet"  UePool:"172.250.1.0/16"  DnsPrimary:"8.8.8.8"  Mtu:1460  UeDnnQos:{DnnMbrUplink:10000000  DnnMbrDownlink:400000000  TrafficClass:{Name:"platinum"  Qci:8  Arp:6  Pdb:300  Pelr:6}}}  Imsi:"208930100007501"  Imsi:"208930100007502"  Imsi:"208930100007503"  Imsi:"208930100007504"  Imsi:"208930100007505"  Imsi:"208930100007506"  Imsi:"208930100007507"  Imsi:"208930100007508"  Imsi:"208930100007509"  Imsi:"208930100007510"}  Site:{SiteName:"aiab"  Gnb:{Name:"aiab-gnb1"  Tac:1}  Gnb:{Name:"aiab-gnb2"  Tac:2}  Plmn:{mcc:"208"  mnc:"93"}  Upf:{UpfName:"upf"}}  AppFilters:{PccRuleBase:{FlowInfos:{FlowDesc:"permit out ip from any to assigned"  TosTrafficClass:"IPV4"  FlowDir:BIDIRECTIONAL  FlowStatus:ENABLED}  RuleId:"ALLOW-ALL"  Qos:{Var5qi:9  Arp:{PL:6  PC:MAY_PREEMPT  PV:PREEMPTABLE}}  Priority:250}}}  ConfigUpdated:1
+2024-03-24T11:17:50Z[36m [INFO][AMF][GRPC] [0mReceived updateConfig in the amf app : RestartCounter:4141576257  NetworkSlice:{Name:"default"  Nssai:{Sst:"1"  Sd:"010203"}  DeviceGroup:{Name:"5g-gnbsim-user-group1"  IpDomainDetails:{Name:"pool1"  DnnName:"internet"  UePool:"172.250.1.0/16"  DnsPrimary:"8.8.8.8"  Mtu:1460  UeDnnQos:{DnnMbrUplink:20000000  DnnMbrDownlink:200000000  TrafficClass:{Name:"platinum"  Qci:9  Arp:6  Pdb:300  Pelr:6}}}  Imsi:"208930100007487"  Imsi:"208930100007488"  Imsi:"208930100007489"  Imsi:"208930100007490"  Imsi:"208930100007491"  Imsi:"208930100007492"  Imsi:"208930100007493"  Imsi:"208930100007494"  Imsi:"208930100007495"  Imsi:"208930100007496"  Imsi:"208930100007497"  Imsi:"208930100007498"  Imsi:"208930100007499"  Imsi:"208930100007500"}  DeviceGroup:{Name:"5g-gnbsim-user-group2"  IpDomainDetails:{Name:"pool2"  DnnName:"internet"  UePool:"172.250.1.0/16"  DnsPrimary:"8.8.8.8"  Mtu:1460  UeDnnQos:{DnnMbrUplink:10000000  DnnMbrDownlink:400000000  TrafficClass:{Name:"platinum"  Qci:8  Arp:6  Pdb:300  Pelr:6}}}  Imsi:"208930100007501"  Imsi:"208930100007502"  Imsi:"208930100007503"  Imsi:"208930100007504"  Imsi:"208930100007505"  Imsi:"208930100007506"  Imsi:"208930100007507"  Imsi:"208930100007508"  Imsi:"208930100007509"  Imsi:"208930100007510"}  Site:{SiteName:"aiab"  Gnb:{Name:"aiab-gnb1"  Tac:1}  Gnb:{Name:"aiab-gnb2"  Tac:2}  Plmn:{mcc:"208"  mnc:"93"}  Upf:{UpfName:"upf"}}  AppFilters:{PccRuleBase:{FlowInfos:{FlowDesc:"permit out ip from any to assigned"  TosTrafficClass:"IPV4"  FlowDir:BIDIRECTIONAL  FlowStatus:ENABLED}  RuleId:"ALLOW-ALL"  Qos:{Var5qi:9  Arp:{PL:6  PC:MAY_PREEMPT  PV:PREEMPTABLE}}  Priority:250}}}  ConfigUpdated:1
+2024-03-24T11:17:50Z[36m [INFO][AMF][GRPC] [0mNetwork Slice Name  default
+2024-03-24T11:17:50Z[36m [INFO][AMF][GRPC] [0mNetwork Slice has site name:  aiab
+2024-03-24T11:17:50Z[36m [INFO][AMF][GRPC] [0mPlmn mcc  208
+2024-03-24T11:17:50Z[36m [INFO][AMF][GRPC] [0mSupportedPlmnLIst: {{208 93} [{1 010203}]}, SupportGuamiLIst: {0xc000452d80 cafe00} received fromRoc
+2024-03-24T11:17:50Z[36m [INFO][AMF][GRPC] [0mSupportedPlmnLIst: [{{208 93} [{1 010203}]}], SupportGuamiLIst: [{0xc000452d80 cafe00}] in AMF
+2024-03-24T11:17:50Z[36m [INFO][AMF][GRPC] [0mTai list present in Slice {0xc0004549e0 1} []
+2024-03-24T11:17:50Z[36m [INFO][AMF][GRPC] [0mTai list present in Slice {0xc000454a00 2} [{0xc0004549e0 1}]
+2024-03-24T11:17:50Z[36m [INFO][AMF][GRPC] [0mGnb Updated in existing Plmn, SupportTAILIst received from Roc:  [{0xc0004549e0 1} {0xc000454a00 2}]
+2024-03-24T11:17:50Z[36m [INFO][AMF][GRPC] [0mSupportTAILIst in AMF [{0xc0004549e0 1} {0xc000454a00 2}]
+2024-03-24T11:17:50Z[36m [INFO][AMF][Util] [0mamfconfig Info: Version[1.0.0] Description[AMF initial configuration]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+2024/03/24 11:17:52 chunk entry: []
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+2024-03-24T11:17:54Z[36m [INFO][DRSM][App] [0mKeepalive insert d.podMaps map[amf-78b4b7b6cf-8977n:0xc0000e1570]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+AMF register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/56aa634c-3941-4cfd-b18a-01d84dd99d87": dial tcp 192.168.85.180:29510: connect: connection refused]
+2024-03-24T11:19:06Z[36m [INFO][AMF][Init] [0mStarted KeepAlive Timer: 86400 sec
+2024-03-24T11:19:06Z[36m [INFO][AMF][CFG] [0mSent Register NF Instance with updated profile
+2024-03-24T11:25:02Z[36m [INFO][AMF][NGAP] [0m[AMF] SCTP Accept from: 192.168.5.242:53388
+2024-03-24T11:25:02Z[36m [INFO][AMF][NGAP] [0mCreate a new NG connection for: 192.168.5.242:53388
+2024-03-24T11:25:02Z[36m [INFO][AMF][NGAP][192.168.5.242:53388] [0mHandle NG Setup request
+2024-03-24T11:25:02Z[36m [INFO][AMF][NGAP][192.168.5.242:53388] [0mSupported Tai List in AMF Plmn: &{208 93}, Tac: 0x000001 Tac: 1
+2024-03-24T11:25:02Z[36m [INFO][AMF][NGAP][192.168.5.242:53388] [0mSupported Tai List in AMF Plmn: &{208 93}, Tac: 0x000002 Tac: 2
+2024-03-24T11:25:02Z[36m [INFO][AMF][NGAP][192.168.5.242:53388] [0mSend NG-Setup response
+2024-03-24T11:25:04Z[36m [INFO][AMF][NGAP][192.168.5.242:53388] [0mRanUe is not exist
+2024-03-24T11:25:04Z[36m [INFO][AMF][NGAP][192.168.5.242:53388] [0mHandle Initial UE Message
+2024-03-24T11:25:04Z[36m [INFO][AMF][NGAP][192.168.5.242:53388] [0mRanUe is not exist
+2024-03-24T11:25:04Z[37m [DEBU][DRSM][App] [0mAllocate new chunk
+2024-03-24T11:25:04Z[37m [DEBU][DRSM][App] [0mFound chunk Id block  4097
+2024/03/24 11:25:04 Adding chunk 4097 success 
+2024-03-24T11:25:04Z[36m [INFO][AMF][Context] [0mAllocate AmfUeNgapID : 4196327
+2024-03-24T11:25:04Z[36m [INFO][DRSM][App] [0mreceived Chunk Doc: &{chunkid-4097 chunkid-4097 amf-78b4b7b6cf-8977n 192.168.84.183 56aa634c-3941-4cfd-b18a-01d84dd99d87 0001-01-01 00:00:00 +0000 UTC chunk}
+2024/03/24 11:25:04 id received: chunkid-4097 value
+2024-03-24T11:25:04Z[36m [INFO][DRSM][App] [0mChunk id 4097, podChunks map[4097:0xc0005e42d0]
+2024-03-24T11:25:04Z[36m [INFO][AMF][Comm] [0mSecurity header type: PlainNas Message
+2024-03-24T11:25:04Z[36m [INFO][AMF][Context] [0mAllocate TMSI : 4196326
+2024-03-24T11:25:04Z[36m [INFO][AMF][NGAP][192.168.5.242:53388][AMF_UE_NGAP_ID:4196327] [0mAntype from new RanUe : 3GPP_ACCESS
+2024-03-24T11:25:04Z[36m [INFO][AMF][GMM][AMF_UE_NGAP_ID:4196327] [0mNew EventChannel created
+2024-03-24T11:25:04Z[36m [INFO][AMF][GMM][AMF_UE_NGAP_ID:4196327] [0mupdated nashandler
+2024-03-24T11:25:04Z[36m [INFO][AMF][GMM][AMF_UE_NGAP_ID:4196327] [0mupdated nashandler
+2024-03-24T11:25:04Z[36m [INFO][AMF][NAS][AMF_UE_NGAP_ID:4196327] [0mHandle Nas Message
+2024-03-24T11:25:04Z[36m [INFO][AMF][GMM][AMF_UE_NGAP_ID:4196327] [0mHandle Registration Request
+2024-03-24T11:25:04Z[36m [INFO][AMF][GMM][AMF_UE_NGAP_ID:4196327][SUCI:suci-0-208-93-0000-0-0-0100007487] [0mAuthentication procedure
+2024-03-24T11:25:04Z[36m [INFO][AMF][GMM][AMF_UE_NGAP_ID:4196327][SUCI:suci-0-208-93-0000-0-0-0100007487] [0mSend Authentication Request
+2024-03-24T11:25:04Z[36m [INFO][AMF][NGAP][192.168.5.242:53388][AMF_UE_NGAP_ID:4196327] [0mSend Downlink Nas Transport
+2024-03-24T11:25:04Z[36m [INFO][AMF][GMM][AMF_UE_NGAP_ID:4196327][SUCI:suci-0-208-93-0000-0-0-0100007487] [0mUecontext found. queuing ngap message to uechannel
+2024-03-24T11:25:04Z[36m [INFO][AMF][GMM][AMF_UE_NGAP_ID:4196327][SUCI:suci-0-208-93-0000-0-0-0100007487] [0mupdated ngaphandler
+2024-03-24T11:25:04Z[36m [INFO][AMF][NGAP][192.168.5.242:53388] [0mHandle Uplink Nas Transport
+2024-03-24T11:25:04Z[36m [INFO][AMF][NGAP][192.168.5.242:53388][AMF_UE_NGAP_ID:4196327] [0mUplink NAS Transport (RAN UE NGAP ID: 1)
+2024-03-24T11:25:04Z[36m [INFO][AMF][GMM][AMF_UE_NGAP_ID:4196327][SUCI:suci-0-208-93-0000-0-0-0100007487] [0mHandle Authentication Failure
+2024-03-24T11:25:04Z[33m [WARN][AMF][GMM][AMF_UE_NGAP_ID:4196327][SUCI:suci-0-208-93-0000-0-0-0100007487] [0mAuthentication Failure 5GMM Cause: Synch Failure
+2024-03-24T11:25:04Z[36m [INFO][AMF][GMM][AMF_UE_NGAP_ID:4196327][SUCI:suci-0-208-93-0000-0-0-0100007487] [0mSend Authentication Request
+2024-03-24T11:25:04Z[36m [INFO][AMF][NGAP][192.168.5.242:53388][AMF_UE_NGAP_ID:4196327] [0mSend Downlink Nas Transport
+2024-03-24T11:25:04Z[36m [INFO][AMF][GMM][AMF_UE_NGAP_ID:4196327][SUCI:suci-0-208-93-0000-0-0-0100007487] [0mUecontext found. queuing ngap message to uechannel
+2024-03-24T11:25:04Z[36m [INFO][AMF][GMM][AMF_UE_NGAP_ID:4196327][SUCI:suci-0-208-93-0000-0-0-0100007487] [0mupdated ngaphandler
+2024-03-24T11:25:04Z[36m [INFO][AMF][NGAP][192.168.5.242:53388] [0mHandle Uplink Nas Transport
+2024-03-24T11:25:04Z[36m [INFO][AMF][NGAP][192.168.5.242:53388][AMF_UE_NGAP_ID:4196327] [0mUplink NAS Transport (RAN UE NGAP ID: 1)
+2024-03-24T11:25:04Z[36m [INFO][AMF][GMM][AMF_UE_NGAP_ID:4196327][SUCI:suci-0-208-93-0000-0-0-0100007487] [0mHandle Authentication Response
+2024-03-24T11:25:04Z[36m [INFO][AMF][GMM][AMF_UE_NGAP_ID:4196327][SUPI:imsi-208930100007487][SUCI:suci-0-208-93-0000-0-0-0100007487] [0mSend Security Mode Command
+2024-03-24T11:25:04Z[36m [INFO][AMF][NGAP][192.168.5.242:53388][AMF_UE_NGAP_ID:4196327] [0mSend Downlink Nas Transport
+2024-03-24T11:25:04Z[36m [INFO][AMF][NAS][AMF_UE_NGAP_ID:4196327][SUPI:imsi-208930100007487] [0mUecontext found. queuing ngap message to uechannel
+2024-03-24T11:25:04Z[36m [INFO][AMF][NAS][AMF_UE_NGAP_ID:4196327][SUPI:imsi-208930100007487] [0mupdated ngaphandler
+2024-03-24T11:25:04Z[36m [INFO][AMF][NGAP][192.168.5.242:53388] [0mHandle Uplink Nas Transport
+2024-03-24T11:25:04Z[36m [INFO][AMF][NGAP][192.168.5.242:53388][AMF_UE_NGAP_ID:4196327] [0mUplink NAS Transport (RAN UE NGAP ID: 1)
+2024-03-24T11:25:04Z[36m [INFO][AMF][GMM][AMF_UE_NGAP_ID:4196327][SUPI:imsi-208930100007487][SUCI:suci-0-208-93-0000-0-0-0100007487] [0mHandle Security Mode Complete
+2024-03-24T11:25:04Z[36m [INFO][AMF][GMM][AMF_UE_NGAP_ID:4196327][SUPI:imsi-208930100007487][SUCI:suci-0-208-93-0000-0-0-0100007487] [0mHandle InitialRegistration
+2024-03-24T11:25:04Z[36m [INFO][AMF][GMM][AMF_UE_NGAP_ID:4196327][SUPI:imsi-208930100007487][SUCI:suci-0-208-93-0000-0-0-0100007487] [0mRequestedNssai: [{ServingSnssai:0xc000206dc8 HomeSnssai:<nil>}]
+2024-03-24T11:25:04Z[36m [INFO][AMF][Comm] [0mHandle AMF Status Change Subscribe Request
+2024-03-24T11:25:04Z[36m [INFO][AMF][Comm] [0mnew AMF Status Subscription[4196325]
+2024-03-24T11:25:04Z[36m [INFO][AMF][GIN] [0m| 201 |  192.168.84.180 | POST    | /namf-comm/v1/subscriptions |
+2024-03-24T11:25:04Z[36m [INFO][AMF][Context] [0mSupported Tai List in AMF Plmn: &{208 93}, Tac: 000001
+2024-03-24T11:25:04Z[36m [INFO][AMF][Context] [0mSupported Tai List in AMF Plmn: &{208 93}, Tac: 000002
+2024-03-24T11:25:04Z[36m [INFO][AMF][GMM][AMF_UE_NGAP_ID:4196327][SUPI:imsi-208930100007487][SUCI:suci-0-208-93-0000-0-0-0100007487] [0mSend Registration Accept
+2024-03-24T11:25:04Z[36m [INFO][AMF][NGAP][192.168.5.242:53388][AMF_UE_NGAP_ID:4196327] [0mSend Initial Context Setup Request
+2024-03-24T11:25:04Z[36m [INFO][AMF][NAS][AMF_UE_NGAP_ID:4196327][SUPI:imsi-208930100007487] [0mUecontext found. queuing ngap message to uechannel
+2024-03-24T11:25:04Z[36m [INFO][AMF][NAS][AMF_UE_NGAP_ID:4196327][SUPI:imsi-208930100007487] [0mupdated ngaphandler
+2024-03-24T11:25:04Z[36m [INFO][AMF][NGAP][192.168.5.242:53388] [0mHandle Initial Context Setup Response
+2024-03-24T11:25:04Z[36m [INFO][AMF][NAS][AMF_UE_NGAP_ID:4196327][SUPI:imsi-208930100007487] [0mUecontext found. queuing ngap message to uechannel
+2024-03-24T11:25:04Z[36m [INFO][AMF][NAS][AMF_UE_NGAP_ID:4196327][SUPI:imsi-208930100007487] [0mupdated ngaphandler
+2024-03-24T11:25:04Z[36m [INFO][AMF][NGAP][192.168.5.242:53388] [0mHandle Uplink Nas Transport
+2024-03-24T11:25:04Z[36m [INFO][AMF][NGAP][192.168.5.242:53388][AMF_UE_NGAP_ID:4196327] [0mUplink NAS Transport (RAN UE NGAP ID: 1)
+2024-03-24T11:25:04Z[36m [INFO][AMF][GMM][AMF_UE_NGAP_ID:4196327][SUPI:imsi-208930100007487][SUCI:suci-0-208-93-0000-0-0-0100007487] [0mHandle Registration Complete
+2024-03-24T11:25:04Z[36m [INFO][AMF][NAS][AMF_UE_NGAP_ID:4196327][SUPI:imsi-208930100007487] [0mUecontext found. queuing ngap message to uechannel
+2024-03-24T11:25:04Z[36m [INFO][AMF][NAS][AMF_UE_NGAP_ID:4196327][SUPI:imsi-208930100007487] [0mupdated ngaphandler
+2024-03-24T11:25:04Z[36m [INFO][AMF][NGAP][192.168.5.242:53388] [0mHandle Uplink Nas Transport
+2024-03-24T11:25:04Z[36m [INFO][AMF][NGAP][192.168.5.242:53388][AMF_UE_NGAP_ID:4196327] [0mUplink NAS Transport (RAN UE NGAP ID: 1)
+2024-03-24T11:25:04Z[36m [INFO][AMF][GMM][AMF_UE_NGAP_ID:4196327][SUPI:imsi-208930100007487][SUCI:suci-0-208-93-0000-0-0-0100007487] [0mHandle UL NAS Transport
+2024-03-24T11:25:04Z[36m [INFO][AMF][GMM][AMF_UE_NGAP_ID:4196327][SUPI:imsi-208930100007487][SUCI:suci-0-208-93-0000-0-0-0100007487] [0mTransport 5GSM Message to SMF
+2024-03-24T11:25:04Z[36m [INFO][AMF][GMM][AMF_UE_NGAP_ID:4196327][SUPI:imsi-208930100007487][SUCI:suci-0-208-93-0000-0-0-0100007487] [0mSelect SMF [snssai: {Sst:1 Sd:010203}, dnn: internet]
+2024-03-24T11:25:05Z[36m [INFO][AMF][GMM][AMF_UE_NGAP_ID:4196327][SUPI:imsi-208930100007487][SUCI:suci-0-208-93-0000-0-0-0100007487] [0mcreate smContext[pduSessionID: 1] Success
+2024-03-24T11:25:05Z[36m [INFO][AMF][Producer] [0mHandle N1N2 Message Transfer Request
+2024-03-24T11:25:05Z[36m [INFO][AMF][NAS][AMF_UE_NGAP_ID:4196327][SUPI:imsi-208930100007487] [0mupdated sbihandler
+2024-03-24T11:25:05Z[36m [INFO][AMF][NGAP][192.168.5.242:53388][AMF_UE_NGAP_ID:4196327] [0mSend PDU Session Resource Setup Request
+2024-03-24T11:25:05Z[36m [INFO][AMF][GIN] [0m| 200 |  192.168.84.181 | POST    | /namf-comm/v1/ue-contexts/imsi-208930100007487/n1-n2-messages |
+2024-03-24T11:25:05Z[36m [INFO][AMF][NAS][AMF_UE_NGAP_ID:4196327][SUPI:imsi-208930100007487] [0mUecontext found. queuing ngap message to uechannel
+2024-03-24T11:25:05Z[36m [INFO][AMF][NAS][AMF_UE_NGAP_ID:4196327][SUPI:imsi-208930100007487] [0mupdated ngaphandler
+2024-03-24T11:25:05Z[36m [INFO][AMF][NGAP][192.168.5.242:53388] [0mHandle PDU Session Resource Setup Response

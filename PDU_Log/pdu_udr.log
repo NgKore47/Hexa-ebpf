@@ -1,0 +1,499 @@
++ cd /free5gc
++ cat config/udrcfg.conf
+configuration:
+  mongodb:
+    name: free5gc
+    url: mongodb://mongodb-arbiter-headless
+  nrfUri: http://nrf:29510
+  plmnSupportList:
+  - plmnId:
+      mcc: "208"
+      mnc: "93"
+  - plmnId:
+      mcc: "333"
+      mnc: "88"
+  sbi:
+    bindingIPv4: 0.0.0.0
+    port: 29504
+    registerIPv4: udr
+    scheme: http
+info:
+  description: UDR initial local configuration
+  version: 1.0.0
+logger:
+  AMF:
+    ReportCaller: false
+    debugLevel: info
+  AUSF:
+    ReportCaller: false
+    debugLevel: info
+  Aper:
+    ReportCaller: false
+    debugLevel: info
+  CommonConsumerTest:
+    ReportCaller: false
+    debugLevel: info
+  FSM:
+    ReportCaller: false
+    debugLevel: info
+  MongoDBLibrary:
+    ReportCaller: false
+    debugLevel: info
+  N3IWF:
+    ReportCaller: false
+    debugLevel: info
+  NAS:
+    ReportCaller: false
+    debugLevel: info
+  NGAP:
+    ReportCaller: false
+    debugLevel: info
+  NRF:
+    ReportCaller: false
+    debugLevel: info
+  NamfComm:
+    ReportCaller: false
+    debugLevel: info
+  NamfEventExposure:
+    ReportCaller: false
+    debugLevel: info
+  NsmfPDUSession:
+    ReportCaller: false
+    debugLevel: info
+  NudrDataRepository:
+    ReportCaller: false
+    debugLevel: info
+  OpenApi:
+    ReportCaller: false
+    debugLevel: info
+  PCF:
+    ReportCaller: false
+    debugLevel: info
+  PFCP:
+    ReportCaller: false
+    debugLevel: info
+  PathUtil:
+    ReportCaller: false
+    debugLevel: info
+  SMF:
+    ReportCaller: false
+    debugLevel: info
+  UDM:
+    ReportCaller: false
+    debugLevel: info
+  UDR:
+    ReportCaller: false
+    debugLevel: info
+  WEBUI:
+    ReportCaller: false
+    debugLevel: info+ GOTRACEBACK=crash ./udr/udr -udrcfg config/udrcfg.conf
+2024-03-24T11:17:34Z[36m [INFO][UDR][App] [0mNeura_udr
+2024-03-24T11:17:34Z[36m [INFO][UDR][Init] [0mMANAGED_BY_CONFIG_POD is true
+2024-03-24T11:17:34Z[36m [INFO][Config5g][GRPC] [0mConfig Client : Creating
+2024-03-24T11:17:34Z[36m [INFO][Config5g][GRPC] [0mDialing GRPC Connection -  webui:9876
+2024-03-24T11:17:34Z[36m [INFO][Config5g][GRPC] [0mConnecting to GRPC ...
+2024-03-24T11:17:54Z[36m [INFO][Config5g][GRPC] [0mConnecting to GRPC ...
+2024-03-24T11:18:14Z[36m [INFO][Config5g][GRPC] [0mConnecting to GRPC ...
+2024-03-24T11:18:34Z[36m [INFO][Config5g][GRPC] [0mConnecting to GRPC ...
+2024-03-24T11:18:54Z[36m [INFO][Config5g][GRPC] [0mConnecting to GRPC ...
+2024/03/24 11:19:14 INFO: [core] [Channel #1] Channel created
+2024/03/24 11:19:14 INFO: [core] [Channel #1] original dial target is: "webui:9876"
+2024/03/24 11:19:14 INFO: [core] [Channel #1] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"webui", Opaque:"9876", User:(*url.Userinfo)(nil), Host:"", Path:"", RawPath:"", OmitHost:false, ForceQuery:false, RawQuery:"", Fragment:"", RawFragment:""}}
+2024/03/24 11:19:14 INFO: [core] [Channel #1] fallback to scheme "passthrough"
+2024/03/24 11:19:14 INFO: [core] [Channel #1] parsed dial target is: passthrough:///webui:9876
+2024/03/24 11:19:14 INFO: [core] [Channel #1] Channel authority set to "webui:9876"
+2024/03/24 11:19:14 INFO: [core] [Channel #1] Resolver state updated: {
+  "Addresses": [
+    {
+      "Addr": "webui:9876",
+      "ServerName": "",
+      "Attributes": null,
+      "BalancerAttributes": null,
+      "Metadata": null
+    }
+  ],
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "webui:9876",
+          "ServerName": "",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": null,
+  "Attributes": null
+} (resolver returned new addresses)
+2024/03/24 11:19:14 INFO: [core] [Channel #1] Channel switches to new LB policy "pick_first"
+2024/03/24 11:19:14 INFO: [core] [pick-first-lb 0xc00023d170] Received new config {
+  "shuffleAddressList": false
+}, resolver state {
+  "Addresses": [
+    {
+      "Addr": "webui:9876",
+      "ServerName": "",
+      "Attributes": null,
+      "BalancerAttributes": null,
+      "Metadata": null
+    }
+  ],
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "webui:9876",
+          "ServerName": "",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": null,
+  "Attributes": null
+}
+2024/03/24 11:19:14 INFO: [core] [Channel #1 SubChannel #2] Subchannel created
+2024/03/24 11:19:14 INFO: [core] [Channel #1] Channel Connectivity change to CONNECTING
+2024/03/24 11:19:14 INFO: [core] [Channel #1] Channel exiting idle mode
+2024-03-24T11:19:14Z[36m [INFO][UDR][Init] [0mUDR Log level is set to [info] level
+2024-03-24T11:19:14Z[36m [INFO][LIB][Path] [0mset log level : info
+2024-03-24T11:19:14Z[36m [INFO][LIB][Path] [0mset report call : false
+2024/03/24 11:19:14 INFO: [core] [Channel #1 SubChannel #2] Subchannel Connectivity change to CONNECTING
+2024/03/24 11:19:14 INFO: [core] [Channel #1 SubChannel #2] Subchannel picks a new address "webui:9876" to connect
+2024-03-24T11:19:14Z[36m [INFO][LIB][MonDB] [0mset log level : info
+2024-03-24T11:19:14Z[36m [INFO][LIB][MonDB] [0mset report call : false
+2024-03-24T11:19:14Z[36m [INFO][UDR][CFG] [0mconfig version [1.0.0]
+2024-03-24T11:19:14Z[36m [INFO][UDR][Init] [0mUDR Config Info: Version[1.0.0] Description[UDR initial local configuration]
+2024-03-24T11:19:14Z[36m [INFO][Config5g][GRPC] [0mSubscribing to Config POD
+2024-03-24T11:19:14Z[31m [ERRO][Config5g][GRPC] [0mConnectivity status: Not Ready
+2024/03/24 11:19:14 INFO: [core] [pick-first-lb 0xc00023d170] Received SubConn state update: 0xc00023d290, {ConnectivityState:CONNECTING ConnectionError:<nil>}
+2024-03-24T11:19:14Z[36m [INFO][UDR][Init] [0mServer started
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /nudr-dr/v1/              --> github.com/omec-project/udr/datarepository.Index (3 handlers)
+[GIN-debug] PATCH  /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/amf-3gpp-access --> github.com/omec-project/udr/datarepository.HTTPAmfContext3gpp (3 handlers)
+[GIN-debug] PUT    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/amf-3gpp-access --> github.com/omec-project/udr/datarepository.HTTPCreateAmfContext3gpp (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/amf-3gpp-access --> github.com/omec-project/udr/datarepository.HTTPQueryAmfContext3gpp (3 handlers)
+[GIN-debug] PATCH  /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/amf-non-3gpp-access --> github.com/omec-project/udr/datarepository.HTTPAmfContextNon3gpp (3 handlers)
+[GIN-debug] PUT    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/amf-non-3gpp-access --> github.com/omec-project/udr/datarepository.HTTPCreateAmfContextNon3gpp (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/amf-non-3gpp-access --> github.com/omec-project/udr/datarepository.HTTPQueryAmfContextNon3gpp (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/provisioned-data/am-data --> github.com/omec-project/udr/datarepository.HTTPQueryAmData (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/authentication-status --> github.com/omec-project/udr/datarepository.HTTPQueryAuthenticationStatus (3 handlers)
+[GIN-debug] PATCH  /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/authentication-subscription --> github.com/omec-project/udr/datarepository.HTTPModifyAuthentication (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/authentication-subscription --> github.com/omec-project/udr/datarepository.HTTPQueryAuthSubsData (3 handlers)
+[GIN-debug] PUT    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/sor-data --> github.com/omec-project/udr/datarepository.HTTPCreateAuthenticationSoR (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/sor-data --> github.com/omec-project/udr/datarepository.HTTPQueryAuthSoR (3 handlers)
+[GIN-debug] PUT    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/authentication-status --> github.com/omec-project/udr/datarepository.HTTPCreateAuthenticationStatus (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/application-data/influenceData --> github.com/omec-project/udr/datarepository.HTTPApplicationDataInfluenceDataGet (3 handlers)
+[GIN-debug] DELETE /nudr-dr/v1/application-data/influenceData/:influenceId/:subscriptionId --> github.com/omec-project/udr/datarepository.HTTPApplicationDataInfluenceDataSubsToNotifySubscriptionIdDelete (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/application-data/influenceData/:influenceId/:subscriptionId --> github.com/omec-project/udr/datarepository.HTTPApplicationDataInfluenceDataSubsToNotifySubscriptionIdGet (3 handlers)
+[GIN-debug] PUT    /nudr-dr/v1/application-data/influenceData/:influenceId/:subscriptionId --> github.com/omec-project/udr/datarepository.HTTPApplicationDataInfluenceDataSubsToNotifySubscriptionIdPut (3 handlers)
+[GIN-debug] DELETE /nudr-dr/v1/application-data/pfds/:appId --> github.com/omec-project/udr/datarepository.HTTPApplicationDataPfdsAppIdDelete (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/application-data/pfds/:appId --> github.com/omec-project/udr/datarepository.HTTPApplicationDataPfdsAppIdGet (3 handlers)
+[GIN-debug] PUT    /nudr-dr/v1/application-data/pfds/:appId --> github.com/omec-project/udr/datarepository.HTTPApplicationDataPfdsAppIdPut (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/application-data/pfds --> github.com/omec-project/udr/datarepository.HTTPApplicationDataPfdsGet (3 handlers)
+[GIN-debug] DELETE /nudr-dr/v1/policy-data/bdt-data/:bdtReferenceId --> github.com/omec-project/udr/datarepository.HTTPPolicyDataBdtDataBdtReferenceIdDelete (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/policy-data/bdt-data/:bdtReferenceId --> github.com/omec-project/udr/datarepository.HTTPPolicyDataBdtDataBdtReferenceIdGet (3 handlers)
+[GIN-debug] PUT    /nudr-dr/v1/policy-data/bdt-data/:bdtReferenceId --> github.com/omec-project/udr/datarepository.HTTPPolicyDataBdtDataBdtReferenceIdPut (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/policy-data/bdt-data --> github.com/omec-project/udr/datarepository.HTTPPolicyDataBdtDataGet (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/policy-data/plmns/:plmnId/ue-policy-set --> github.com/omec-project/udr/datarepository.HTTPPolicyDataPlmnsPlmnIdUePolicySetGet (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/policy-data/sponsor-connectivity-data/:sponsorId --> github.com/omec-project/udr/datarepository.HTTPPolicyDataSponsorConnectivityDataSponsorIdGet (3 handlers)
+[GIN-debug] POST   /nudr-dr/v1/policy-data/subs-to-notify --> github.com/omec-project/udr/datarepository.HTTPPolicyDataSubsToNotifyPost (3 handlers)
+[GIN-debug] DELETE /nudr-dr/v1/policy-data/subs-to-notify/:subsId --> github.com/omec-project/udr/datarepository.HTTPPolicyDataSubsToNotifySubsIdDelete (3 handlers)
+[GIN-debug] PUT    /nudr-dr/v1/policy-data/subs-to-notify/:subsId --> github.com/omec-project/udr/datarepository.HTTPPolicyDataSubsToNotifySubsIdPut (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/policy-data/ues/:ueId/am-data --> github.com/omec-project/udr/datarepository.HTTPPolicyDataUesUeIdAmDataGet (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/policy-data/ues/:ueId/operator-specific-data --> github.com/omec-project/udr/datarepository.HTTPPolicyDataUesUeIdOperatorSpecificDataGet (3 handlers)
+[GIN-debug] PATCH  /nudr-dr/v1/policy-data/ues/:ueId/operator-specific-data --> github.com/omec-project/udr/datarepository.HTTPPolicyDataUesUeIdOperatorSpecificDataPatch (3 handlers)
+[GIN-debug] PUT    /nudr-dr/v1/policy-data/ues/:ueId/operator-specific-data --> github.com/omec-project/udr/datarepository.HTTPPolicyDataUesUeIdOperatorSpecificDataPut (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/policy-data/ues/:ueId/sm-data --> github.com/omec-project/udr/datarepository.HTTPPolicyDataUesUeIdSmDataGet (3 handlers)
+[GIN-debug] PATCH  /nudr-dr/v1/policy-data/ues/:ueId/sm-data --> github.com/omec-project/udr/datarepository.HTTPPolicyDataUesUeIdSmDataPatch (3 handlers)
+[GIN-debug] DELETE /nudr-dr/v1/policy-data/ues/:ueId/sm-data/:usageMonId --> github.com/omec-project/udr/datarepository.HTTPPolicyDataUesUeIdSmDataUsageMonIdDelete (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/policy-data/ues/:ueId/sm-data/:usageMonId --> github.com/omec-project/udr/datarepository.HTTPPolicyDataUesUeIdSmDataUsageMonIdGet (3 handlers)
+[GIN-debug] PUT    /nudr-dr/v1/policy-data/ues/:ueId/sm-data/:usageMonId --> github.com/omec-project/udr/datarepository.HTTPPolicyDataUesUeIdSmDataUsageMonIdPut (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/policy-data/ues/:ueId/ue-policy-set --> github.com/omec-project/udr/datarepository.HTTPPolicyDataUesUeIdUePolicySetGet (3 handlers)
+[GIN-debug] PATCH  /nudr-dr/v1/policy-data/ues/:ueId/ue-policy-set --> github.com/omec-project/udr/datarepository.HTTPPolicyDataUesUeIdUePolicySetPatch (3 handlers)
+[GIN-debug] PUT    /nudr-dr/v1/policy-data/ues/:ueId/ue-policy-set --> github.com/omec-project/udr/datarepository.HTTPPolicyDataUesUeIdUePolicySetPut (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/provisioned-data --> github.com/omec-project/udr/datarepository.HTTPQueryProvisionedData (3 handlers)
+[GIN-debug] DELETE /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/sdm-subscriptions/:subsId --> github.com/omec-project/udr/datarepository.HTTPRemovesdmSubscriptions (3 handlers)
+[GIN-debug] PUT    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/sdm-subscriptions/:subsId --> github.com/omec-project/udr/datarepository.HTTPUpdatesdmsubscriptions (3 handlers)
+[GIN-debug] POST   /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/sdm-subscriptions --> github.com/omec-project/udr/datarepository.HTTPCreateSdmSubscriptions (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/sdm-subscriptions --> github.com/omec-project/udr/datarepository.HTTPQuerysdmsubscriptions (3 handlers)
+[GIN-debug] PUT    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/smf-registrations/:pduSessionId --> github.com/omec-project/udr/datarepository.HTTPCreateSmfContextNon3gpp (3 handlers)
+[GIN-debug] DELETE /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/smf-registrations/:pduSessionId --> github.com/omec-project/udr/datarepository.HTTPDeleteSmfContext (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/smf-registrations/:pduSessionId --> github.com/omec-project/udr/datarepository.HTTPQuerySmfRegistration (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/smf-registrations --> github.com/omec-project/udr/datarepository.HTTPQuerySmfRegList (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/provisioned-data/smf-selection-subscription-data --> github.com/omec-project/udr/datarepository.HTTPQuerySmfSelectData (3 handlers)
+[GIN-debug] PUT    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/smsf-3gpp-access --> github.com/omec-project/udr/datarepository.HTTPCreateSmsfContext3gpp (3 handlers)
+[GIN-debug] DELETE /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/smsf-3gpp-access --> github.com/omec-project/udr/datarepository.HTTPDeleteSmsfContext3gpp (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/smsf-3gpp-access --> github.com/omec-project/udr/datarepository.HTTPQuerySmsfContext3gpp (3 handlers)
+[GIN-debug] PUT    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/smsf-non-3gpp-access --> github.com/omec-project/udr/datarepository.HTTPCreateSmsfContextNon3gpp (3 handlers)
+[GIN-debug] DELETE /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/smsf-non-3gpp-access --> github.com/omec-project/udr/datarepository.HTTPDeleteSmsfContextNon3gpp (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/smsf-non-3gpp-access --> github.com/omec-project/udr/datarepository.HTTPQuerySmsfContextNon3gpp (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/provisioned-data/sms-mng-data --> github.com/omec-project/udr/datarepository.HTTPQuerySmsMngData (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/provisioned-data/sms-data --> github.com/omec-project/udr/datarepository.HTTPQuerySmsData (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/provisioned-data/sm-data --> github.com/omec-project/udr/datarepository.HTTPQuerySmData (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/provisioned-data/trace-data --> github.com/omec-project/udr/datarepository.HTTPQueryTraceData (3 handlers)
+[GIN-debug] PUT    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/ee-subscriptions/:subsId/amf-subscriptions --> github.com/omec-project/udr/datarepository.HTTPCreateAMFSubscriptions (3 handlers)
+[GIN-debug] PATCH  /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/ee-subscriptions/:subsId/amf-subscriptions --> github.com/omec-project/udr/datarepository.HTTPModifyAmfSubscriptionInfo (3 handlers)
+[GIN-debug] DELETE /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/ee-subscriptions/:subsId/amf-subscriptions --> github.com/omec-project/udr/datarepository.HTTPRemoveAmfSubscriptionsInfo (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/ee-subscriptions/:subsId/amf-subscriptions --> github.com/omec-project/udr/datarepository.HTTPGetAmfSubscriptionInfo (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/subscription-data/:ueId --> github.com/omec-project/udr/datarepository.subMsgShortDispatchHandlerFunc (3 handlers)
+[GIN-debug] POST   /nudr-dr/v1/subscription-data/:ueId --> github.com/omec-project/udr/datarepository.subMsgShortDispatchHandlerFunc (3 handlers)
+[GIN-debug] PUT    /nudr-dr/v1/subscription-data/:ueId --> github.com/omec-project/udr/datarepository.subMsgShortDispatchHandlerFunc (3 handlers)
+[GIN-debug] PATCH  /nudr-dr/v1/subscription-data/:ueId --> github.com/omec-project/udr/datarepository.subMsgShortDispatchHandlerFunc (3 handlers)
+[GIN-debug] HEAD   /nudr-dr/v1/subscription-data/:ueId --> github.com/omec-project/udr/datarepository.subMsgShortDispatchHandlerFunc (3 handlers)
+[GIN-debug] OPTIONS /nudr-dr/v1/subscription-data/:ueId --> github.com/omec-project/udr/datarepository.subMsgShortDispatchHandlerFunc (3 handlers)
+[GIN-debug] DELETE /nudr-dr/v1/subscription-data/:ueId --> github.com/omec-project/udr/datarepository.subMsgShortDispatchHandlerFunc (3 handlers)
+[GIN-debug] CONNECT /nudr-dr/v1/subscription-data/:ueId --> github.com/omec-project/udr/datarepository.subMsgShortDispatchHandlerFunc (3 handlers)
+[GIN-debug] TRACE  /nudr-dr/v1/subscription-data/:ueId --> github.com/omec-project/udr/datarepository.subMsgShortDispatchHandlerFunc (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId --> github.com/omec-project/udr/datarepository.subMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] POST   /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId --> github.com/omec-project/udr/datarepository.subMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] PUT    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId --> github.com/omec-project/udr/datarepository.subMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] PATCH  /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId --> github.com/omec-project/udr/datarepository.subMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] HEAD   /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId --> github.com/omec-project/udr/datarepository.subMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] OPTIONS /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId --> github.com/omec-project/udr/datarepository.subMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] DELETE /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId --> github.com/omec-project/udr/datarepository.subMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] CONNECT /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId --> github.com/omec-project/udr/datarepository.subMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] TRACE  /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId --> github.com/omec-project/udr/datarepository.subMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/ee-subscriptions --> github.com/omec-project/udr/datarepository.eeMsgShortDispatchHandlerFunc (3 handlers)
+[GIN-debug] POST   /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/ee-subscriptions --> github.com/omec-project/udr/datarepository.eeMsgShortDispatchHandlerFunc (3 handlers)
+[GIN-debug] PUT    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/ee-subscriptions --> github.com/omec-project/udr/datarepository.eeMsgShortDispatchHandlerFunc (3 handlers)
+[GIN-debug] PATCH  /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/ee-subscriptions --> github.com/omec-project/udr/datarepository.eeMsgShortDispatchHandlerFunc (3 handlers)
+[GIN-debug] HEAD   /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/ee-subscriptions --> github.com/omec-project/udr/datarepository.eeMsgShortDispatchHandlerFunc (3 handlers)
+[GIN-debug] OPTIONS /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/ee-subscriptions --> github.com/omec-project/udr/datarepository.eeMsgShortDispatchHandlerFunc (3 handlers)
+[GIN-debug] DELETE /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/ee-subscriptions --> github.com/omec-project/udr/datarepository.eeMsgShortDispatchHandlerFunc (3 handlers)
+[GIN-debug] CONNECT /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/ee-subscriptions --> github.com/omec-project/udr/datarepository.eeMsgShortDispatchHandlerFunc (3 handlers)
+[GIN-debug] TRACE  /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/ee-subscriptions --> github.com/omec-project/udr/datarepository.eeMsgShortDispatchHandlerFunc (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/ee-subscriptions/:subsId --> github.com/omec-project/udr/datarepository.eeMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] POST   /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/ee-subscriptions/:subsId --> github.com/omec-project/udr/datarepository.eeMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] PUT    /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/ee-subscriptions/:subsId --> github.com/omec-project/udr/datarepository.eeMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] PATCH  /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/ee-subscriptions/:subsId --> github.com/omec-project/udr/datarepository.eeMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] HEAD   /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/ee-subscriptions/:subsId --> github.com/omec-project/udr/datarepository.eeMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] OPTIONS /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/ee-subscriptions/:subsId --> github.com/omec-project/udr/datarepository.eeMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] DELETE /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/ee-subscriptions/:subsId --> github.com/omec-project/udr/datarepository.eeMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] CONNECT /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/ee-subscriptions/:subsId --> github.com/omec-project/udr/datarepository.eeMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] TRACE  /nudr-dr/v1/subscription-data/:ueId/:servingPlmnId/ee-subscriptions/:subsId --> github.com/omec-project/udr/datarepository.eeMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/application-data/influenceData/:influenceId --> github.com/omec-project/udr/datarepository.appInfluDataMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] POST   /nudr-dr/v1/application-data/influenceData/:influenceId --> github.com/omec-project/udr/datarepository.appInfluDataMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] PUT    /nudr-dr/v1/application-data/influenceData/:influenceId --> github.com/omec-project/udr/datarepository.appInfluDataMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] PATCH  /nudr-dr/v1/application-data/influenceData/:influenceId --> github.com/omec-project/udr/datarepository.appInfluDataMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] HEAD   /nudr-dr/v1/application-data/influenceData/:influenceId --> github.com/omec-project/udr/datarepository.appInfluDataMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] OPTIONS /nudr-dr/v1/application-data/influenceData/:influenceId --> github.com/omec-project/udr/datarepository.appInfluDataMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] DELETE /nudr-dr/v1/application-data/influenceData/:influenceId --> github.com/omec-project/udr/datarepository.appInfluDataMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] CONNECT /nudr-dr/v1/application-data/influenceData/:influenceId --> github.com/omec-project/udr/datarepository.appInfluDataMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] TRACE  /nudr-dr/v1/application-data/influenceData/:influenceId --> github.com/omec-project/udr/datarepository.appInfluDataMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/exposure-data/:ueId/:subId --> github.com/omec-project/udr/datarepository.expoMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] POST   /nudr-dr/v1/exposure-data/:ueId/:subId --> github.com/omec-project/udr/datarepository.expoMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] PUT    /nudr-dr/v1/exposure-data/:ueId/:subId --> github.com/omec-project/udr/datarepository.expoMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] PATCH  /nudr-dr/v1/exposure-data/:ueId/:subId --> github.com/omec-project/udr/datarepository.expoMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] HEAD   /nudr-dr/v1/exposure-data/:ueId/:subId --> github.com/omec-project/udr/datarepository.expoMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] OPTIONS /nudr-dr/v1/exposure-data/:ueId/:subId --> github.com/omec-project/udr/datarepository.expoMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] DELETE /nudr-dr/v1/exposure-data/:ueId/:subId --> github.com/omec-project/udr/datarepository.expoMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] CONNECT /nudr-dr/v1/exposure-data/:ueId/:subId --> github.com/omec-project/udr/datarepository.expoMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] TRACE  /nudr-dr/v1/exposure-data/:ueId/:subId --> github.com/omec-project/udr/datarepository.expoMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] GET    /nudr-dr/v1/exposure-data/:ueId/:subId/:pduSessionId --> github.com/omec-project/udr/datarepository.expoMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] POST   /nudr-dr/v1/exposure-data/:ueId/:subId/:pduSessionId --> github.com/omec-project/udr/datarepository.expoMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] PUT    /nudr-dr/v1/exposure-data/:ueId/:subId/:pduSessionId --> github.com/omec-project/udr/datarepository.expoMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] PATCH  /nudr-dr/v1/exposure-data/:ueId/:subId/:pduSessionId --> github.com/omec-project/udr/datarepository.expoMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] HEAD   /nudr-dr/v1/exposure-data/:ueId/:subId/:pduSessionId --> github.com/omec-project/udr/datarepository.expoMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] OPTIONS /nudr-dr/v1/exposure-data/:ueId/:subId/:pduSessionId --> github.com/omec-project/udr/datarepository.expoMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] DELETE /nudr-dr/v1/exposure-data/:ueId/:subId/:pduSessionId --> github.com/omec-project/udr/datarepository.expoMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] CONNECT /nudr-dr/v1/exposure-data/:ueId/:subId/:pduSessionId --> github.com/omec-project/udr/datarepository.expoMsgDispatchHandlerFunc (3 handlers)
+[GIN-debug] TRACE  /nudr-dr/v1/exposure-data/:ueId/:subId/:pduSessionId --> github.com/omec-project/udr/datarepository.expoMsgDispatchHandlerFunc (3 handlers)
+2024-03-24T11:19:14Z[36m [INFO][UDR][Util] [0mudrconfig Info: Version[1.0.0] Description[UDR initial local configuration]
+2024/03/24 11:19:14 INFO: [core] [Channel #1 SubChannel #2] Subchannel Connectivity change to READY
+2024/03/24 11:19:14 INFO: [core] [pick-first-lb 0xc00023d170] Received SubConn state update: 0xc00023d290, {ConnectivityState:READY ConnectionError:<nil>}
+2024/03/24 11:19:14 INFO: [core] [Channel #1] Channel Connectivity change to READY
+2024-03-24T11:19:15Z[36m [INFO][Config5g][GRPC] [0mConnectivity status: Ready
+2024-03-24T11:19:15Z[36m [INFO][Config5g][GRPC] [0mConfig Message received
+2024-03-24T11:19:15Z[36m [INFO][Config5g][GRPC] [0mInitial Config Received  RestartCounter:4141576257  NetworkSlice:{Name:"default"  Nssai:{Sst:"1"  Sd:"010203"}  DeviceGroup:{Name:"5g-gnbsim-user-group1"  IpDomainDetails:{Name:"pool1"  DnnName:"internet"  UePool:"172.250.1.0/16"  DnsPrimary:"8.8.8.8"  Mtu:1460  UeDnnQos:{DnnMbrUplink:20000000  DnnMbrDownlink:200000000  TrafficClass:{Name:"platinum"  Qci:9  Arp:6  Pdb:300  Pelr:6}}}  Imsi:"208930100007487"  Imsi:"208930100007488"  Imsi:"208930100007489"  Imsi:"208930100007490"  Imsi:"208930100007491"  Imsi:"208930100007492"  Imsi:"208930100007493"  Imsi:"208930100007494"  Imsi:"208930100007495"  Imsi:"208930100007496"  Imsi:"208930100007497"  Imsi:"208930100007498"  Imsi:"208930100007499"  Imsi:"208930100007500"}  DeviceGroup:{Name:"5g-gnbsim-user-group2"  IpDomainDetails:{Name:"pool2"  DnnName:"internet"  UePool:"172.250.1.0/16"  DnsPrimary:"8.8.8.8"  Mtu:1460  UeDnnQos:{DnnMbrUplink:10000000  DnnMbrDownlink:400000000  TrafficClass:{Name:"platinum"  Qci:8  Arp:6  Pdb:300  Pelr:6}}}  Imsi:"208930100007501"  Imsi:"208930100007502"  Imsi:"208930100007503"  Imsi:"208930100007504"  Imsi:"208930100007505"  Imsi:"208930100007506"  Imsi:"208930100007507"  Imsi:"208930100007508"  Imsi:"208930100007509"  Imsi:"208930100007510"}  Site:{SiteName:"aiab"  Gnb:{Name:"aiab-gnb1"  Tac:1}  Gnb:{Name:"aiab-gnb2"  Tac:2}  Plmn:{mcc:"208"  mnc:"93"}  Upf:{UpfName:"upf"}}  AppFilters:{PccRuleBase:{FlowInfos:{FlowDesc:"permit out ip from any to assigned"  TosTrafficClass:"IPV4"  FlowDir:BIDIRECTIONAL  FlowStatus:ENABLED}  RuleId:"ALLOW-ALL"  Qos:{Var5qi:9  Arp:{PL:6  PC:MAY_PREEMPT  PV:PREEMPTABLE}}  Priority:250}}}  ConfigUpdated:1
+2024-03-24T11:19:15Z[36m [INFO][UDR][GRPC] [0mReceived updateConfig in the udr app :  RestartCounter:4141576257  NetworkSlice:{Name:"default"  Nssai:{Sst:"1"  Sd:"010203"}  DeviceGroup:{Name:"5g-gnbsim-user-group1"  IpDomainDetails:{Name:"pool1"  DnnName:"internet"  UePool:"172.250.1.0/16"  DnsPrimary:"8.8.8.8"  Mtu:1460  UeDnnQos:{DnnMbrUplink:20000000  DnnMbrDownlink:200000000  TrafficClass:{Name:"platinum"  Qci:9  Arp:6  Pdb:300  Pelr:6}}}  Imsi:"208930100007487"  Imsi:"208930100007488"  Imsi:"208930100007489"  Imsi:"208930100007490"  Imsi:"208930100007491"  Imsi:"208930100007492"  Imsi:"208930100007493"  Imsi:"208930100007494"  Imsi:"208930100007495"  Imsi:"208930100007496"  Imsi:"208930100007497"  Imsi:"208930100007498"  Imsi:"208930100007499"  Imsi:"208930100007500"}  DeviceGroup:{Name:"5g-gnbsim-user-group2"  IpDomainDetails:{Name:"pool2"  DnnName:"internet"  UePool:"172.250.1.0/16"  DnsPrimary:"8.8.8.8"  Mtu:1460  UeDnnQos:{DnnMbrUplink:10000000  DnnMbrDownlink:400000000  TrafficClass:{Name:"platinum"  Qci:8  Arp:6  Pdb:300  Pelr:6}}}  Imsi:"208930100007501"  Imsi:"208930100007502"  Imsi:"208930100007503"  Imsi:"208930100007504"  Imsi:"208930100007505"  Imsi:"208930100007506"  Imsi:"208930100007507"  Imsi:"208930100007508"  Imsi:"208930100007509"  Imsi:"208930100007510"}  Site:{SiteName:"aiab"  Gnb:{Name:"aiab-gnb1"  Tac:1}  Gnb:{Name:"aiab-gnb2"  Tac:2}  Plmn:{mcc:"208"  mnc:"93"}  Upf:{UpfName:"upf"}}  AppFilters:{PccRuleBase:{FlowInfos:{FlowDesc:"permit out ip from any to assigned"  TosTrafficClass:"IPV4"  FlowDir:BIDIRECTIONAL  FlowStatus:ENABLED}  RuleId:"ALLOW-ALL"  Qos:{Var5qi:9  Arp:{PL:6  PC:MAY_PREEMPT  PV:PREEMPTABLE}}  Priority:250}}}  ConfigUpdated:1
+2024-03-24T11:19:15Z[36m [INFO][UDR][GRPC] [0mNetwork Slice Name  default
+2024-03-24T11:19:15Z[36m [INFO][UDR][GRPC] [0mNetwork Slice has site name present
+2024-03-24T11:19:15Z[36m [INFO][UDR][GRPC] [0mSite name  aiab
+2024-03-24T11:19:15Z[36m [INFO][UDR][GRPC] [0mPlmn mcc  208
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0mConfig update DB trigger
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mAddEntrySmPolicyTable
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mcollname, imsi, dnn, sst, sd :  policyData.ues.smData 208930100007487 internet 1 010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB key   01010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB val   {0xc00050c720 map[internet:{internet [] []   false false 0 0 false false <nil> map[] false false 0}]}
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0madded entry to sm policy table success
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0mConfig update DB trigger
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mAddEntrySmPolicyTable
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mcollname, imsi, dnn, sst, sd :  policyData.ues.smData 208930100007488 internet 1 010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB key   01010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB val   {0xc00050ca08 map[internet:{internet [] []   false false 0 0 false false <nil> map[] false false 0}]}
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0madded entry to sm policy table success
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0mConfig update DB trigger
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mAddEntrySmPolicyTable
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mcollname, imsi, dnn, sst, sd :  policyData.ues.smData 208930100007489 internet 1 010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB key   01010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB val   {0xc000716558 map[internet:{internet [] []   false false 0 0 false false <nil> map[] false false 0}]}
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0madded entry to sm policy table success
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0mConfig update DB trigger
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mAddEntrySmPolicyTable
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mcollname, imsi, dnn, sst, sd :  policyData.ues.smData 208930100007490 internet 1 010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB key   01010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB val   {0xc000011cc8 map[internet:{internet [] []   false false 0 0 false false <nil> map[] false false 0}]}
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0madded entry to sm policy table success
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0mConfig update DB trigger
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mAddEntrySmPolicyTable
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mcollname, imsi, dnn, sst, sd :  policyData.ues.smData 208930100007491 internet 1 010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB key   01010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB val   {0xc000011f98 map[internet:{internet [] []   false false 0 0 false false <nil> map[] false false 0}]}
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0madded entry to sm policy table success
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0mConfig update DB trigger
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mAddEntrySmPolicyTable
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mcollname, imsi, dnn, sst, sd :  policyData.ues.smData 208930100007492 internet 1 010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB key   01010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB val   {0xc000716cc0 map[internet:{internet [] []   false false 0 0 false false <nil> map[] false false 0}]}
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0madded entry to sm policy table success
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0mConfig update DB trigger
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mAddEntrySmPolicyTable
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mcollname, imsi, dnn, sst, sd :  policyData.ues.smData 208930100007493 internet 1 010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB key   01010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB val   {0xc000716f90 map[internet:{internet [] []   false false 0 0 false false <nil> map[] false false 0}]}
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0madded entry to sm policy table success
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0mConfig update DB trigger
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mAddEntrySmPolicyTable
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mcollname, imsi, dnn, sst, sd :  policyData.ues.smData 208930100007494 internet 1 010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB key   01010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB val   {0xc000717260 map[internet:{internet [] []   false false 0 0 false false <nil> map[] false false 0}]}
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0madded entry to sm policy table success
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0mConfig update DB trigger
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mAddEntrySmPolicyTable
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mcollname, imsi, dnn, sst, sd :  policyData.ues.smData 208930100007495 internet 1 010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB key   01010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB val   {0xc00050d470 map[internet:{internet [] []   false false 0 0 false false <nil> map[] false false 0}]}
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0madded entry to sm policy table success
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0mConfig update DB trigger
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mAddEntrySmPolicyTable
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mcollname, imsi, dnn, sst, sd :  policyData.ues.smData 208930100007496 internet 1 010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB key   01010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB val   {0xc000212bb8 map[internet:{internet [] []   false false 0 0 false false <nil> map[] false false 0}]}
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0madded entry to sm policy table success
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0mConfig update DB trigger
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mAddEntrySmPolicyTable
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mcollname, imsi, dnn, sst, sd :  policyData.ues.smData 208930100007497 internet 1 010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB key   01010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB val   {0xc00050da40 map[internet:{internet [] []   false false 0 0 false false <nil> map[] false false 0}]}
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0madded entry to sm policy table success
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0mConfig update DB trigger
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mAddEntrySmPolicyTable
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mcollname, imsi, dnn, sst, sd :  policyData.ues.smData 208930100007498 internet 1 010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB key   01010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB val   {0xc000213188 map[internet:{internet [] []   false false 0 0 false false <nil> map[] false false 0}]}
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0madded entry to sm policy table success
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0mConfig update DB trigger
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mAddEntrySmPolicyTable
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mcollname, imsi, dnn, sst, sd :  policyData.ues.smData 208930100007499 internet 1 010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB key   01010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB val   {0xc000717698 map[internet:{internet [] []   false false 0 0 false false <nil> map[] false false 0}]}
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0madded entry to sm policy table success
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0mConfig update DB trigger
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mAddEntrySmPolicyTable
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mcollname, imsi, dnn, sst, sd :  policyData.ues.smData 208930100007500 internet 1 010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][GRPC] [0mSend config trigger to main routine
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0mMinimum configuration from config pod available true
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB key   01010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB val   {0xc00062a018 map[internet:{internet [] []   false false 0 0 false false <nil> map[] false false 0}]}
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0madded entry to sm policy table success
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0mConfig update DB trigger
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mAddEntrySmPolicyTable
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mcollname, imsi, dnn, sst, sd :  policyData.ues.smData 208930100007501 internet 1 010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB key   01010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB val   {0xc00069adb0 map[internet:{internet [] []   false false 0 0 false false <nil> map[] false false 0}]}
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0madded entry to sm policy table success
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0mConfig update DB trigger
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mAddEntrySmPolicyTable
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mcollname, imsi, dnn, sst, sd :  policyData.ues.smData 208930100007502 internet 1 010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB key   01010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB val   {0xc000810150 map[internet:{internet [] []   false false 0 0 false false <nil> map[] false false 0}]}
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0madded entry to sm policy table success
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0mConfig update DB trigger
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mAddEntrySmPolicyTable
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mcollname, imsi, dnn, sst, sd :  policyData.ues.smData 208930100007503 internet 1 010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB key   01010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB val   {0xc00062a138 map[internet:{internet [] []   false false 0 0 false false <nil> map[] false false 0}]}
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0madded entry to sm policy table success
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0mConfig update DB trigger
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mAddEntrySmPolicyTable
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mcollname, imsi, dnn, sst, sd :  policyData.ues.smData 208930100007504 internet 1 010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB key   01010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB val   {0xc00062a408 map[internet:{internet [] []   false false 0 0 false false <nil> map[] false false 0}]}
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0madded entry to sm policy table success
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0mConfig update DB trigger
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mAddEntrySmPolicyTable
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mcollname, imsi, dnn, sst, sd :  policyData.ues.smData 208930100007505 internet 1 010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0mStarted KeepAlive Timer: 86400 sec
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mSent Register NF Instance with updated profile
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB key   01010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB val   {0xc00062a6f0 map[internet:{internet [] []   false false 0 0 false false <nil> map[] false false 0}]}
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0madded entry to sm policy table success
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0mConfig update DB trigger
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mAddEntrySmPolicyTable
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mcollname, imsi, dnn, sst, sd :  policyData.ues.smData 208930100007506 internet 1 010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB key   01010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB val   {0xc00069a918 map[internet:{internet [] []   false false 0 0 false false <nil> map[] false false 0}]}
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0madded entry to sm policy table success
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0mConfig update DB trigger
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mAddEntrySmPolicyTable
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mcollname, imsi, dnn, sst, sd :  policyData.ues.smData 208930100007507 internet 1 010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB key   01010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB val   {0xc000476498 map[internet:{internet [] []   false false 0 0 false false <nil> map[] false false 0}]}
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0madded entry to sm policy table success
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0mConfig update DB trigger
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mAddEntrySmPolicyTable
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mcollname, imsi, dnn, sst, sd :  policyData.ues.smData 208930100007508 internet 1 010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB key   01010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB val   {0xc00062acc0 map[internet:{internet [] []   false false 0 0 false false <nil> map[] false false 0}]}
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0madded entry to sm policy table success
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0mConfig update DB trigger
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mAddEntrySmPolicyTable
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mcollname, imsi, dnn, sst, sd :  policyData.ues.smData 208930100007509 internet 1 010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB key   01010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB val   {0xc00069af18 map[internet:{internet [] []   false false 0 0 false false <nil> map[] false false 0}]}
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0madded entry to sm policy table success
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0mConfig update DB trigger
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mAddEntrySmPolicyTable
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mcollname, imsi, dnn, sst, sd :  policyData.ues.smData 208930100007510 internet 1 010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB key   01010203
+2024-03-24T11:19:15Z[36m [INFO][UDR][CFG] [0mentry in DB val   {0xc000476a68 map[internet:{internet [] []   false false 0 0 false false <nil> map[] false false 0}]}
+2024-03-24T11:19:15Z[36m [INFO][UDR][Init] [0madded entry to sm policy table success
+2024-03-24T11:25:04Z[36m [INFO][UDR][DRepo] [0mHandle QueryAuthSubsData
+2024-03-24T11:25:04Z[36m [INFO][UDR][GIN] [0m| 200 |  192.168.84.182 | GET     | /nudr-dr/v1/subscription-data/imsi-208930100007487/authentication-data/authentication-subscription |
+2024-03-24T11:25:04Z[36m [INFO][UDR][DRepo] [0mHandle ModifyAuthentication
+2024-03-24T11:25:04Z[36m [INFO][UDR][GIN] [0m| 204 |  192.168.84.182 | PATCH   | /nudr-dr/v1/subscription-data/imsi-208930100007487/authentication-data/authentication-subscription |
+2024-03-24T11:25:04Z[36m [INFO][UDR][DRepo] [0mHandle QueryAuthSubsData
+2024-03-24T11:25:04Z[36m [INFO][UDR][GIN] [0m| 200 |  192.168.84.182 | GET     | /nudr-dr/v1/subscription-data/imsi-208930100007487/authentication-data/authentication-subscription |
+2024-03-24T11:25:04Z[36m [INFO][UDR][DRepo] [0mHandle ModifyAuthentication
+2024-03-24T11:25:04Z[36m [INFO][UDR][GIN] [0m| 204 |  192.168.84.182 | PATCH   | /nudr-dr/v1/subscription-data/imsi-208930100007487/authentication-data/authentication-subscription |
+2024-03-24T11:25:04Z[36m [INFO][UDR][DRepo] [0mHandle CreateAuthenticationStatus
+2024-03-24T11:25:04Z[36m [INFO][UDR][GIN] [0m| 204 |  192.168.84.182 | PUT     | /nudr-dr/v1/subscription-data/imsi-208930100007487/authentication-data/authentication-status |
+2024-03-24T11:25:04Z[36m [INFO][UDR][DRepo] [0mHandle QueryAmData
+2024-03-24T11:25:04Z[36m [INFO][UDR][GIN] [0m| 200 |  192.168.84.182 | GET     | /nudr-dr/v1/subscription-data/imsi-208930100007487/20893/provisioned-data/am-data?supported-features= |
+2024-03-24T11:25:04Z[36m [INFO][UDR][DRepo] [0mHandle CreateAmfContext3gpp
+2024-03-24T11:25:04Z[36m [INFO][UDR][GIN] [0m| 204 |  192.168.84.182 | PUT     | /nudr-dr/v1/subscription-data/imsi-208930100007487/context-data/amf-3gpp-access |
+2024-03-24T11:25:04Z[36m [INFO][UDR][DRepo] [0mHandle QueryAmData
+2024-03-24T11:25:04Z[36m [INFO][UDR][GIN] [0m| 200 |  192.168.84.182 | GET     | /nudr-dr/v1/subscription-data/imsi-208930100007487/20893/provisioned-data/am-data?supported-features=20893 |
+2024-03-24T11:25:04Z[36m [INFO][UDR][DRepo] [0mHandle QuerySmfSelectData
+2024-03-24T11:25:04Z[36m [INFO][UDR][GIN] [0m| 200 |  192.168.84.182 | GET     | /nudr-dr/v1/subscription-data/imsi-208930100007487/20893/provisioned-data/smf-selection-subscription-data?supported-features= |
+2024-03-24T11:25:04Z[36m [INFO][UDR][DRepo] [0mHandle QuerySmfRegList
+2024-03-24T11:25:04Z[36m [INFO][UDR][GIN] [0m| 200 |  192.168.84.182 | GET     | /nudr-dr/v1/subscription-data/imsi-208930100007487/context-data/smf-registrations?supported-features= |
+2024-03-24T11:25:04Z[36m [INFO][UDR][DRepo] [0mHandle CreateSdmSubscriptions
+2024-03-24T11:25:04Z[36m [INFO][UDR][GIN] [0m| 201 |  192.168.84.182 | POST    | /nudr-dr/v1/subscription-data/imsi-208930100007487/context-data/sdm-subscriptions |
+2024-03-24T11:25:04Z[36m [INFO][UDR][DRepo] [0mHandle PolicyDataUesUeIdAmDataGet
+2024-03-24T11:25:04Z[36m [INFO][UDR][GIN] [0m| 200 |  192.168.84.180 | GET     | /nudr-dr/v1/policy-data/ues/imsi-208930100007487/am-data |
+2024-03-24T11:25:05Z[36m [INFO][UDR][DRepo] [0mHandle QuerySmData
+2024-03-24T11:25:05Z[36m [INFO][UDR][GIN] [0m| 200 |  192.168.84.182 | GET     | /nudr-dr/v1/subscription-data/imsi-208930100007487/20893/provisioned-data/sm-data?single-nssai=%7B%22sst%22%3A1%2C%22sd%22%3A%22010203%22%7D |
+2024-03-24T11:25:05Z[36m [INFO][UDR][DRepo] [0mHandle PolicyDataUesUeIdSmDataGet
+2024-03-24T11:25:05Z[36m [INFO][UDR][GIN] [0m| 200 |  192.168.84.180 | GET     | /nudr-dr/v1/policy-data/ues/imsi-208930100007487/sm-data?dnn=internet&snssai=%7B%22sst%22%3A1%2C%22sd%22%3A%22010203%22%7D |
