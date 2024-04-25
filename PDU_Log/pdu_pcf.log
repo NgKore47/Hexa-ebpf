@@ -1,0 +1,394 @@
++ cd /free5gc
++ cat config/pcfcfg.conf
+configuration:
+  defaultBdtRefId: BdtPolicyId-
+  mongodb:
+    name: free5gc
+    url: mongodb://mongodb-arbiter-headless
+  nrfUri: http://nrf:29510
+  pcfName: PCF
+  plmnList:
+  - plmnId:
+      mcc: "208"
+      mnc: "93"
+  - plmnId:
+      mcc: "333"
+      mnc: "88"
+  sbi:
+    bindingIPv4: 0.0.0.0
+    port: 29507
+    registerIPv4: pcf
+    scheme: http
+  serviceList:
+  - serviceName: npcf-am-policy-control
+  - serviceName: npcf-smpolicycontrol
+    suppFeat: 3fff
+  - serviceName: npcf-bdtpolicycontrol
+  - serviceName: npcf-policyauthorization
+    suppFeat: 3
+  - serviceName: npcf-eventexposure
+  - serviceName: npcf-ue-policy-control
+info:
+  description: PCF initial local configuration
+  version: 1.0.0
+logger:
+  AMF:
+    ReportCaller: false
+    debugLevel: info
+  AUSF:
+    ReportCaller: false
+    debugLevel: info
+  Aper:
+    ReportCaller: false
+    debugLevel: info
+  CommonConsumerTest:
+    ReportCaller: false
+    debugLevel: info
+  FSM:
+    ReportCaller: false
+    debugLevel: info
+  MongoDBLibrary:
+    ReportCaller: false
+    debugLevel: info
+  N3IWF:
+    ReportCaller: false
+    debugLevel: info
+  NAS:
+    ReportCaller: false
+    debugLevel: info
+  NGAP:
+    ReportCaller: false
+    debugLevel: info
+  NRF:
+    ReportCaller: false
+    debugLevel: info
+  NamfComm:
+    ReportCaller: false
+    debugLevel: info
+  NamfEventExposure:
+    ReportCaller: false
+    debugLevel: info
+  NsmfPDUSession:
+    ReportCaller: false
+    debugLevel: info
+  NudrDataRepository:
+    ReportCaller: false
+    debugLevel: info
+  OpenApi:
+    ReportCaller: false
+    debugLevel: info
+  PCF:
+    ReportCaller: false
+    debugLevel: info
+  PFCP:
+    ReportCaller: false
+    debugLevel: info
+  PathUtil:
+    ReportCaller: false
+    debugLevel: info
+  SMF:
+    ReportCaller: false
+    debugLevel: info
+  UDM:
+    ReportCaller: false
+    debugLevel: info
+  UDR:
+    ReportCaller: false
+    debugLevel: info
+  WEBUI:
+    ReportCaller: false
+    debugLevel: info+ GOTRACEBACK=crash ./pcf/pcf -pcfcfg config/pcfcfg.conf
+Neura_pcf
+2024-03-24T11:17:34Z[36m [INFO][PCF][App] [0mPCF version:  
+	Not specify ldflags (which link version) during go build
+	go version: go1.19.13 linux/amd64
+2024-03-24T11:17:34Z[36m [INFO][PCF][Init] [0mPCF Log level is set to [info] level
+2024-03-24T11:17:34Z[36m [INFO][LIB][Path] [0mset log level : info
+2024-03-24T11:17:34Z[36m [INFO][LIB][Path] [0mset report call : false
+2024-03-24T11:17:34Z[36m [INFO][PCF][CFG] [0mconfig version [1.0.0]
+2024-03-24T11:17:34Z[36m [INFO][PCF][Init] [0mMANAGED_BY_CONFIG_POD is true
+2024-03-24T11:17:34Z[36m [INFO][Config5g][GRPC] [0mConfig Client : Creating
+2024-03-24T11:17:34Z[36m [INFO][Config5g][GRPC] [0mDialing GRPC Connection -  webui:9876
+2024-03-24T11:17:34Z[36m [INFO][Config5g][GRPC] [0mConnecting to GRPC ...
+2024-03-24T11:17:54Z[36m [INFO][Config5g][GRPC] [0mConnecting to GRPC ...
+2024-03-24T11:18:14Z[36m [INFO][Config5g][GRPC] [0mConnecting to GRPC ...
+2024-03-24T11:18:34Z[36m [INFO][Config5g][GRPC] [0mConnecting to GRPC ...
+2024-03-24T11:18:54Z[36m [INFO][Config5g][GRPC] [0mConnecting to GRPC ...
+2024/03/24 11:19:14 INFO: [core] [Channel #1] Channel created
+2024/03/24 11:19:14 INFO: [core] [Channel #1] original dial target is: "webui:9876"
+2024/03/24 11:19:14 INFO: [core] [Channel #1] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"webui", Opaque:"9876", User:(*url.Userinfo)(nil), Host:"", Path:"", RawPath:"", OmitHost:false, ForceQuery:false, RawQuery:"", Fragment:"", RawFragment:""}}
+2024/03/24 11:19:14 INFO: [core] [Channel #1] fallback to scheme "passthrough"
+2024/03/24 11:19:14 INFO: [core] [Channel #1] parsed dial target is: passthrough:///webui:9876
+2024/03/24 11:19:14 INFO: [core] [Channel #1] Channel authority set to "webui:9876"
+2024/03/24 11:19:14 INFO: [core] [Channel #1] Resolver state updated: {
+  "Addresses": [
+    {
+      "Addr": "webui:9876",
+      "ServerName": "",
+      "Attributes": null,
+      "BalancerAttributes": null,
+      "Metadata": null
+    }
+  ],
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "webui:9876",
+          "ServerName": "",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": null,
+  "Attributes": null
+} (resolver returned new addresses)
+2024/03/24 11:19:14 INFO: [core] [Channel #1] Channel switches to new LB policy "pick_first"
+2024/03/24 11:19:14 INFO: [core] [pick-first-lb 0xc0001e9da0] Received new config {
+  "shuffleAddressList": false
+}, resolver state {
+  "Addresses": [
+    {
+      "Addr": "webui:9876",
+      "ServerName": "",
+      "Attributes": null,
+      "BalancerAttributes": null,
+      "Metadata": null
+    }
+  ],
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "webui:9876",
+          "ServerName": "",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": null,
+  "Attributes": null
+}
+2024/03/24 11:19:14 INFO: [core] [Channel #1 SubChannel #2] Subchannel created
+2024/03/24 11:19:14 INFO: [core] [Channel #1] Channel Connectivity change to CONNECTING
+2024/03/24 11:19:14 INFO: [core] [Channel #1] Channel exiting idle mode
+2024-03-24T11:19:14Z[36m [INFO][PCF][Init] [0mServer started
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+2024/03/24 11:19:14 INFO: [core] [Channel #1 SubChannel #2] Subchannel Connectivity change to CONNECTING
+2024/03/24 11:19:14 INFO: [core] [Channel #1 SubChannel #2] Subchannel picks a new address "webui:9876" to connect
+[GIN-debug] GET    /npcf-bdtpolicycontrol/v1/ --> github.com/omec-project/pcf/bdtpolicy.Index (3 handlers)
+[GIN-debug] POST   /npcf-bdtpolicycontrol/v1/bdtpolicies --> github.com/omec-project/pcf/bdtpolicy.HTTPCreateBDTPolicy (3 handlers)
+[GIN-debug] GET    /npcf-bdtpolicycontrol/v1/bdtpolicies/:bdtPolicyId --> github.com/omec-project/pcf/bdtpolicy.HTTPGetBDTPolicy (3 handlers)
+[GIN-debug] PATCH  /npcf-bdtpolicycontrol/v1/bdtpolicies/:bdtPolicyId --> github.com/omec-project/pcf/bdtpolicy.HTTPUpdateBDTPolicy (3 handlers)
+[GIN-debug] GET    /npcf-smpolicycontrol/v1/ --> github.com/omec-project/pcf/smpolicy.Index (3 handlers)
+[GIN-debug] POST   /npcf-smpolicycontrol/v1/sm-policies --> github.com/omec-project/pcf/smpolicy.HTTPSmPoliciesPost (3 handlers)
+[GIN-debug] POST   /npcf-smpolicycontrol/v1/sm-policies/:smPolicyId/delete --> github.com/omec-project/pcf/smpolicy.HTTPSmPoliciesSmPolicyIdDeletePost (3 handlers)
+[GIN-debug] GET    /npcf-smpolicycontrol/v1/sm-policies/:smPolicyId --> github.com/omec-project/pcf/smpolicy.HTTPSmPoliciesSmPolicyIDGet (3 handlers)
+[GIN-debug] POST   /npcf-smpolicycontrol/v1/sm-policies/:smPolicyId/update --> github.com/omec-project/pcf/smpolicy.HTTPSmPoliciesSmPolicyIdUpdatePost (3 handlers)
+[GIN-debug] GET    /npcf-am-policy-control/v1/ --> github.com/omec-project/pcf/ampolicy.Index (3 handlers)
+[GIN-debug] DELETE /npcf-am-policy-control/v1/policies/:polAssoId --> github.com/omec-project/pcf/ampolicy.HTTPPoliciesPolAssoIdDelete (3 handlers)
+[GIN-debug] GET    /npcf-am-policy-control/v1/policies/:polAssoId --> github.com/omec-project/pcf/ampolicy.HTTPPoliciesPolAssoIdGet (3 handlers)
+2024/03/24 11:19:14 INFO: [core] [pick-first-lb 0xc0001e9da0] Received SubConn state update: 0xc0001e9ec0, {ConnectivityState:CONNECTING ConnectionError:<nil>}
+[GIN-debug] POST   /npcf-am-policy-control/v1/policies/:polAssoId/update --> github.com/omec-project/pcf/ampolicy.HTTPPoliciesPolAssoIdUpdatePost (3 handlers)
+[GIN-debug] POST   /npcf-am-policy-control/v1/policies --> github.com/omec-project/pcf/ampolicy.HTTPPoliciesPost (3 handlers)
+[GIN-debug] GET    /npcf-ue-policy-control/v1/ --> github.com/omec-project/pcf/uepolicy.Index (3 handlers)
+[GIN-debug] GET    /npcf-ue-policy-control/v1/policies/{polAssoId} --> github.com/omec-project/pcf/uepolicy.PoliciesPolAssoIdGet (3 handlers)
+[GIN-debug] POST   /npcf-ue-policy-control/v1/policies/{polAssoId}/update --> github.com/omec-project/pcf/uepolicy.PoliciesPolAssoIdUpdatePost (3 handlers)
+[GIN-debug] POST   /npcf-ue-policy-control/v1/policies --> github.com/omec-project/pcf/uepolicy.PoliciesPost (3 handlers)
+2024-03-24T11:19:14Z[36m [INFO][Config5g][GRPC] [0mSubscribing to Config POD
+[GIN-debug] GET    /npcf-policyauthorization/v1/ --> github.com/omec-project/pcf/policyauthorization.Index (3 handlers)
+[GIN-debug] POST   /npcf-policyauthorization/v1/app-sessions --> github.com/omec-project/pcf/policyauthorization.HTTPPostAppSessions (3 handlers)
+[GIN-debug] DELETE /npcf-policyauthorization/v1/app-sessions/:appSessionId/events-subscription --> github.com/omec-project/pcf/policyauthorization.HTTPDeleteEventsSubsc (3 handlers)
+[GIN-debug] PUT    /npcf-policyauthorization/v1/app-sessions/:appSessionId/events-subscription --> github.com/omec-project/pcf/policyauthorization.HTTPUpdateEventsSubsc (3 handlers)
+[GIN-debug] POST   /npcf-policyauthorization/v1/app-sessions/:appSessionId/delete --> github.com/omec-project/pcf/policyauthorization.HTTPDeleteAppSession (3 handlers)
+[GIN-debug] GET    /npcf-policyauthorization/v1/app-sessions/:appSessionId --> github.com/omec-project/pcf/policyauthorization.HTTPGetAppSession (3 handlers)
+[GIN-debug] PATCH  /npcf-policyauthorization/v1/app-sessions/:appSessionId --> github.com/omec-project/pcf/policyauthorization.HTTPModAppSession (3 handlers)
+[GIN-debug] POST   /npcf-callback/v1/nudr-notify/:supi --> github.com/omec-project/pcf/httpcallback.HTTPNudrNotify (3 handlers)
+[GIN-debug] POST   /npcf-callback/v1/amfstatus --> github.com/omec-project/pcf/httpcallback.HTTPAmfStatusChangeNotify (3 handlers)
+[GIN-debug] GET    /npcf-oam/v1/             --> github.com/omec-project/pcf/oam.Index (3 handlers)
+[GIN-debug] GET    /npcf-oam/v1/am-policy/:supi --> github.com/omec-project/pcf/oam.HTTPOAMGetAmPolicy (3 handlers)
+2024-03-24T11:19:14Z[31m [ERRO][Config5g][GRPC] [0mConnectivity status: Not Ready
+2024-03-24T11:19:14Z[36m [INFO][PCF][Util] [0mpcfconfig Info: Version[1.0.0] Description[PCF initial local configuration]
+2024/03/24 11:19:14 INFO: [core] [Channel #1 SubChannel #2] Subchannel Connectivity change to READY
+2024/03/24 11:19:14 INFO: [core] [pick-first-lb 0xc0001e9da0] Received SubConn state update: 0xc0001e9ec0, {ConnectivityState:READY ConnectionError:<nil>}
+2024/03/24 11:19:14 INFO: [core] [Channel #1] Channel Connectivity change to READY
+2024-03-24T11:19:15Z[36m [INFO][Config5g][GRPC] [0mConnectivity status: Ready
+2024-03-24T11:19:15Z[36m [INFO][Config5g][GRPC] [0mConfig Message received
+2024-03-24T11:19:15Z[36m [INFO][Config5g][GRPC] [0mInitial Config Received  RestartCounter:4141576257  NetworkSlice:{Name:"default"  Nssai:{Sst:"1"  Sd:"010203"}  DeviceGroup:{Name:"5g-gnbsim-user-group1"  IpDomainDetails:{Name:"pool1"  DnnName:"internet"  UePool:"172.250.1.0/16"  DnsPrimary:"8.8.8.8"  Mtu:1460  UeDnnQos:{DnnMbrUplink:20000000  DnnMbrDownlink:200000000  TrafficClass:{Name:"platinum"  Qci:9  Arp:6  Pdb:300  Pelr:6}}}  Imsi:"208930100007487"  Imsi:"208930100007488"  Imsi:"208930100007489"  Imsi:"208930100007490"  Imsi:"208930100007491"  Imsi:"208930100007492"  Imsi:"208930100007493"  Imsi:"208930100007494"  Imsi:"208930100007495"  Imsi:"208930100007496"  Imsi:"208930100007497"  Imsi:"208930100007498"  Imsi:"208930100007499"  Imsi:"208930100007500"}  DeviceGroup:{Name:"5g-gnbsim-user-group2"  IpDomainDetails:{Name:"pool2"  DnnName:"internet"  UePool:"172.250.1.0/16"  DnsPrimary:"8.8.8.8"  Mtu:1460  UeDnnQos:{DnnMbrUplink:10000000  DnnMbrDownlink:400000000  TrafficClass:{Name:"platinum"  Qci:8  Arp:6  Pdb:300  Pelr:6}}}  Imsi:"208930100007501"  Imsi:"208930100007502"  Imsi:"208930100007503"  Imsi:"208930100007504"  Imsi:"208930100007505"  Imsi:"208930100007506"  Imsi:"208930100007507"  Imsi:"208930100007508"  Imsi:"208930100007509"  Imsi:"208930100007510"}  Site:{SiteName:"aiab"  Gnb:{Name:"aiab-gnb1"  Tac:1}  Gnb:{Name:"aiab-gnb2"  Tac:2}  Plmn:{mcc:"208"  mnc:"93"}  Upf:{UpfName:"upf"}}  AppFilters:{PccRuleBase:{FlowInfos:{FlowDesc:"permit out ip from any to assigned"  TosTrafficClass:"IPV4"  FlowDir:BIDIRECTIONAL  FlowStatus:ENABLED}  RuleId:"ALLOW-ALL"  Qos:{Var5qi:9  Arp:{PL:6  PC:MAY_PREEMPT  PV:PREEMPTABLE}}  Priority:250}}}  ConfigUpdated:1
+2024-03-24T11:19:15Z[36m [INFO][PCF][GRPC] [0mReceived updateConfig in the pcf app :  RestartCounter:4141576257  NetworkSlice:{Name:"default"  Nssai:{Sst:"1"  Sd:"010203"}  DeviceGroup:{Name:"5g-gnbsim-user-group1"  IpDomainDetails:{Name:"pool1"  DnnName:"internet"  UePool:"172.250.1.0/16"  DnsPrimary:"8.8.8.8"  Mtu:1460  UeDnnQos:{DnnMbrUplink:20000000  DnnMbrDownlink:200000000  TrafficClass:{Name:"platinum"  Qci:9  Arp:6  Pdb:300  Pelr:6}}}  Imsi:"208930100007487"  Imsi:"208930100007488"  Imsi:"208930100007489"  Imsi:"208930100007490"  Imsi:"208930100007491"  Imsi:"208930100007492"  Imsi:"208930100007493"  Imsi:"208930100007494"  Imsi:"208930100007495"  Imsi:"208930100007496"  Imsi:"208930100007497"  Imsi:"208930100007498"  Imsi:"208930100007499"  Imsi:"208930100007500"}  DeviceGroup:{Name:"5g-gnbsim-user-group2"  IpDomainDetails:{Name:"pool2"  DnnName:"internet"  UePool:"172.250.1.0/16"  DnsPrimary:"8.8.8.8"  Mtu:1460  UeDnnQos:{DnnMbrUplink:10000000  DnnMbrDownlink:400000000  TrafficClass:{Name:"platinum"  Qci:8  Arp:6  Pdb:300  Pelr:6}}}  Imsi:"208930100007501"  Imsi:"208930100007502"  Imsi:"208930100007503"  Imsi:"208930100007504"  Imsi:"208930100007505"  Imsi:"208930100007506"  Imsi:"208930100007507"  Imsi:"208930100007508"  Imsi:"208930100007509"  Imsi:"208930100007510"}  Site:{SiteName:"aiab"  Gnb:{Name:"aiab-gnb1"  Tac:1}  Gnb:{Name:"aiab-gnb2"  Tac:2}  Plmn:{mcc:"208"  mnc:"93"}  Upf:{UpfName:"upf"}}  AppFilters:{PccRuleBase:{FlowInfos:{FlowDesc:"permit out ip from any to assigned"  TosTrafficClass:"IPV4"  FlowDir:BIDIRECTIONAL  FlowStatus:ENABLED}  RuleId:"ALLOW-ALL"  Qos:{Var5qi:9  Arp:{PL:6  PC:MAY_PREEMPT  PV:PREEMPTABLE}}  Priority:250}}}  ConfigUpdated:1
+2024-03-24T11:19:15Z[36m [INFO][PCF][GRPC] [0mNetwork Slice Name  default
+2024-03-24T11:19:15Z[36m [INFO][PCF][GRPC] [0mReceived Slice with OperationType: Add from ConfigPod
+2024-03-24T11:19:15Z[36m [INFO][PCF][Context][imsi-208930100007487] [0mSubscriber Detals: PccPolicy[1010203]: 
+   SessionPolicy[internet]: 
+    SessRule[internet-1]: SessionRuleId: internet-1, AuthQos: 5Qi: 9, Arp: PL: 6, PC: , PV: AuthSessAmbr: Uplink: 20000 Kbps, Downlink: 200 Mbps 
+   PccRules[ALLOW-ALL]: RuleId: 1, Precedence: 250, FlowInfo[0]: FlowDesc: permit out ip from any to assigned, TrafficClass: , FlowDir: BIDIRECTIONAL
+   QosDecs[1] QosId: 1, 5Qi: 9, MaxbrUl: 20000 Kbps, MaxbrDl: 200 Mbps, GbrUl: , GbrUl: ,PL: 0 PL: 6, PC: MAY_PREEMPT, PV: PREEMPTABLE
+   TrafficDecs[TcId-2]: TcId: TcId-2, FlowStatus: ENABLED
+2024-03-24T11:19:15Z[36m [INFO][PCF][Context][imsi-208930100007488] [0mSubscriber Detals: PccPolicy[1010203]: 
+   SessionPolicy[internet]: 
+    SessRule[internet-1]: SessionRuleId: internet-1, AuthQos: 5Qi: 9, Arp: PL: 6, PC: , PV: AuthSessAmbr: Uplink: 20000 Kbps, Downlink: 200 Mbps 
+   PccRules[ALLOW-ALL]: RuleId: 1, Precedence: 250, FlowInfo[0]: FlowDesc: permit out ip from any to assigned, TrafficClass: , FlowDir: BIDIRECTIONAL
+   QosDecs[1] QosId: 1, 5Qi: 9, MaxbrUl: 20000 Kbps, MaxbrDl: 200 Mbps, GbrUl: , GbrUl: ,PL: 0 PL: 6, PC: MAY_PREEMPT, PV: PREEMPTABLE
+   TrafficDecs[TcId-2]: TcId: TcId-2, FlowStatus: ENABLED
+2024-03-24T11:19:15Z[36m [INFO][PCF][Context][imsi-208930100007489] [0mSubscriber Detals: PccPolicy[1010203]: 
+   SessionPolicy[internet]: 
+    SessRule[internet-1]: SessionRuleId: internet-1, AuthQos: 5Qi: 9, Arp: PL: 6, PC: , PV: AuthSessAmbr: Uplink: 20000 Kbps, Downlink: 200 Mbps 
+   PccRules[ALLOW-ALL]: RuleId: 1, Precedence: 250, FlowInfo[0]: FlowDesc: permit out ip from any to assigned, TrafficClass: , FlowDir: BIDIRECTIONAL
+   QosDecs[1] QosId: 1, 5Qi: 9, MaxbrUl: 20000 Kbps, MaxbrDl: 200 Mbps, GbrUl: , GbrUl: ,PL: 0 PL: 6, PC: MAY_PREEMPT, PV: PREEMPTABLE
+   TrafficDecs[TcId-2]: TcId: TcId-2, FlowStatus: ENABLED
+2024-03-24T11:19:15Z[36m [INFO][PCF][Context][imsi-208930100007490] [0mSubscriber Detals: PccPolicy[1010203]: 
+   SessionPolicy[internet]: 
+    SessRule[internet-1]: SessionRuleId: internet-1, AuthQos: 5Qi: 9, Arp: PL: 6, PC: , PV: AuthSessAmbr: Uplink: 20000 Kbps, Downlink: 200 Mbps 
+   PccRules[ALLOW-ALL]: RuleId: 1, Precedence: 250, FlowInfo[0]: FlowDesc: permit out ip from any to assigned, TrafficClass: , FlowDir: BIDIRECTIONAL
+   QosDecs[1] QosId: 1, 5Qi: 9, MaxbrUl: 20000 Kbps, MaxbrDl: 200 Mbps, GbrUl: , GbrUl: ,PL: 0 PL: 6, PC: MAY_PREEMPT, PV: PREEMPTABLE
+   TrafficDecs[TcId-2]: TcId: TcId-2, FlowStatus: ENABLED
+2024-03-24T11:19:15Z[36m [INFO][PCF][Context][imsi-208930100007491] [0mSubscriber Detals: PccPolicy[1010203]: 
+   SessionPolicy[internet]: 
+    SessRule[internet-1]: SessionRuleId: internet-1, AuthQos: 5Qi: 9, Arp: PL: 6, PC: , PV: AuthSessAmbr: Uplink: 20000 Kbps, Downlink: 200 Mbps 
+   PccRules[ALLOW-ALL]: RuleId: 1, Precedence: 250, FlowInfo[0]: FlowDesc: permit out ip from any to assigned, TrafficClass: , FlowDir: BIDIRECTIONAL
+   QosDecs[1] QosId: 1, 5Qi: 9, MaxbrUl: 20000 Kbps, MaxbrDl: 200 Mbps, GbrUl: , GbrUl: ,PL: 0 PL: 6, PC: MAY_PREEMPT, PV: PREEMPTABLE
+   TrafficDecs[TcId-2]: TcId: TcId-2, FlowStatus: ENABLED
+2024-03-24T11:19:15Z[36m [INFO][PCF][Context][imsi-208930100007492] [0mSubscriber Detals: PccPolicy[1010203]: 
+   SessionPolicy[internet]: 
+    SessRule[internet-1]: SessionRuleId: internet-1, AuthQos: 5Qi: 9, Arp: PL: 6, PC: , PV: AuthSessAmbr: Uplink: 20000 Kbps, Downlink: 200 Mbps 
+   PccRules[ALLOW-ALL]: RuleId: 1, Precedence: 250, FlowInfo[0]: FlowDesc: permit out ip from any to assigned, TrafficClass: , FlowDir: BIDIRECTIONAL
+   QosDecs[1] QosId: 1, 5Qi: 9, MaxbrUl: 20000 Kbps, MaxbrDl: 200 Mbps, GbrUl: , GbrUl: ,PL: 0 PL: 6, PC: MAY_PREEMPT, PV: PREEMPTABLE
+   TrafficDecs[TcId-2]: TcId: TcId-2, FlowStatus: ENABLED
+2024-03-24T11:19:15Z[36m [INFO][PCF][Context][imsi-208930100007493] [0mSubscriber Detals: PccPolicy[1010203]: 
+   SessionPolicy[internet]: 
+    SessRule[internet-1]: SessionRuleId: internet-1, AuthQos: 5Qi: 9, Arp: PL: 6, PC: , PV: AuthSessAmbr: Uplink: 20000 Kbps, Downlink: 200 Mbps 
+   PccRules[ALLOW-ALL]: RuleId: 1, Precedence: 250, FlowInfo[0]: FlowDesc: permit out ip from any to assigned, TrafficClass: , FlowDir: BIDIRECTIONAL
+   QosDecs[1] QosId: 1, 5Qi: 9, MaxbrUl: 20000 Kbps, MaxbrDl: 200 Mbps, GbrUl: , GbrUl: ,PL: 0 PL: 6, PC: MAY_PREEMPT, PV: PREEMPTABLE
+   TrafficDecs[TcId-2]: TcId: TcId-2, FlowStatus: ENABLED
+2024-03-24T11:19:15Z[36m [INFO][PCF][Context][imsi-208930100007494] [0mSubscriber Detals: PccPolicy[1010203]: 
+   SessionPolicy[internet]: 
+    SessRule[internet-1]: SessionRuleId: internet-1, AuthQos: 5Qi: 9, Arp: PL: 6, PC: , PV: AuthSessAmbr: Uplink: 20000 Kbps, Downlink: 200 Mbps 
+   PccRules[ALLOW-ALL]: RuleId: 1, Precedence: 250, FlowInfo[0]: FlowDesc: permit out ip from any to assigned, TrafficClass: , FlowDir: BIDIRECTIONAL
+   QosDecs[1] QosId: 1, 5Qi: 9, MaxbrUl: 20000 Kbps, MaxbrDl: 200 Mbps, GbrUl: , GbrUl: ,PL: 0 PL: 6, PC: MAY_PREEMPT, PV: PREEMPTABLE
+   TrafficDecs[TcId-2]: TcId: TcId-2, FlowStatus: ENABLED
+2024-03-24T11:19:15Z[36m [INFO][PCF][Context][imsi-208930100007495] [0mSubscriber Detals: PccPolicy[1010203]: 
+   SessionPolicy[internet]: 
+    SessRule[internet-1]: SessionRuleId: internet-1, AuthQos: 5Qi: 9, Arp: PL: 6, PC: , PV: AuthSessAmbr: Uplink: 20000 Kbps, Downlink: 200 Mbps 
+   PccRules[ALLOW-ALL]: RuleId: 1, Precedence: 250, FlowInfo[0]: FlowDesc: permit out ip from any to assigned, TrafficClass: , FlowDir: BIDIRECTIONAL
+   QosDecs[1] QosId: 1, 5Qi: 9, MaxbrUl: 20000 Kbps, MaxbrDl: 200 Mbps, GbrUl: , GbrUl: ,PL: 0 PL: 6, PC: MAY_PREEMPT, PV: PREEMPTABLE
+   TrafficDecs[TcId-2]: TcId: TcId-2, FlowStatus: ENABLED
+2024-03-24T11:19:15Z[36m [INFO][PCF][Context][imsi-208930100007496] [0mSubscriber Detals: PccPolicy[1010203]: 
+   SessionPolicy[internet]: 
+    SessRule[internet-1]: SessionRuleId: internet-1, AuthQos: 5Qi: 9, Arp: PL: 6, PC: , PV: AuthSessAmbr: Uplink: 20000 Kbps, Downlink: 200 Mbps 
+   PccRules[ALLOW-ALL]: RuleId: 1, Precedence: 250, FlowInfo[0]: FlowDesc: permit out ip from any to assigned, TrafficClass: , FlowDir: BIDIRECTIONAL
+   QosDecs[1] QosId: 1, 5Qi: 9, MaxbrUl: 20000 Kbps, MaxbrDl: 200 Mbps, GbrUl: , GbrUl: ,PL: 0 PL: 6, PC: MAY_PREEMPT, PV: PREEMPTABLE
+   TrafficDecs[TcId-2]: TcId: TcId-2, FlowStatus: ENABLED
+2024-03-24T11:19:15Z[36m [INFO][PCF][Context][imsi-208930100007497] [0mSubscriber Detals: PccPolicy[1010203]: 
+   SessionPolicy[internet]: 
+    SessRule[internet-1]: SessionRuleId: internet-1, AuthQos: 5Qi: 9, Arp: PL: 6, PC: , PV: AuthSessAmbr: Uplink: 20000 Kbps, Downlink: 200 Mbps 
+   PccRules[ALLOW-ALL]: RuleId: 1, Precedence: 250, FlowInfo[0]: FlowDesc: permit out ip from any to assigned, TrafficClass: , FlowDir: BIDIRECTIONAL
+   QosDecs[1] QosId: 1, 5Qi: 9, MaxbrUl: 20000 Kbps, MaxbrDl: 200 Mbps, GbrUl: , GbrUl: ,PL: 0 PL: 6, PC: MAY_PREEMPT, PV: PREEMPTABLE
+   TrafficDecs[TcId-2]: TcId: TcId-2, FlowStatus: ENABLED
+2024-03-24T11:19:15Z[36m [INFO][PCF][Context][imsi-208930100007498] [0mSubscriber Detals: PccPolicy[1010203]: 
+   SessionPolicy[internet]: 
+    SessRule[internet-1]: SessionRuleId: internet-1, AuthQos: 5Qi: 9, Arp: PL: 6, PC: , PV: AuthSessAmbr: Uplink: 20000 Kbps, Downlink: 200 Mbps 
+   PccRules[ALLOW-ALL]: RuleId: 1, Precedence: 250, FlowInfo[0]: FlowDesc: permit out ip from any to assigned, TrafficClass: , FlowDir: BIDIRECTIONAL
+   QosDecs[1] QosId: 1, 5Qi: 9, MaxbrUl: 20000 Kbps, MaxbrDl: 200 Mbps, GbrUl: , GbrUl: ,PL: 0 PL: 6, PC: MAY_PREEMPT, PV: PREEMPTABLE
+   TrafficDecs[TcId-2]: TcId: TcId-2, FlowStatus: ENABLED
+2024-03-24T11:19:15Z[36m [INFO][PCF][Context][imsi-208930100007499] [0mSubscriber Detals: PccPolicy[1010203]: 
+   SessionPolicy[internet]: 
+    SessRule[internet-1]: SessionRuleId: internet-1, AuthQos: 5Qi: 9, Arp: PL: 6, PC: , PV: AuthSessAmbr: Uplink: 20000 Kbps, Downlink: 200 Mbps 
+   PccRules[ALLOW-ALL]: RuleId: 1, Precedence: 250, FlowInfo[0]: FlowDesc: permit out ip from any to assigned, TrafficClass: , FlowDir: BIDIRECTIONAL
+   QosDecs[1] QosId: 1, 5Qi: 9, MaxbrUl: 20000 Kbps, MaxbrDl: 200 Mbps, GbrUl: , GbrUl: ,PL: 0 PL: 6, PC: MAY_PREEMPT, PV: PREEMPTABLE
+   TrafficDecs[TcId-2]: TcId: TcId-2, FlowStatus: ENABLED
+2024-03-24T11:19:15Z[36m [INFO][PCF][Context][imsi-208930100007500] [0mSubscriber Detals: PccPolicy[1010203]: 
+   SessionPolicy[internet]: 
+    SessRule[internet-1]: SessionRuleId: internet-1, AuthQos: 5Qi: 9, Arp: PL: 6, PC: , PV: AuthSessAmbr: Uplink: 20000 Kbps, Downlink: 200 Mbps 
+   PccRules[ALLOW-ALL]: RuleId: 1, Precedence: 250, FlowInfo[0]: FlowDesc: permit out ip from any to assigned, TrafficClass: , FlowDir: BIDIRECTIONAL
+   QosDecs[1] QosId: 1, 5Qi: 9, MaxbrUl: 20000 Kbps, MaxbrDl: 200 Mbps, GbrUl: , GbrUl: ,PL: 0 PL: 6, PC: MAY_PREEMPT, PV: PREEMPTABLE
+   TrafficDecs[TcId-2]: TcId: TcId-2, FlowStatus: ENABLED
+2024-03-24T11:19:15Z[36m [INFO][PCF][Context][imsi-208930100007501] [0mSubscriber Detals: PccPolicy[1010203]: 
+   SessionPolicy[internet]: 
+    SessRule[internet-1]: SessionRuleId: internet-1, AuthQos: 5Qi: 8, Arp: PL: 6, PC: , PV: AuthSessAmbr: Uplink: 10000 Kbps, Downlink: 400 Mbps 
+   PccRules[ALLOW-ALL]: RuleId: 1, Precedence: 250, FlowInfo[0]: FlowDesc: permit out ip from any to assigned, TrafficClass: , FlowDir: BIDIRECTIONAL
+   QosDecs[1] QosId: 1, 5Qi: 9, MaxbrUl: 10000 Kbps, MaxbrDl: 400 Mbps, GbrUl: , GbrUl: ,PL: 0 PL: 6, PC: MAY_PREEMPT, PV: PREEMPTABLE
+   TrafficDecs[TcId-2]: TcId: TcId-2, FlowStatus: ENABLED
+2024-03-24T11:19:15Z[36m [INFO][PCF][Context][imsi-208930100007502] [0mSubscriber Detals: PccPolicy[1010203]: 
+   SessionPolicy[internet]: 
+    SessRule[internet-1]: SessionRuleId: internet-1, AuthQos: 5Qi: 8, Arp: PL: 6, PC: , PV: AuthSessAmbr: Uplink: 10000 Kbps, Downlink: 400 Mbps 
+   PccRules[ALLOW-ALL]: RuleId: 1, Precedence: 250, FlowInfo[0]: FlowDesc: permit out ip from any to assigned, TrafficClass: , FlowDir: BIDIRECTIONAL
+   QosDecs[1] QosId: 1, 5Qi: 9, MaxbrUl: 10000 Kbps, MaxbrDl: 400 Mbps, GbrUl: , GbrUl: ,PL: 0 PL: 6, PC: MAY_PREEMPT, PV: PREEMPTABLE
+   TrafficDecs[TcId-2]: TcId: TcId-2, FlowStatus: ENABLED
+2024-03-24T11:19:15Z[36m [INFO][PCF][Context][imsi-208930100007503] [0mSubscriber Detals: PccPolicy[1010203]: 
+   SessionPolicy[internet]: 
+    SessRule[internet-1]: SessionRuleId: internet-1, AuthQos: 5Qi: 8, Arp: PL: 6, PC: , PV: AuthSessAmbr: Uplink: 10000 Kbps, Downlink: 400 Mbps 
+   PccRules[ALLOW-ALL]: RuleId: 1, Precedence: 250, FlowInfo[0]: FlowDesc: permit out ip from any to assigned, TrafficClass: , FlowDir: BIDIRECTIONAL
+   QosDecs[1] QosId: 1, 5Qi: 9, MaxbrUl: 10000 Kbps, MaxbrDl: 400 Mbps, GbrUl: , GbrUl: ,PL: 0 PL: 6, PC: MAY_PREEMPT, PV: PREEMPTABLE
+   TrafficDecs[TcId-2]: TcId: TcId-2, FlowStatus: ENABLED
+2024-03-24T11:19:15Z[36m [INFO][PCF][Context][imsi-208930100007504] [0mSubscriber Detals: PccPolicy[1010203]: 
+   SessionPolicy[internet]: 
+    SessRule[internet-1]: SessionRuleId: internet-1, AuthQos: 5Qi: 8, Arp: PL: 6, PC: , PV: AuthSessAmbr: Uplink: 10000 Kbps, Downlink: 400 Mbps 
+   PccRules[ALLOW-ALL]: RuleId: 1, Precedence: 250, FlowInfo[0]: FlowDesc: permit out ip from any to assigned, TrafficClass: , FlowDir: BIDIRECTIONAL
+   QosDecs[1] QosId: 1, 5Qi: 9, MaxbrUl: 10000 Kbps, MaxbrDl: 400 Mbps, GbrUl: , GbrUl: ,PL: 0 PL: 6, PC: MAY_PREEMPT, PV: PREEMPTABLE
+   TrafficDecs[TcId-2]: TcId: TcId-2, FlowStatus: ENABLED
+2024-03-24T11:19:15Z[36m [INFO][PCF][Context][imsi-208930100007505] [0mSubscriber Detals: PccPolicy[1010203]: 
+   SessionPolicy[internet]: 
+    SessRule[internet-1]: SessionRuleId: internet-1, AuthQos: 5Qi: 8, Arp: PL: 6, PC: , PV: AuthSessAmbr: Uplink: 10000 Kbps, Downlink: 400 Mbps 
+   PccRules[ALLOW-ALL]: RuleId: 1, Precedence: 250, FlowInfo[0]: FlowDesc: permit out ip from any to assigned, TrafficClass: , FlowDir: BIDIRECTIONAL
+   QosDecs[1] QosId: 1, 5Qi: 9, MaxbrUl: 10000 Kbps, MaxbrDl: 400 Mbps, GbrUl: , GbrUl: ,PL: 0 PL: 6, PC: MAY_PREEMPT, PV: PREEMPTABLE
+   TrafficDecs[TcId-2]: TcId: TcId-2, FlowStatus: ENABLED
+2024-03-24T11:19:15Z[36m [INFO][PCF][Context][imsi-208930100007506] [0mSubscriber Detals: PccPolicy[1010203]: 
+   SessionPolicy[internet]: 
+    SessRule[internet-1]: SessionRuleId: internet-1, AuthQos: 5Qi: 8, Arp: PL: 6, PC: , PV: AuthSessAmbr: Uplink: 10000 Kbps, Downlink: 400 Mbps 
+   PccRules[ALLOW-ALL]: RuleId: 1, Precedence: 250, FlowInfo[0]: FlowDesc: permit out ip from any to assigned, TrafficClass: , FlowDir: BIDIRECTIONAL
+   QosDecs[1] QosId: 1, 5Qi: 9, MaxbrUl: 10000 Kbps, MaxbrDl: 400 Mbps, GbrUl: , GbrUl: ,PL: 0 PL: 6, PC: MAY_PREEMPT, PV: PREEMPTABLE
+   TrafficDecs[TcId-2]: TcId: TcId-2, FlowStatus: ENABLED
+2024-03-24T11:19:15Z[36m [INFO][PCF][Context][imsi-208930100007507] [0mSubscriber Detals: PccPolicy[1010203]: 
+   SessionPolicy[internet]: 
+    SessRule[internet-1]: SessionRuleId: internet-1, AuthQos: 5Qi: 8, Arp: PL: 6, PC: , PV: AuthSessAmbr: Uplink: 10000 Kbps, Downlink: 400 Mbps 
+   PccRules[ALLOW-ALL]: RuleId: 1, Precedence: 250, FlowInfo[0]: FlowDesc: permit out ip from any to assigned, TrafficClass: , FlowDir: BIDIRECTIONAL
+   QosDecs[1] QosId: 1, 5Qi: 9, MaxbrUl: 10000 Kbps, MaxbrDl: 400 Mbps, GbrUl: , GbrUl: ,PL: 0 PL: 6, PC: MAY_PREEMPT, PV: PREEMPTABLE
+   TrafficDecs[TcId-2]: TcId: TcId-2, FlowStatus: ENABLED
+2024-03-24T11:19:15Z[36m [INFO][PCF][Context][imsi-208930100007508] [0mSubscriber Detals: PccPolicy[1010203]: 
+   SessionPolicy[internet]: 
+    SessRule[internet-1]: SessionRuleId: internet-1, AuthQos: 5Qi: 8, Arp: PL: 6, PC: , PV: AuthSessAmbr: Uplink: 10000 Kbps, Downlink: 400 Mbps 
+   PccRules[ALLOW-ALL]: RuleId: 1, Precedence: 250, FlowInfo[0]: FlowDesc: permit out ip from any to assigned, TrafficClass: , FlowDir: BIDIRECTIONAL
+   QosDecs[1] QosId: 1, 5Qi: 9, MaxbrUl: 10000 Kbps, MaxbrDl: 400 Mbps, GbrUl: , GbrUl: ,PL: 0 PL: 6, PC: MAY_PREEMPT, PV: PREEMPTABLE
+   TrafficDecs[TcId-2]: TcId: TcId-2, FlowStatus: ENABLED
+2024-03-24T11:19:15Z[36m [INFO][PCF][Context][imsi-208930100007509] [0mSubscriber Detals: PccPolicy[1010203]: 
+   SessionPolicy[internet]: 
+    SessRule[internet-1]: SessionRuleId: internet-1, AuthQos: 5Qi: 8, Arp: PL: 6, PC: , PV: AuthSessAmbr: Uplink: 10000 Kbps, Downlink: 400 Mbps 
+   PccRules[ALLOW-ALL]: RuleId: 1, Precedence: 250, FlowInfo[0]: FlowDesc: permit out ip from any to assigned, TrafficClass: , FlowDir: BIDIRECTIONAL
+   QosDecs[1] QosId: 1, 5Qi: 9, MaxbrUl: 10000 Kbps, MaxbrDl: 400 Mbps, GbrUl: , GbrUl: ,PL: 0 PL: 6, PC: MAY_PREEMPT, PV: PREEMPTABLE
+   TrafficDecs[TcId-2]: TcId: TcId-2, FlowStatus: ENABLED
+2024-03-24T11:19:15Z[36m [INFO][PCF][Context][imsi-208930100007510] [0mSubscriber Detals: PccPolicy[1010203]: 
+   SessionPolicy[internet]: 
+    SessRule[internet-1]: SessionRuleId: internet-1, AuthQos: 5Qi: 8, Arp: PL: 6, PC: , PV: AuthSessAmbr: Uplink: 10000 Kbps, Downlink: 400 Mbps 
+   PccRules[ALLOW-ALL]: RuleId: 1, Precedence: 250, FlowInfo[0]: FlowDesc: permit out ip from any to assigned, TrafficClass: , FlowDir: BIDIRECTIONAL
+   QosDecs[1] QosId: 1, 5Qi: 9, MaxbrUl: 10000 Kbps, MaxbrDl: 400 Mbps, GbrUl: , GbrUl: ,PL: 0 PL: 6, PC: MAY_PREEMPT, PV: PREEMPTABLE
+   TrafficDecs[TcId-2]: TcId: TcId-2, FlowStatus: ENABLED
+2024-03-24T11:19:15Z[36m [INFO][PCF][GRPC] [0mUpdated Slice level DnnList[1010203]: internet internet
+2024-03-24T11:19:15Z[36m [INFO][PCF][GRPC] [0mDnnList Present in PCF: [internet]
+2024-03-24T11:19:15Z[36m [INFO][PCF][GRPC] [0mNetwork Slice [1010203] has site name: aiab
+2024-03-24T11:19:15Z[36m [INFO][PCF][GRPC] [0mUpdated Slice level Plmn[1010203]: {{208 93}}
+2024-03-24T11:19:15Z[36m [INFO][PCF][GRPC] [0mPlmnList Present in PCF: [{{208 93}}]
+2024-03-24T11:19:15Z[36m [INFO][PCF][GRPC] [0mSend config trigger to main routine first time config
+2024-03-24T11:19:15Z[36m [INFO][PCF][Init] [0mConfig update trigger true received in PCF App
+2024-03-24T11:19:15Z[36m [INFO][PCF][Init] [0mPcf Profile Registering to NRF: {8f3fb1fe-ff98-43f3-a9a9-cbb98888b765 PCF REGISTERED 0 0xc000264630 <nil> [] []   [pcf] [] <nil> [] [] <nil> 0 0 0  <nil> <nil> <nil> <nil> <nil> <nil> 0xc0007aa4b0 <nil> <nil> <nil> map[] <nil> false 0xc000264618 false false []}
+2024-03-24T11:19:15Z[36m [INFO][PCF][Consumer] [0mPCF register to NRF - created Success
+2024-03-24T11:19:15Z[36m [INFO][PCF][Init] [0mStarted KeepAlive Timer: 86400 sec
+2024-03-24T11:25:04Z[36m [INFO][PCF][Ampolicy] [0mHandle AM Policy Create Request
+2024-03-24T11:25:04Z[36m [INFO][PCF][GIN] [0m| 201 |  192.168.84.183 | POST    | /npcf-am-policy-control/v1/policies |
+2024-03-24T11:25:05Z[36m [INFO][PCF][SMpolicy] [0mHandle CreateSmPolicy
+2024-03-24T11:25:05Z[36m [INFO][PCF][SMpolicy] [0mSupi[208930100007487] exist in PcfSubscriberPolicyData
+2024-03-24T11:25:05Z[36m [INFO][PCF][SMpolicy] [0mPccPolicy in SM Policy Decision[1010203]: 
+   SessionPolicy[internet]: 
+    SessRule[internet-1]: SessionRuleId: internet-1, AuthQos: 5Qi: 9, Arp: PL: 6, PC: , PV: AuthSessAmbr: Uplink: 20000 Kbps, Downlink: 200 Mbps
+2024-03-24T11:25:05Z[36m [INFO][PCF][SMpolicy] [0mSM Policy Decision Sent to SMF: {map[internet-1:0xc00040c900] map[ALLOW-ALL:0xc00073a410] false map[1:0xc000658580] map[] <nil> map[TcId-2:0xc0003a35e0] map[] map[] 0 map[] <nil> false false [PLMN_CH RES_MO_RE AC_TY_CH UE_IP_CH PS_DA_OFF DEF_QOS_CH SE_AMBR_CH QOS_NOTIF RAT_TY_CH] [] <nil> map[] 0 0  000f}
+2024-03-24T11:25:05Z[36m [INFO][PCF][GIN] [0m| 201 |  192.168.84.181 | POST    | /npcf-smpolicycontrol/v1/sm-policies |
