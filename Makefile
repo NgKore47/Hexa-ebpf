@@ -289,7 +289,7 @@ $(M)/helm-ready: | $(M)/k8s-ready
 	helm repo add onosproject https://charts.onosproject.org
 	helm repo add aether https://charts.aetherproject.org
 	helm repo add rancher http://charts.rancher.io/
-	helm repo add hexaebpf https://kcl17.github.io/chars-test/
+	helm repo add hexaebpf https://kcl17.github.io/chars-test/helm/charts
 	touch $@
 endif
 
@@ -365,10 +365,10 @@ $(M)/hexa:
 	touch $@
 hexaupf:
 	helm $(HELM_ACTION) \
-		hexa-eupf hexaebpf \
+		hexaupf hexaebpf/hexa-ebpf \
 		--version 0.1.0 \
 		--values eupf.yaml \
-		-n $(NS) \`
+		-n $(NS) \
 		$(HELM_ARGS)
 
 
