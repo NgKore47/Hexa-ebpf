@@ -2,9 +2,9 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ include "eupf.fullname" . }}-xdp-programm-install
+  name: {{ include "hexaupf.fullname" . }}-xdp-programm-install
   labels:
-    {{- include "eupf.labels" . | nindent 4 }}
+    {{- include "hexaupf.labels" . | nindent 4 }}
   annotations:
     helm.sh/hook: post-install,post-upgrade
     helm.sh/hook-weight: "-100"
@@ -12,11 +12,11 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "eupf.labels" . | nindent 8 }}
+        {{- include "hexaupf.labels" . | nindent 8 }}
     spec:
       hostNetwork: true
       restartPolicy: Never
-      serviceAccountName: {{ include "eupf.serviceAccountName" . }}
+      serviceAccountName: {{ include "hexaupf.serviceAccountName" . }}
       containers:
         - name: xdp-programm-install
           image: "{{ include "helpers.pod.containerImage" . }}"

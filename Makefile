@@ -103,7 +103,7 @@ os_vendor	:= $(shell lsb_release -i -s)
 os_release	:= $(shell lsb_release -r -s)
 USER		:= $(shell whoami)
 
-.PHONY: 4g-core 5g-core oaisim test reset-test reset-ue reset-5g-test node-prep clean
+.PHONY: 4g-core 5g-core oaisim test reset-test reset-ue reset-5g-test node-prep clean hexaupf
 
 $(M):
 	mkdir -p $(M)
@@ -362,7 +362,7 @@ $(M)/hexa:
 
 	@echo "1" > ${UPF_COUNT}
 	touch $@
-	@sleep 50
+hexaupf:
 	helm $(HELM_ACTION) \
 		hexa-eupf .deploy/helm/eupf \
 		--version 0.5.0 \

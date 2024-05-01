@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "eupf.fullname" . }}
+  name: {{ include "hexaupf.fullname" . }}
   labels:
-    {{- include "eupf.labels" . | nindent 4 }}
+    {{- include "hexaupf.labels" . | nindent 4 }}
 spec:
   {{- if eq .Values.deploymentType "statefulset" }}
   clusterIP: None
@@ -18,4 +18,4 @@ spec:
     {{- include "helpers.common.tplvalues.render" (dict "value" .Values.service.extraPorts "context" $) | nindent 4 }}
     {{- end }}
   selector:
-    {{- include "eupf.selectorLabels" . | nindent 4 }}
+    {{- include "hexaupf.selectorLabels" . | nindent 4 }}

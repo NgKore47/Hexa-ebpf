@@ -14,9 +14,9 @@ deploymentType: deployment
 # deploymentType: statefulset
 
 image:
-  registry: ghcr.io
-  repository: edgecomllc
-  name: eupf
+  registry: docker.io
+  repository: khushichhillar
+  name: hexa-upf
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
   pullPolicy: IfNotPresent
@@ -106,40 +106,40 @@ xdpProgrammInstall:
       ls -alh /app ;\
       ip link set dev ${IFACE_NAME} xdpdrv obj /app/zeroentrypoint_bpf.o sec xdp/upf_zero_entrypoint
 
-bird:
-  enabled: false
-  image: docker.io/edgecom/bird:0.0.4
-  env:
-    BIRD_ROUTER_ID: $(MY_POD_IP)
-    BIRD_LOCAL_AS: 65000
-    BIRD_LOCAL_PREFIX: 10.45.0.0/16
-    BIRD_NEIGHBOR_IP: $(MY_NODE_IP)
-    BIRD_NEIGHBOR_AS: 64512
-  service:
-    enabled: false
-    type: ClusterIP
-    port: 179
-  ports:
-    - name: bgp
-      containerPort: 179
-      protocol: TCP
-  resources:
-    limits:
-      cpu: 100m
-      memory: 128Mi
-    requests:
-      cpu: 100m
-      memory: 128Mi
-  livenessProbe:
-    tcpSocket:
-      port: bgp
-    initialDelaySeconds: 5
-    periodSeconds: 10
-  readinessProbe:
-    tcpSocket:
-      port: bgp
-    initialDelaySeconds: 5
-    periodSeconds: 10
+# bird:
+#   enabled: false
+#   image: docker.io/edgecom/bird:0.0.4
+#   env:
+#     BIRD_ROUTER_ID: $(MY_POD_IP)
+#     BIRD_LOCAL_AS: 65000
+#     BIRD_LOCAL_PREFIX: 10.45.0.0/16
+#     BIRD_NEIGHBOR_IP: $(MY_NODE_IP)
+#     BIRD_NEIGHBOR_AS: 64512
+#   service:
+#     enabled: false
+#     type: ClusterIP
+#     port: 179
+#   ports:
+#     - name: bgp
+#       containerPort: 179
+#       protocol: TCP
+#   resources:
+#     limits:
+#       cpu: 100m
+#       memory: 128Mi
+#     requests:
+#       cpu: 100m
+#       memory: 128Mi
+#   livenessProbe:
+#     tcpSocket:
+#       port: bgp
+#     initialDelaySeconds: 5
+#     periodSeconds: 10
+#   readinessProbe:
+#     tcpSocket:
+#       port: bgp
+#     initialDelaySeconds: 5
+#     periodSeconds: 10
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -294,34 +294,34 @@ extraDeploy: []
   #         ]
   #       }
 
-ui:
-  enabled: false
-  image:
-    registry: ghcr.io
-    repository: edgecomllc
-    name: eupf-ui
-    tag: main
-    pullPolicy: Always
-  env:
-    API_ADDR: localhost:8080
-  service:
-    port: 8081
-  resources:
-    limits:
-      cpu: 100m
-      memory: 128Mi
-    requests:
-      cpu: 100m
-      memory: 128Mi
-  livenessProbe:
-    httpGet:
-      path: /healthz
-      port: 8081
-    initialDelaySeconds: 5
-    periodSeconds: 10
-  readinessProbe:
-    httpGet:
-      path: /healthz
-      port: 8081
-    initialDelaySeconds: 5
-    periodSeconds: 10
+# ui:
+#   enabled: false
+#   image:
+#     registry: ghcr.io
+#     repository: edgecomllc
+#     name: eupf-ui
+#     tag: main
+#     pullPolicy: Always
+#   env:
+#     API_ADDR: localhost:8080
+#   service:
+#     port: 8081
+#   resources:
+#     limits:
+#       cpu: 100m
+#       memory: 128Mi
+#     requests:
+#       cpu: 100m
+#       memory: 128Mi
+#   livenessProbe:
+#     httpGet:
+#       path: /healthz
+#       port: 8081
+#     initialDelaySeconds: 5
+#     periodSeconds: 10
+#   readinessProbe:
+#     httpGet:
+#       path: /healthz
+#       port: 8081
+#     initialDelaySeconds: 5
+#     periodSeconds: 10
