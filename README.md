@@ -12,6 +12,11 @@ cp -r cord ~/
 ```bash
 DATA_IFACE=eth0 make hexa
 ```
+this will deploy core 
+```
+make hexaupf
+```
+this will deploy eupf
 
 to clean only core 
 ```bash
