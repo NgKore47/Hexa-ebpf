@@ -9,4 +9,4 @@ if [[ $(/bin/mount | /bin/grep /sys/kernel/debug -c) -eq 0 ]]; then
 fi
 
 # Run app replacing current shell (to preserve signal handling) and forward cmd arguments
-exec /app/bin/eupf "$@"
+exec /app/bin/hexaupf "$@"

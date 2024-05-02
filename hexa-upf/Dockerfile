@@ -18,7 +18,7 @@ RUN BPF_CFLAGS="" \
     && if [ "$BPF_ENABLE_LOG" = "1" ]; then BPF_CFLAGS="$BPF_CFLAGS -DENABLE_LOG"; fi \
     && if [ "$BPF_ENABLE_ROUTE_CACHE" = "1" ]; then BPF_CFLAGS="$BPF_CFLAGS -DENABLE_ROUTE_CACHE"; fi \
     && BPF_CFLAGS=$BPF_CFLAGS go generate -v ./cmd/...
-RUN CGO_ENABLED=0 go build -v -o bin/eupf ./cmd/
+RUN CGO_ENABLED=0 go build -v -o bin/hexaupf ./cmd/
 
 FROM alpine:3.18.5 AS runtime
 LABEL org.opencontainers.image.source="https://github.com/edgecomllc/eupf"
