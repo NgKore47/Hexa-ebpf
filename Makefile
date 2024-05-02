@@ -367,7 +367,7 @@ hexaupf:
 	helm $(HELM_ACTION) \
 		hexaupf hexaebpf/hexa-ebpf \
 		--version 0.1.0 \
-		--values eupf.yaml \
+		--values hexaupf.yaml \
 		-n $(NS) \
 		$(HELM_ARGS)
 
