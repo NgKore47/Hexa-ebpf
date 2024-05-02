@@ -3,8 +3,8 @@
 image:
   registry: docker.io
   repository: khushichhillar
-  name: eupf
-  tag: "v2.0.0" # tag should be v2.0.1
+  name: hexaupf
+  tag: "v1.0.0" # tag should be v2.0.1
   pullPolicy: Always
 
 deploymentStrategy:
@@ -22,7 +22,7 @@ command:
       ip rule add from 172.250.0.0/16 lookup fromn3gtp; \
       ip route add default via 10.42.0.1 dev eth0 table fromn3gtp ;\
       sysctl -w net.ipv4.ip_forward=1  # to overcome the problem of switched off net.ipv4.ip_forward appearing in some environments ;\
-      /app/bin/eupf $0 $@
+      /app/bin/hexaupf $0 $@
 
 args:
   - --config
