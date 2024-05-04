@@ -4,7 +4,7 @@ image:
   registry: docker.io
   repository: khushichhillar
   name: hexaupf
-  tag: "v2.0.0" # tag should be v2.0.1
+  tag: "v1.0.0" 
   pullPolicy: Always
 
 deploymentStrategy:
@@ -51,8 +51,7 @@ configMaps:
         n3_address: 192.168.252.3
 
 env:
-  UPF_PFCP_NODE_ID: 192.168.250.3  # address on n4 interface
-  # UPF_N3_ADDRESS: 10.100.50.233
+  UPF_PFCP_NODE_ID: 192.168.250.3  
 
 volumes:
   - name: sys
