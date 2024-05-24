@@ -54,13 +54,17 @@ NO_PROXY        ?= ${no_proxy}
 ONECLOUD	?= false
 
 DATA_IFACE ?= data
+EXTERNEL_AMF_IP ?= ip
 ifeq ($(DATA_IFACE), data)
 	RAN_SUBNET := 192.168.251.0/24
 else
 	RAN_SUBNET := $(shell ip route | grep $${DATA_IFACE} | awk '/kernel/ {print $$1}' | head -1)
 	DATA_IFACE_PATH := $(shell find /*/systemd/network -maxdepth 1 -not -type d -name '*$(DATA_IFACE).network' -print)
 	DATA_IFACE_CONF ?= $(shell basename $(DATA_IFACE_PATH)).d
+	EXTERNEL_AMF_IP=$(shell ip addr show $(DATA_IFACE) | grep 'inet\b' | awk '{print $$2}' | cut -d/ -f1)
 endif
+
+
 
 # systemd-networkd and systemd configs
 LO_NETCONF            := /etc/systemd/network/20-aiab-lo.network
@@ -353,7 +357,7 @@ endif
 endif
 hexa: $(M)/hexa
 $(M)/hexa:
-	NODE_IP=${NODE_IP} DATA_IFACE=${DATA_IFACE} RAN_SUBNET=${RAN_SUBNET} ENABLE_GNBSIM=${ENABLE_GNBSIM} envsubst < $(5G_CORE_VALUES) | \
+	NODE_IP=${NODE_IP} DATA_IFACE=${DATA_IFACE} EXTERNEL_AMF_IP=${EXTERNEL_AMF_IP} RAN_SUBNET=${RAN_SUBNET} ENABLE_GNBSIM=${ENABLE_GNBSIM} envsubst < $(5G_CORE_VALUES) | \
 	helm upgrade --create-namespace --install --wait $(HELM_GLOBAL_ARGS) \
 		--namespace $(NS) \
 		--values - \
