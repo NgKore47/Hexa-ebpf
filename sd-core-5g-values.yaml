@@ -19,7 +19,7 @@ omec-control-plane:
       nrf: khushichhillar/shadow_nrf:v2.6.4
       nssf: khushichhillar/shadow_nssf:v2.6.0
       pcf: khushichhillar/shadow_pcf:v2.6.4
-      smf: khushichhillar/shadow_smf:v2.0.0
+      smf: khushichhillar/hexasmf:latest
       udm: khushichhillar/shadow_udm:v2.6.4 
       udr: khushichhillar/shadow_udr:v2.6.4
      

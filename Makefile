@@ -103,7 +103,7 @@ os_vendor	:= $(shell lsb_release -i -s)
 os_release	:= $(shell lsb_release -r -s)
 USER		:= $(shell whoami)
 
-.PHONY: 4g-core 5g-core oaisim test reset-test reset-ue reset-5g-test node-prep clean hexaupf
+.PHONY: 4g-core 5g-core oaisim test reset-test reset-ue reset-5g-test node-prep clean hexaupf hexa-clean
 
 $(M):
 	mkdir -p $(M)
@@ -649,7 +649,7 @@ hexa-clean: upf-clean
 	@rm -f $(UPF_COUNT)
 	@echo ""
 	@echo "Wait for all pods to terminate..."
-	kubectl wait -n omec --for=delete --all=true -l app!=ue pod --timeout=180s || true
+	kubectl wait -n hexa --for=delete --all=true -l app!=ue pod --timeout=180s || true
 
 router-clean:
 	@kubectl delete net-attach-def router-net 2>/dev/null || true
