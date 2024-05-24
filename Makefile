@@ -107,7 +107,7 @@ os_vendor	:= $(shell lsb_release -i -s)
 os_release	:= $(shell lsb_release -r -s)
 USER		:= $(shell whoami)
 
-.PHONY: 4g-core 5g-core oaisim test reset-test reset-ue reset-5g-test node-prep clean hexaupf hexa-clean
+.PHONY: 4g-core 5g-core oaisim test reset-test reset-ue reset-5g-test node-prep clean hexaupf hexa-clean hexa
 
 $(M):
 	mkdir -p $(M)
@@ -358,17 +358,19 @@ endif
 hexa: $(M)/hexa
 $(M)/hexa:
 	NODE_IP=${NODE_IP} DATA_IFACE=${DATA_IFACE} EXTERNEL_AMF_IP=${EXTERNEL_AMF_IP} RAN_SUBNET=${RAN_SUBNET} ENABLE_GNBSIM=${ENABLE_GNBSIM} envsubst < $(5G_CORE_VALUES) | \
-	helm upgrade --create-namespace --install --wait $(HELM_GLOBAL_ARGS) \
+	helm upgrade --create-namespace --install --wait --timeout 10m $(HELM_GLOBAL_ARGS) \
 		--namespace $(NS) \
 		--values - \
 		hexa-core \
 		$(SD_CORE_CHART)
-		-- timeout 10m
+		-- timeout 2m
 
 	@echo "1" > ${UPF_COUNT}
 	touch $@
+	@echo "SD-CORE DEPLOYING."
+	@echo "NOTE: DEPLOY HEXAUPF AFTER ALL PODS ARE RUNNING"
 hexaupf:
-	helm $(HELM_ACTION) \
+	helm upgrade --install --wait \
 		hexaupf hexaebpf/hexa-ebpf \
 		--version 0.1.0 \
 		--values hexaupf.yaml \
