@@ -24,7 +24,7 @@ command:
       sysctl -w net.ipv4.ip_forward=1  
       ip route add default via 192.168.250.1 dev core table 200 ;\
       ip rule add from 172.250.0.0/16 table 200 ;\
-      /app/bin/hexaupf $0 $@
+      /app/bin/eupf $0 $@
 
 args:
   - --config
