@@ -1,0 +1,138 @@
+---
+
+image:
+  registry: docker.io
+  repository: nikhdock
+  name: hexaupf
+  tag: "latest" 
+  pullPolicy: Always
+
+deploymentStrategy:
+  type: Recreate
+
+command:
+  - /bin/sh
+  - -c
+  - |
+      set -x ; \
+      echo -e "interface_name: [access, core]\napi_address: :8080\npfcp_address: PFCP_ADDRESS:8805\nmetrics_address: :9090\nn3_address: 192.168.252.3" > /etc/appconfig.yml; \
+      export PFCP_IP=$(hostname -i); \
+      sed -i "s/PFCP_ADDRESS:8805/${PFCP_IP}:8805/g" /etc/appconfig.yml; \
+      mkdir /etc/iproute2 ; echo "111 fromn3gtp" >> /etc/iproute2/rt_tables ; \
+      ip rule add from 172.250.0.0/16 lookup fromn3gtp; \
+      ip route add default via 10.42.0.1 dev eth0 table fromn3gtp ;\
+      sysctl -w net.ipv4.ip_forward=1  
+      ip route add default via 192.168.250.1 dev core table 200 ;\
+      ip rule add from 172.250.0.0/16 table 200 ;\
+      /app/bin/eupf $0 $@
+
+args:
+  - --config
+  - /etc/appconfig.yml
+
+securityContext:
+  privileged: true
+
+podSecurityContext:
+  sysctls:
+  - name: net.ipv4.ip_forward
+    value: "1"
+  - name: net.ipv6.conf.all.forwarding
+    value: "1"
+
+configMaps:
+  config:
+    data:
+      config.yml: |
+        interface_name: [access, eth0, core]
+        api_address: :8080
+        pfcp_address: PFCP_ADDRESS:8805
+        metrics_address: :9090
+        n3_address: 192.168.252.3
+
+env:
+  UPF_PFCP_NODE_ID: 192.168.250.3  
+
+volumes:
+  - name: sys
+    hostPath:
+      path: /sys
+  - name: config
+    configMap:
+      name: hexa-upf-config
+
+volumeMounts:
+  - name: sys
+    mountPath: /sys
+    readOnly:  true
+  - name: config
+    mountPath: /app/conf
+
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    additionalLabels:
+      release: kube-prometheus-stack
+    endpoints:
+      port: metrics
+      path: "/metrics"
+
+extraContainerPorts:
+  - name: pfcp
+    containerPort: 8805
+    protocol: UDP
+  - name: metrics
+    containerPort: 9090
+    protocol: TCP
+
+service:
+  type: ClusterIP
+  port: 8080
+  extraPorts:
+    - port: 8805
+      targetPort: pfcp
+      protocol: UDP
+      name: pfcp
+    - port: 9090
+      targetPort: metrics
+      protocol: TCP
+      name: metrics
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+livenessProbe:
+  tcpSocket:
+    port: http
+  initialDelaySeconds: 5
+  periodSeconds: 10
+
+readinessProbe:
+  tcpSocket:
+    port: http
+  initialDelaySeconds: 5
+  periodSeconds: 10
+
+podAnnotations:
+  k8s.v1.cni.cncf.io/networks: |
+    [
+      { "name": "access-net",
+        "interface": "access",
+        "ips": [ "192.168.252.3/24" ],
+        "mac": "d6:a4:06:a6:45:6f",
+        "dns": {}
+      },
+      { "name": "core-net",
+        "interface": "core",
+        "ips": [ "192.168.250.3/24" ],
+        "mac": "f6:2b:4f:38:e8:49",
+        "dns": {}
+      }
+    ]
+

@@ -1,0 +1,344 @@
++ cd /free5gc
++ cat config/udmcfg.conf
+configuration:
+  keys:
+    udmProfileAHNPrivateKey: c53c22208b61860b06c62e5406a7b330c2b577aa5558981510d128247d38bd1d
+    udmProfileAHNPublicKey: 5a8d38864820197c3394b92613b20b91633cbd897119273bf8e4a6f4eec0a650
+    udmProfileBHNPrivateKey: F1AB1074477EBCC7F554EA1C5FC368B1616730155E0041AC447D6301975FECDA
+    udmProfileBHNPublicKey: 0472DA71976234CE833A6907425867B82E074D44EF907DFB4B3E21C1C2256EBCD15A7DED52FCBB097A4ED250E036C7B9C8C7004C4EEDC4F068CD7BF8D3F900E3B4
+  nrfUri: http://nrf:29510
+  plmnList:
+  - plmnId:
+      mcc: "208"
+      mnc: "93"
+  - plmnId:
+      mcc: "222"
+      mnc: "88"
+  sbi:
+    bindingIPv4: 0.0.0.0
+    port: 29503
+    registerIPv4: udm
+    scheme: http
+    tls:
+      key: free5gc/support/TLS/udm.key
+      log: free5gc/udmsslkey.log
+      pem: free5gc/support/TLS/udm.pem
+  serviceNameList:
+  - nudm-sdm
+  - nudm-uecm
+  - nudm-ueau
+  - nudm-ee
+  - nudm-pp
+info:
+  description: UDM initial local configuration
+  version: 1.0.0
+logger:
+  AMF:
+    ReportCaller: false
+    debugLevel: info
+  AUSF:
+    ReportCaller: false
+    debugLevel: info
+  Aper:
+    ReportCaller: false
+    debugLevel: info
+  CommonConsumerTest:
+    ReportCaller: false
+    debugLevel: info
+  FSM:
+    ReportCaller: false
+    debugLevel: info
+  MongoDBLibrary:
+    ReportCaller: false
+    debugLevel: info
+  N3IWF:
+    ReportCaller: false
+    debugLevel: info
+  NAS:
+    ReportCaller: false
+    debugLevel: info
+  NGAP:
+    ReportCaller: false
+    debugLevel: info
+  NRF:
+    ReportCaller: false
+    debugLevel: info
+  NamfComm:
+    ReportCaller: false
+    debugLevel: info
+  NamfEventExposure:
+    ReportCaller: false
+    debugLevel: info
+  NsmfPDUSession:
+    ReportCaller: false
+    debugLevel: info
+  NudrDataRepository:
+    ReportCaller: false
+    debugLevel: info
+  OpenApi:
+    ReportCaller: false
+    debugLevel: info
+  PCF:
+    ReportCaller: false
+    debugLevel: info
+  PFCP:
+    ReportCaller: false
+    debugLevel: info
+  PathUtil:
+    ReportCaller: false
+    debugLevel: info
+  SMF:
+    ReportCaller: false
+    debugLevel: info
+  UDM:
+    ReportCaller: false
+    debugLevel: info
+  UDR:
+    ReportCaller: false
+    debugLevel: info
+  WEBUI:
+    ReportCaller: false
+    debugLevel: info+ GOTRACEBACK=crash ./udm/udm -udmcfg config/udmcfg.conf
+Neura_udm
+2024-03-24T11:16:11Z[36m [INFO][UDM][Init] [0mUDM Log level is set to [info] level
+2024-03-24T11:16:11Z[36m [INFO][LIB][Path] [0mset log level : info
+2024-03-24T11:16:11Z[36m [INFO][LIB][Path] [0mset report call : false
+2024-03-24T11:16:11Z[36m [INFO][UDM][CFG] [0mconfig version [1.0.0]
+2024-03-24T11:16:11Z[36m [INFO][UDM][Init] [0mMANAGED_BY_CONFIG_POD is true
+2024-03-24T11:16:11Z[36m [INFO][Config5g][GRPC] [0mConfig Client : Creating
+2024-03-24T11:16:11Z[36m [INFO][Config5g][GRPC] [0mDialing GRPC Connection -  webui:9876
+2024-03-24T11:16:11Z[36m [INFO][Config5g][GRPC] [0mConnecting to GRPC ...
+2024-03-24T11:16:31Z[36m [INFO][Config5g][GRPC] [0mConnecting to GRPC ...
+2024-03-24T11:16:51Z[36m [INFO][Config5g][GRPC] [0mConnecting to GRPC ...
+2024-03-24T11:17:11Z[36m [INFO][Config5g][GRPC] [0mConnecting to GRPC ...
+2024-03-24T11:17:31Z[36m [INFO][Config5g][GRPC] [0mConnecting to GRPC ...
+2024/03/24 11:17:51 INFO: [core] [Channel #1] Channel created
+2024/03/24 11:17:51 INFO: [core] [Channel #1] original dial target is: "webui:9876"
+2024/03/24 11:17:51 INFO: [core] [Channel #1] parsed dial target is: resolver.Target{URL:url.URL{Scheme:"webui", Opaque:"9876", User:(*url.Userinfo)(nil), Host:"", Path:"", RawPath:"", OmitHost:false, ForceQuery:false, RawQuery:"", Fragment:"", RawFragment:""}}
+2024/03/24 11:17:51 INFO: [core] [Channel #1] fallback to scheme "passthrough"
+2024/03/24 11:17:51 INFO: [core] [Channel #1] parsed dial target is: passthrough:///webui:9876
+2024/03/24 11:17:51 INFO: [core] [Channel #1] Channel authority set to "webui:9876"
+2024/03/24 11:17:51 INFO: [core] [Channel #1] Resolver state updated: {
+  "Addresses": [
+    {
+      "Addr": "webui:9876",
+      "ServerName": "",
+      "Attributes": null,
+      "BalancerAttributes": null,
+      "Metadata": null
+    }
+  ],
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "webui:9876",
+          "ServerName": "",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": null,
+  "Attributes": null
+} (resolver returned new addresses)
+2024/03/24 11:17:51 INFO: [core] [Channel #1] Channel switches to new LB policy "pick_first"
+2024/03/24 11:17:51 INFO: [core] [pick-first-lb 0xc0001589c0] Received new config {
+  "shuffleAddressList": false
+}, resolver state {
+  "Addresses": [
+    {
+      "Addr": "webui:9876",
+      "ServerName": "",
+      "Attributes": null,
+      "BalancerAttributes": null,
+      "Metadata": null
+    }
+  ],
+  "Endpoints": [
+    {
+      "Addresses": [
+        {
+          "Addr": "webui:9876",
+          "ServerName": "",
+          "Attributes": null,
+          "BalancerAttributes": null,
+          "Metadata": null
+        }
+      ],
+      "Attributes": null
+    }
+  ],
+  "ServiceConfig": null,
+  "Attributes": null
+}
+2024/03/24 11:17:51 INFO: [core] [Channel #1 SubChannel #2] Subchannel created
+2024/03/24 11:17:51 INFO: [core] [Channel #1] Channel Connectivity change to CONNECTING
+2024/03/24 11:17:51 INFO: [core] [Channel #1] Channel exiting idle mode
+2024/03/24 11:17:51 INFO: [core] [Channel #1 SubChannel #2] Subchannel Connectivity change to CONNECTING
+2024/03/24 11:17:51 INFO: [core] [Channel #1 SubChannel #2] Subchannel picks a new address "webui:9876" to connect
+2024-03-24T11:17:51Z[36m [INFO][UDM][Init] [0mUDM Config Info: Version[1.0.0] Description[UDM initial local configuration]
+2024-03-24T11:17:51Z[36m [INFO][UDM][Init] [0mServer started
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /nudm-ee/v1/              --> github.com/omec-project/udm/eventexposure.Index (3 handlers)
+[GIN-debug] POST   /nudm-ee/v1/:ueIdentity/ee-subscriptions --> github.com/omec-project/udm/eventexposure.HTTPCreateEeSubscription (3 handlers)
+[GIN-debug] DELETE /nudm-ee/v1/:ueIdentity/ee-subscriptions/:subscriptionId --> github.com/omec-project/udm/eventexposure.HTTPDeleteEeSubscription (3 handlers)
+2024-03-24T11:17:51Z[36m [INFO][Config5g][GRPC] [0mSubscribing to Config POD
+[GIN-debug] PATCH  /nudm-ee/v1/:ueIdentity/ee-subscriptions/:subscriptionId --> github.com/omec-project/udm/eventexposure.HTTPUpdateEeSubscription (3 handlers)
+[GIN-debug] GET    /                         --> github.com/omec-project/udm/httpcallback.Index (3 handlers)
+2024-03-24T11:17:51Z[31m [ERRO][Config5g][GRPC] [0mConnectivity status: Not Ready
+[GIN-debug] POST   /sdm-subscriptions        --> github.com/omec-project/udm/httpcallback.HTTPDataChangeNotificationToNF (3 handlers)
+[GIN-debug] GET    /nudm-pp/v1/              --> github.com/omec-project/udm/parameterprovision.Index (3 handlers)
+2024/03/24 11:17:51 INFO: [core] [pick-first-lb 0xc0001589c0] Received SubConn state update: 0xc000158ae0, {ConnectivityState:CONNECTING ConnectionError:<nil>}
+[GIN-debug] PATCH  /nudm-pp/v1/:gpsi/pp-data --> github.com/omec-project/udm/parameterprovision.HTTPUpdate (3 handlers)
+[GIN-debug] GET    /nudm-sdm/v1/             --> github.com/omec-project/udm/subscriberdatamanagement.Index (3 handlers)
+[GIN-debug] GET    /nudm-sdm/v1/:supi        --> github.com/omec-project/udm/subscriberdatamanagement.oneLayerPathHandlerFunc (3 handlers)
+[GIN-debug] POST   /nudm-sdm/v1/:supi        --> github.com/omec-project/udm/subscriberdatamanagement.oneLayerPathHandlerFunc (3 handlers)
+[GIN-debug] PUT    /nudm-sdm/v1/:supi        --> github.com/omec-project/udm/subscriberdatamanagement.oneLayerPathHandlerFunc (3 handlers)
+[GIN-debug] PATCH  /nudm-sdm/v1/:supi        --> github.com/omec-project/udm/subscriberdatamanagement.oneLayerPathHandlerFunc (3 handlers)
+[GIN-debug] HEAD   /nudm-sdm/v1/:supi        --> github.com/omec-project/udm/subscriberdatamanagement.oneLayerPathHandlerFunc (3 handlers)
+[GIN-debug] OPTIONS /nudm-sdm/v1/:supi        --> github.com/omec-project/udm/subscriberdatamanagement.oneLayerPathHandlerFunc (3 handlers)
+[GIN-debug] DELETE /nudm-sdm/v1/:supi        --> github.com/omec-project/udm/subscriberdatamanagement.oneLayerPathHandlerFunc (3 handlers)
+[GIN-debug] CONNECT /nudm-sdm/v1/:supi        --> github.com/omec-project/udm/subscriberdatamanagement.oneLayerPathHandlerFunc (3 handlers)
+[GIN-debug] TRACE  /nudm-sdm/v1/:supi        --> github.com/omec-project/udm/subscriberdatamanagement.oneLayerPathHandlerFunc (3 handlers)
+[GIN-debug] GET    /nudm-sdm/v1/:supi/:subscriptionId --> github.com/omec-project/udm/subscriberdatamanagement.twoLayerPathHandlerFunc (3 handlers)
+[GIN-debug] POST   /nudm-sdm/v1/:supi/:subscriptionId --> github.com/omec-project/udm/subscriberdatamanagement.twoLayerPathHandlerFunc (3 handlers)
+[GIN-debug] PUT    /nudm-sdm/v1/:supi/:subscriptionId --> github.com/omec-project/udm/subscriberdatamanagement.twoLayerPathHandlerFunc (3 handlers)
+[GIN-debug] PATCH  /nudm-sdm/v1/:supi/:subscriptionId --> github.com/omec-project/udm/subscriberdatamanagement.twoLayerPathHandlerFunc (3 handlers)
+[GIN-debug] HEAD   /nudm-sdm/v1/:supi/:subscriptionId --> github.com/omec-project/udm/subscriberdatamanagement.twoLayerPathHandlerFunc (3 handlers)
+[GIN-debug] OPTIONS /nudm-sdm/v1/:supi/:subscriptionId --> github.com/omec-project/udm/subscriberdatamanagement.twoLayerPathHandlerFunc (3 handlers)
+[GIN-debug] DELETE /nudm-sdm/v1/:supi/:subscriptionId --> github.com/omec-project/udm/subscriberdatamanagement.twoLayerPathHandlerFunc (3 handlers)
+[GIN-debug] CONNECT /nudm-sdm/v1/:supi/:subscriptionId --> github.com/omec-project/udm/subscriberdatamanagement.twoLayerPathHandlerFunc (3 handlers)
+[GIN-debug] TRACE  /nudm-sdm/v1/:supi/:subscriptionId --> github.com/omec-project/udm/subscriberdatamanagement.twoLayerPathHandlerFunc (3 handlers)
+[GIN-debug] GET    /nudm-sdm/v1/:supi/:subscriptionId/:thirdLayer --> github.com/omec-project/udm/subscriberdatamanagement.threeLayerPathHandlerFunc (3 handlers)
+[GIN-debug] POST   /nudm-sdm/v1/:supi/:subscriptionId/:thirdLayer --> github.com/omec-project/udm/subscriberdatamanagement.threeLayerPathHandlerFunc (3 handlers)
+[GIN-debug] PUT    /nudm-sdm/v1/:supi/:subscriptionId/:thirdLayer --> github.com/omec-project/udm/subscriberdatamanagement.threeLayerPathHandlerFunc (3 handlers)
+[GIN-debug] PATCH  /nudm-sdm/v1/:supi/:subscriptionId/:thirdLayer --> github.com/omec-project/udm/subscriberdatamanagement.threeLayerPathHandlerFunc (3 handlers)
+[GIN-debug] HEAD   /nudm-sdm/v1/:supi/:subscriptionId/:thirdLayer --> github.com/omec-project/udm/subscriberdatamanagement.threeLayerPathHandlerFunc (3 handlers)
+[GIN-debug] OPTIONS /nudm-sdm/v1/:supi/:subscriptionId/:thirdLayer --> github.com/omec-project/udm/subscriberdatamanagement.threeLayerPathHandlerFunc (3 handlers)
+[GIN-debug] DELETE /nudm-sdm/v1/:supi/:subscriptionId/:thirdLayer --> github.com/omec-project/udm/subscriberdatamanagement.threeLayerPathHandlerFunc (3 handlers)
+[GIN-debug] CONNECT /nudm-sdm/v1/:supi/:subscriptionId/:thirdLayer --> github.com/omec-project/udm/subscriberdatamanagement.threeLayerPathHandlerFunc (3 handlers)
+[GIN-debug] TRACE  /nudm-sdm/v1/:supi/:subscriptionId/:thirdLayer --> github.com/omec-project/udm/subscriberdatamanagement.threeLayerPathHandlerFunc (3 handlers)
+[GIN-debug] GET    /nudm-ueau/v1/            --> github.com/omec-project/udm/ueauthentication.Index (3 handlers)
+[GIN-debug] POST   /nudm-ueau/v1/:supi/auth-events --> github.com/omec-project/udm/ueauthentication.HTTPConfirmAuth (3 handlers)
+[GIN-debug] GET    /nudm-ueau/v1/:supi/security-information/generate-auth-data --> github.com/omec-project/udm/ueauthentication.genAuthDataHandlerFunc (3 handlers)
+[GIN-debug] POST   /nudm-ueau/v1/:supi/security-information/generate-auth-data --> github.com/omec-project/udm/ueauthentication.genAuthDataHandlerFunc (3 handlers)
+[GIN-debug] PUT    /nudm-ueau/v1/:supi/security-information/generate-auth-data --> github.com/omec-project/udm/ueauthentication.genAuthDataHandlerFunc (3 handlers)
+[GIN-debug] PATCH  /nudm-ueau/v1/:supi/security-information/generate-auth-data --> github.com/omec-project/udm/ueauthentication.genAuthDataHandlerFunc (3 handlers)
+[GIN-debug] HEAD   /nudm-ueau/v1/:supi/security-information/generate-auth-data --> github.com/omec-project/udm/ueauthentication.genAuthDataHandlerFunc (3 handlers)
+[GIN-debug] OPTIONS /nudm-ueau/v1/:supi/security-information/generate-auth-data --> github.com/omec-project/udm/ueauthentication.genAuthDataHandlerFunc (3 handlers)
+[GIN-debug] DELETE /nudm-ueau/v1/:supi/security-information/generate-auth-data --> github.com/omec-project/udm/ueauthentication.genAuthDataHandlerFunc (3 handlers)
+[GIN-debug] CONNECT /nudm-ueau/v1/:supi/security-information/generate-auth-data --> github.com/omec-project/udm/ueauthentication.genAuthDataHandlerFunc (3 handlers)
+[GIN-debug] TRACE  /nudm-ueau/v1/:supi/security-information/generate-auth-data --> github.com/omec-project/udm/ueauthentication.genAuthDataHandlerFunc (3 handlers)
+[GIN-debug] GET    /nudm-uecm/v1/            --> github.com/omec-project/udm/uecontextmanagement.Index (3 handlers)
+[GIN-debug] GET    /nudm-uecm/v1/:ueId/registrations/amf-3gpp-access --> github.com/omec-project/udm/uecontextmanagement.HTTPGetAmf3gppAccess (3 handlers)
+[GIN-debug] GET    /nudm-uecm/v1/:ueId/registrations/amf-non-3gpp-access --> github.com/omec-project/udm/uecontextmanagement.HTTPGetAmfNon3gppAccess (3 handlers)
+[GIN-debug] PUT    /nudm-uecm/v1/:ueId/registrations/amf-3gpp-access --> github.com/omec-project/udm/uecontextmanagement.HTTPRegistrationAmf3gppAccess (3 handlers)
+[GIN-debug] PUT    /nudm-uecm/v1/:ueId/registrations/amf-non-3gpp-access --> github.com/omec-project/udm/uecontextmanagement.HTTPRegistrationAmfNon3gppAccess (3 handlers)
+[GIN-debug] PATCH  /nudm-uecm/v1/:ueId/registrations/amf-3gpp-access --> github.com/omec-project/udm/uecontextmanagement.HTTPUpdateAmf3gppAccess (3 handlers)
+[GIN-debug] PATCH  /nudm-uecm/v1/:ueId/registrations/amf-non-3gpp-access --> github.com/omec-project/udm/uecontextmanagement.HTTPUpdateAmfNon3gppAccess (3 handlers)
+[GIN-debug] DELETE /nudm-uecm/v1/:ueId/registrations/smf-registrations/:pduSessionId --> github.com/omec-project/udm/uecontextmanagement.HTTPDeregistrationSmfRegistrations (3 handlers)
+[GIN-debug] PUT    /nudm-uecm/v1/:ueId/registrations/smf-registrations/:pduSessionId --> github.com/omec-project/udm/uecontextmanagement.HTTPRegistrationSmfRegistrations (3 handlers)
+[GIN-debug] GET    /nudm-uecm/v1/:ueId/registrations/smsf-3gpp-access --> github.com/omec-project/udm/uecontextmanagement.HTTPGetSmsf3gppAccess (3 handlers)
+[GIN-debug] DELETE /nudm-uecm/v1/:ueId/registrations/smsf-3gpp-access --> github.com/omec-project/udm/uecontextmanagement.HTTPDeregistrationSmsf3gppAccess (3 handlers)
+[GIN-debug] DELETE /nudm-uecm/v1/:ueId/registrations/smsf-non-3gpp-access --> github.com/omec-project/udm/uecontextmanagement.HTTPDeregistrationSmsfNon3gppAccess (3 handlers)
+[GIN-debug] GET    /nudm-uecm/v1/:ueId/registrations/smsf-non-3gpp-access --> github.com/omec-project/udm/uecontextmanagement.HTTPGetSmsfNon3gppAccess (3 handlers)
+[GIN-debug] PUT    /nudm-uecm/v1/:ueId/registrations/smsf-3gpp-access --> github.com/omec-project/udm/uecontextmanagement.HTTPUpdateSMSFReg3GPP (3 handlers)
+[GIN-debug] PUT    /nudm-uecm/v1/:ueId/registrations/smsf-non-3gpp-access --> github.com/omec-project/udm/uecontextmanagement.HTTPRegistrationSmsfNon3gppAccess (3 handlers)
+2024-03-24T11:17:51Z[36m [INFO][UDM][Util] [0mudmconfig Info: Version[1.0.0] Description[UDM initial local configuration]
+2024/03/24 11:17:51 INFO: [core] [Channel #1 SubChannel #2] Subchannel Connectivity change to READY
+2024/03/24 11:17:51 INFO: [core] [pick-first-lb 0xc0001589c0] Received SubConn state update: 0xc000158ae0, {ConnectivityState:READY ConnectionError:<nil>}
+2024/03/24 11:17:51 INFO: [core] [Channel #1] Channel Connectivity change to READY
+2024-03-24T11:17:52Z[36m [INFO][Config5g][GRPC] [0mConnectivity status: Ready
+2024-03-24T11:17:52Z[36m [INFO][Config5g][GRPC] [0mConfig Message received
+2024-03-24T11:17:52Z[36m [INFO][Config5g][GRPC] [0mInitial Config Received  RestartCounter:4141576257 NetworkSlice:{Name:"default" Nssai:{Sst:"1" Sd:"010203"} DeviceGroup:{Name:"5g-gnbsim-user-group1" IpDomainDetails:{Name:"pool1" DnnName:"internet" UePool:"172.250.1.0/16" DnsPrimary:"8.8.8.8" Mtu:1460 UeDnnQos:{DnnMbrUplink:20000000 DnnMbrDownlink:200000000 TrafficClass:{Name:"platinum" Qci:9 Arp:6 Pdb:300 Pelr:6}}} Imsi:"208930100007487" Imsi:"208930100007488" Imsi:"208930100007489" Imsi:"208930100007490" Imsi:"208930100007491" Imsi:"208930100007492" Imsi:"208930100007493" Imsi:"208930100007494" Imsi:"208930100007495" Imsi:"208930100007496" Imsi:"208930100007497" Imsi:"208930100007498" Imsi:"208930100007499" Imsi:"208930100007500"} DeviceGroup:{Name:"5g-gnbsim-user-group2" IpDomainDetails:{Name:"pool2" DnnName:"internet" UePool:"172.250.1.0/16" DnsPrimary:"8.8.8.8" Mtu:1460 UeDnnQos:{DnnMbrUplink:10000000 DnnMbrDownlink:400000000 TrafficClass:{Name:"platinum" Qci:8 Arp:6 Pdb:300 Pelr:6}}} Imsi:"208930100007501" Imsi:"208930100007502" Imsi:"208930100007503" Imsi:"208930100007504" Imsi:"208930100007505" Imsi:"208930100007506" Imsi:"208930100007507" Imsi:"208930100007508" Imsi:"208930100007509" Imsi:"208930100007510"} Site:{SiteName:"aiab" Gnb:{Name:"aiab-gnb1" Tac:1} Gnb:{Name:"aiab-gnb2" Tac:2} Plmn:{mcc:"208" mnc:"93"} Upf:{UpfName:"upf"}} AppFilters:{PccRuleBase:{FlowInfos:{FlowDesc:"permit out ip from any to assigned" TosTrafficClass:"IPV4" FlowDir:BIDIRECTIONAL FlowStatus:ENABLED} RuleId:"ALLOW-ALL" Qos:{Var5qi:9 Arp:{PL:6 PC:MAY_PREEMPT PV:PREEMPTABLE}} Priority:250}}} ConfigUpdated:1
+2024-03-24T11:17:52Z[36m [INFO][UDM][GRPC] [0mReceived updateConfig in the udm app :  RestartCounter:4141576257 NetworkSlice:{Name:"default" Nssai:{Sst:"1" Sd:"010203"} DeviceGroup:{Name:"5g-gnbsim-user-group1" IpDomainDetails:{Name:"pool1" DnnName:"internet" UePool:"172.250.1.0/16" DnsPrimary:"8.8.8.8" Mtu:1460 UeDnnQos:{DnnMbrUplink:20000000 DnnMbrDownlink:200000000 TrafficClass:{Name:"platinum" Qci:9 Arp:6 Pdb:300 Pelr:6}}} Imsi:"208930100007487" Imsi:"208930100007488" Imsi:"208930100007489" Imsi:"208930100007490" Imsi:"208930100007491" Imsi:"208930100007492" Imsi:"208930100007493" Imsi:"208930100007494" Imsi:"208930100007495" Imsi:"208930100007496" Imsi:"208930100007497" Imsi:"208930100007498" Imsi:"208930100007499" Imsi:"208930100007500"} DeviceGroup:{Name:"5g-gnbsim-user-group2" IpDomainDetails:{Name:"pool2" DnnName:"internet" UePool:"172.250.1.0/16" DnsPrimary:"8.8.8.8" Mtu:1460 UeDnnQos:{DnnMbrUplink:10000000 DnnMbrDownlink:400000000 TrafficClass:{Name:"platinum" Qci:8 Arp:6 Pdb:300 Pelr:6}}} Imsi:"208930100007501" Imsi:"208930100007502" Imsi:"208930100007503" Imsi:"208930100007504" Imsi:"208930100007505" Imsi:"208930100007506" Imsi:"208930100007507" Imsi:"208930100007508" Imsi:"208930100007509" Imsi:"208930100007510"} Site:{SiteName:"aiab" Gnb:{Name:"aiab-gnb1" Tac:1} Gnb:{Name:"aiab-gnb2" Tac:2} Plmn:{mcc:"208" mnc:"93"} Upf:{UpfName:"upf"}} AppFilters:{PccRuleBase:{FlowInfos:{FlowDesc:"permit out ip from any to assigned" TosTrafficClass:"IPV4" FlowDir:BIDIRECTIONAL FlowStatus:ENABLED} RuleId:"ALLOW-ALL" Qos:{Var5qi:9 Arp:{PL:6 PC:MAY_PREEMPT PV:PREEMPTABLE}} Priority:250}}} ConfigUpdated:1
+2024-03-24T11:17:52Z[36m [INFO][UDM][GRPC] [0mNetwork Slice Name  default
+2024-03-24T11:17:52Z[36m [INFO][UDM][GRPC] [0mNetwork Slice has site name present
+2024-03-24T11:17:52Z[36m [INFO][UDM][GRPC] [0mSite name  aiab
+2024-03-24T11:17:52Z[36m [INFO][UDM][GRPC] [0mPlmn mcc  208
+2024-03-24T11:17:52Z[36m [INFO][UDM][GRPC] [0mSend config trigger to main routine
+2024-03-24T11:17:52Z[36m [INFO][UDM][Init] [0mMinimum configuration from config pod available true
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+UDM register to NRF Error[Put "http://nrf:29510/nnrf-nfm/v1/nf-instances/2d8d596c-a7ae-4b76-b5f8-aca241a6bbc2": dial tcp 192.168.85.180:29510: connect: connection refused]
+2024-03-24T11:19:06Z[36m [INFO][UDM][Init] [0mStarted KeepAlive Timer: 86400 sec
+2024-03-24T11:19:06Z[36m [INFO][UDM][CFG] [0mSent Register NF Instance with updated profile
+2024-03-24T11:25:04Z[36m [INFO][UDM][UEAU] [0mHandle GenerateAuthDataRequest
+2024-03-24T11:25:04Z[36m [INFO][LIB][3GPP] [0msuciPart [suci 0 208 93 0000 0 0 0100007487]
+2024-03-24T11:25:04Z[36m [INFO][LIB][3GPP] [0mscheme 0
+2024-03-24T11:25:04Z[36m [INFO][LIB][3GPP] [0mSUPI type is IMSI
+http://nrf:29510
+2024-03-24T11:25:04Z[31m [ERRO][UDM][UEAU] [0mopStr length is  0
+AUTN = c33a3d1e19148000f466a11f1856d0b2
+2024-03-24T11:25:04Z[36m [INFO][UDM][GIN] [0m| 200 |  192.168.84.184 | POST    | /nudm-ueau/v1/suci-0-208-93-0000-0-0-0100007487/security-information/generate-auth-data |
+2024-03-24T11:25:04Z[36m [INFO][UDM][UEAU] [0mHandle GenerateAuthDataRequest
+2024-03-24T11:25:04Z[36m [INFO][LIB][3GPP] [0msuciPart [suci 0 208 93 0000 0 0 0100007487]
+2024-03-24T11:25:04Z[36m [INFO][LIB][3GPP] [0mscheme 0
+2024-03-24T11:25:04Z[36m [INFO][LIB][3GPP] [0mSUPI type is IMSI
+2024-03-24T11:25:04Z[31m [ERRO][UDM][UEAU] [0mopStr length is  0
+SQNstr 000000000000
+AUTN = 0e4b1950255280007b8cea87b7b847d9
+2024-03-24T11:25:04Z[36m [INFO][UDM][GIN] [0m| 200 |  192.168.84.184 | POST    | /nudm-ueau/v1/suci-0-208-93-0000-0-0-0100007487/security-information/generate-auth-data |
+2024-03-24T11:25:04Z[36m [INFO][UDM][UEAU] [0mHandle ConfirmAuthDataRequest
+2024-03-24T11:25:04Z[36m [INFO][UDM][GIN] [0m| 201 |  192.168.84.184 | POST    | /nudm-ueau/v1/imsi-208930100007487/auth-events |
+2024-03-24T11:25:04Z[36m [INFO][UDM][SDM] [0mHandle GetNssai
+2024-03-24T11:25:04Z[36m [INFO][UDM][GIN] [0m| 200 |  192.168.84.183 | GET     | /nudm-sdm/v1/imsi-208930100007487/nssai?plmn-id=20893 |
+2024-03-24T11:25:04Z[36m [INFO][UDM][UECM] [0mHandle RegistrationAmf3gppAccess
+2024-03-24T11:25:04Z[36m [INFO][UDM][UECM] [0mUEID: imsi-208930100007487
+http://nrf:29510
+2024-03-24T11:25:04Z[36m [INFO][UDM][GIN] [0m| 201 |  192.168.84.183 | PUT     | /nudm-uecm/v1/imsi-208930100007487/registrations/amf-3gpp-access |
+2024-03-24T11:25:04Z[36m [INFO][UDM][SDM] [0mHandle GetAmData
+2024-03-24T11:25:04Z[36m [INFO][UDM][GIN] [0m| 200 |  192.168.84.183 | GET     | /nudm-sdm/v1/imsi-208930100007487/am-data?plmn-id=20893 |
+2024-03-24T11:25:04Z[36m [INFO][UDM][SDM] [0mHandle GetSmfSelectData
+http://nrf:29510
+2024-03-24T11:25:04Z[36m [INFO][UDM][GIN] [0m| 200 |  192.168.84.183 | GET     | /nudm-sdm/v1/imsi-208930100007487/smf-select-data?plmn-id=20893 |
+2024-03-24T11:25:04Z[36m [INFO][UDM][SDM] [0mHandle GetUeContextInSmfData
+http://nrf:29510
+2024-03-24T11:25:04Z[36m [INFO][UDM][GIN] [0m| 200 |  192.168.84.183 | GET     | /nudm-sdm/v1/imsi-208930100007487/ue-context-in-smf-data |
+2024-03-24T11:25:04Z[36m [INFO][UDM][SDM] [0mHandle Subscribe
+http://nrf:29510
+2024-03-24T11:25:04Z[36m [INFO][UDM][GIN] [0m| 201 |  192.168.84.183 | POST    | /nudm-sdm/v1/imsi-208930100007487/sdm-subscriptions |
+2024-03-24T11:25:05Z[36m [INFO][UDM][SDM] [0mHandle GetSmData
+2024-03-24T11:25:05Z[36m [INFO][UDM][SDM] [0mgetSmDataProcedure: SUPI[imsi-208930100007487] PLMNID[20893] DNN[internet] SNssai[{"sst":1,"sd":"010203"}]
+2024-03-24T11:25:05Z[36m [INFO][UDM][GIN] [0m| 200 |  192.168.84.181 | GET     | /nudm-sdm/v1/imsi-208930100007487/sm-data?dnn=internet&plmn-id=20893&single-nssai=%7B%22sst%22%3A1%2C%22sd%22%3A%22010203%22%7D |
