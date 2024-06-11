@@ -1,0 +1,318 @@
+diff --git a/cmd/core/pfcp_connection.go b/cmd/core/pfcp_connection.go
+index 26f10ec..4611906 100644
+--- a/cmd/core/pfcp_connection.go
++++ b/cmd/core/pfcp_connection.go
+@@ -24,6 +24,7 @@ type PfcpConnection struct {
+ 	mapOperations     ebpf.ForwardingPlaneController
+ 	RecoveryTimestamp time.Time
+ 	ResourceManager   *service.ResourceManager
++	networkInstance   string
+ }
+ 
+ func (connection *PfcpConnection) GetAssociation(assocAddr string) *NodeAssociation {
+diff --git a/cmd/core/pfcp_handlers.go b/cmd/core/pfcp_handlers.go
+index ae5151a..7ff65e8 100644
+--- a/cmd/core/pfcp_handlers.go
++++ b/cmd/core/pfcp_handlers.go
+@@ -54,6 +54,7 @@ func setBit(n uint8, pos uint) uint8 {
+ // https://www.etsi.org/deliver/etsi_ts/129200_129299/129244/16.04.00_60/ts_129244v160400p.pdf page 95
+ func HandlePfcpAssociationSetupRequest(conn *PfcpConnection, msg message.Message, addr string) (message.Message, error) {
+ 	asreq := msg.(*message.AssociationSetupRequest)
++	conn.networkInstance = "internet"
+ 	log.Info().Msgf("Got Association Setup Request from: %s. \n", addr)
+ 	if asreq.NodeID == nil {
+ 		log.Warn().Msgf("Got Association Setup Request without NodeID from: %s", addr)
+@@ -102,11 +103,13 @@ func HandlePfcpAssociationSetupRequest(conn *PfcpConnection, msg message.Message
+ 	upFunctionFeaturesIE := ie.NewUPFunctionFeatures(featuresOctets[:]...)
+ 
+ 	// shall send a PFCP Association Setup Response including:
++	flags := uint8(0x41)
+ 	asres := message.NewAssociationSetupResponse(asreq.SequenceNumber,
+ 		ie.NewCause(ie.CauseRequestAccepted), // a successful cause
+ 		newIeNodeID(conn.nodeId),             // its Node ID;
+ 		ie.NewRecoveryTimeStamp(conn.RecoveryTimestamp),
+ 		upFunctionFeaturesIE,
++		ie.NewUserPlaneIPResourceInformation(flags, 0, conn.n3Address.String(), "", conn.networkInstance, ie.SrcInterfaceAccess),
+ 	)
+ 
+ 	// Send AssociationSetupResponse
+diff --git a/cmd/ebpf/xdp/utils/routing.h b/cmd/ebpf/xdp/utils/routing.h
+index afc9335..c9b9350 100644
+--- a/cmd/ebpf/xdp/utils/routing.h
++++ b/cmd/ebpf/xdp/utils/routing.h
+@@ -101,13 +101,15 @@ static __always_inline enum xdp_action route_ipv4(struct xdp_md *ctx, struct eth
+     const __u32 key = 0;
+     struct route_stat *statistic = bpf_map_lookup_elem(&upf_route_stat, &key);
+     if (!statistic) {
+-        return XDP_ABORTED;
++        bpf_printk("boom passed your packet ");
++        return XDP_PASS;
+     }
++    bpf_printk("in route ipv4");
+ 
+ #ifdef ENABLE_ROUTE_CACHE
+     struct route_record *cache = bpf_map_lookup_elem(&upf_route_cache_ip4, &ip4->daddr);
+     if (cache) {
+-        upf_printk("upf: bpf_fib_lookup %pI4 -> %pI4: cached ifindex: %d", &ip4->saddr, &ip4->daddr, cache->ifindex);
++        bpf_printk("upf: bpf_fib_lookup %pI4 -> %pI4: cached ifindex: %d", &ip4->saddr, &ip4->daddr, cache->ifindex);
+         statistic->fib_lookup_ip4_cache += 1;
+         return do_route_ipv4(ctx, eth, cache->ifindex, &cache->smac, &cache->dmac);
+     }
+@@ -123,11 +125,14 @@ static __always_inline enum xdp_action route_ipv4(struct xdp_md *ctx, struct eth
+     fib_params.ipv4_src = ip4->saddr;
+     fib_params.ipv4_dst = ip4->daddr;
+     fib_params.ifindex = ctx->ingress_ifindex;
+-
++    bpf_printk("source addr :%d destination :%d ",&ip4->saddr , &ip4->daddr);
+     int rc = bpf_fib_lookup(ctx, &fib_params, sizeof(fib_params), 0 /*BPF_FIB_LOOKUP_OUTPUT*/);
++    bpf_printk("from fib params source addr :%d destination :%d ",&fib_params.ipv4_src , &fib_params.ipv4_dst);
++
++    bpf_printk("starting switch case rc is %d", rc);
+     switch (rc) {
+         case BPF_FIB_LKUP_RET_SUCCESS:
+-            upf_printk("upf: bpf_fib_lookup %pI4 -> %pI4: nexthop: %pI4", &ip4->saddr, &ip4->daddr, &fib_params.ipv4_dst);
++            bpf_printk("upf: bpf_fib_lookup %pI4 -> %pI4: nexthop: %pI4", &ip4->saddr, &ip4->daddr, &fib_params.ipv4_dst);
+             statistic->fib_lookup_ip4_ok += 1;
+ 
+ #ifdef ENABLE_ROUTE_CACHE
+@@ -138,16 +143,16 @@ static __always_inline enum xdp_action route_ipv4(struct xdp_md *ctx, struct eth
+         case BPF_FIB_LKUP_RET_BLACKHOLE:
+         case BPF_FIB_LKUP_RET_UNREACHABLE:
+         case BPF_FIB_LKUP_RET_PROHIBIT:
+-            upf_printk("upf: bpf_fib_lookup %pI4 -> %pI4: %d", &ip4->saddr, &ip4->daddr, rc);
++            bpf_printk("upf: bpf_fib_lookup %pI4 -> %pI4: %d", &ip4->saddr, &ip4->daddr, rc);
+             statistic->fib_lookup_ip4_error_drop += 1;
+-            return XDP_DROP;
++            return XDP_PASS;
+         case BPF_FIB_LKUP_RET_NOT_FWDED:
+         case BPF_FIB_LKUP_RET_FWD_DISABLED:
+         case BPF_FIB_LKUP_RET_UNSUPP_LWT:
+         case BPF_FIB_LKUP_RET_NO_NEIGH:
+         case BPF_FIB_LKUP_RET_FRAG_NEEDED:
+         default:
+-            upf_printk("upf: bpf_fib_lookup %pI4 -> %pI4: %d", &ip4->saddr, &ip4->daddr, rc);
++            bpf_printk("upf: bpf_fib_lookup %pI4 -> %pI4: %d", &ip4->saddr, &ip4->daddr, rc);
+             statistic->fib_lookup_ip4_error_pass += 1;
+             return XDP_PASS; /* Let's kernel takes care */
+     }
+@@ -174,12 +179,12 @@ static __always_inline enum xdp_action route_ipv6(struct xdp_md *ctx, struct eth
+     int rc = bpf_fib_lookup(ctx, &fib_params, sizeof(fib_params), 0 /*BPF_FIB_LOOKUP_OUTPUT*/);
+     switch (rc) {
+         case BPF_FIB_LKUP_RET_SUCCESS:
+-            upf_printk("upf: bpf_fib_lookup %pI6c -> %pI6c: nexthop: %pI4", &ip6->saddr, &ip6->daddr, &fib_params.ipv4_dst);
++            bpf_printk("upf: bpf_fib_lookup %pI6c -> %pI6c: nexthop: %pI4", &ip6->saddr, &ip6->daddr, &fib_params.ipv4_dst);
+             statistic->fib_lookup_ip6_ok += 1;
+             //_decr_ttl(ether_proto, l3hdr);
+             __builtin_memcpy(eth->h_dest, fib_params.dmac, ETH_ALEN);
+             __builtin_memcpy(eth->h_source, fib_params.smac, ETH_ALEN);
+-            upf_printk("upf: bpf_redirect: if=%d %lu -> %lu", fib_params.ifindex, fib_params.smac, fib_params.dmac);
++            bpf_printk("upf: bpf_redirect: if=%d %lu -> %lu", fib_params.ifindex, fib_params.smac, fib_params.dmac);
+ 
+             if (fib_params.ifindex == ctx->ingress_ifindex)
+                 return XDP_TX;
+@@ -188,7 +193,7 @@ static __always_inline enum xdp_action route_ipv6(struct xdp_md *ctx, struct eth
+         case BPF_FIB_LKUP_RET_BLACKHOLE:
+         case BPF_FIB_LKUP_RET_UNREACHABLE:
+         case BPF_FIB_LKUP_RET_PROHIBIT:
+-            upf_printk("upf: bpf_fib_lookup %pI6c -> %pI6c: %d", &ip6->saddr, &ip6->daddr, rc);
++            bpf_printk("upf: bpf_fib_lookup %pI6c -> %pI6c: %d", &ip6->saddr, &ip6->daddr, rc);
+             statistic->fib_lookup_ip6_error_drop += 1;
+             return XDP_DROP;
+         case BPF_FIB_LKUP_RET_NOT_FWDED:
+@@ -197,7 +202,7 @@ static __always_inline enum xdp_action route_ipv6(struct xdp_md *ctx, struct eth
+         case BPF_FIB_LKUP_RET_NO_NEIGH:
+         case BPF_FIB_LKUP_RET_FRAG_NEEDED:
+         default:
+-            upf_printk("upf: bpf_fib_lookup %pI6c -> %pI6c: %d", &ip6->saddr, &ip6->daddr, rc);
++            bpf_printk("upf: bpf_fib_lookup %pI6c -> %pI6c: %d", &ip6->saddr, &ip6->daddr, rc);
+             statistic->fib_lookup_ip6_error_pass += 1;
+             return XDP_PASS; /* Let's kernel takes care */
+     }
+diff --git a/docs/deployments/free5gc-ulcl/Makefile b/docs/deployments/free5gc-ulcl/Makefile
+index 7b09891..c78325b 100644
+--- a/docs/deployments/free5gc-ulcl/Makefile
++++ b/docs/deployments/free5gc-ulcl/Makefile
+@@ -1,5 +1,5 @@
+-NAMESPACE?=free5gculcl
+-HELM_ARGS?=--wait --timeout 100s --create-namespace
++NAMESPACE?=free5gc
++HELM_ARGS?=--create-namespace
+ HELM_ACTION?=install
+ 
+ free5gc:
+diff --git a/docs/deployments/free5gc-ulcl/eupf-b.yaml b/docs/deployments/free5gc-ulcl/eupf-b.yaml
+index 00f0ade..6ee5ed9 100644
+--- a/docs/deployments/free5gc-ulcl/eupf-b.yaml
++++ b/docs/deployments/free5gc-ulcl/eupf-b.yaml
+@@ -144,7 +144,7 @@ extraDeploy:
+             {
+               "type": "ipvlan",
+               "capabilities": { "ips": true },
+-              "master": "ens3",
++              "master": "eth1",
+               "mode": "l2",
+               "ipam": {
+                 "type": "static"
+@@ -164,7 +164,7 @@ extraDeploy:
+             {
+               "type": "ipvlan",
+               "capabilities": { "ips": true },
+-              "master": "ens3",
++              "master": "eth1",
+               "mode": "l2",
+               "ipam": {
+                 "type": "static"
+diff --git a/docs/deployments/free5gc-ulcl/free5gc.yaml b/docs/deployments/free5gc-ulcl/free5gc.yaml
+index 84f51a7..20cfba4 100644
+--- a/docs/deployments/free5gc-ulcl/free5gc.yaml
++++ b/docs/deployments/free5gc-ulcl/free5gc.yaml
+@@ -78,47 +78,47 @@ free5gc-smf:
+                     - 10.100.50.233
+                   networkInstances:
+                     - internet # Data Network Name (DNN)
+-            upf1:
+-              type: UPF
+-              nodeID: 10.100.50.242
+-              sNssaiUpfInfos:
+-                - sNssai:
+-                    sst: 1
+-                    sd: 010203
+-                  dnnUpfInfoList:
+-                    - dnn: internet
+-                      pools:
+-                      - cidr: 10.1.0.0/17
+-              interfaces:
+-                - interfaceType: N9
+-                  endpoints:
+-                    - 10.100.50.226
+-                  networkInstances:
+-                    - internet # Data Network Name (DNN)
+-            upf2:
+-              type: UPF
+-              nodeID: 10.100.50.243
+-              sNssaiUpfInfos:
+-                - sNssai:
+-                    sst: 1
+-                    sd: 010203
+-                  dnnUpfInfoList:
+-                    - dnn: internet
+-                      pools:
+-                      - cidr: 10.1.128.0/17
+-              interfaces:
+-                - interfaceType: N9
+-                  endpoints:
+-                    - 10.100.50.227
+-                  networkInstances:
+-                    - internet # Data Network Name (DNN)
++            # upf1:
++            #   type: UPF
++            #   nodeID: 10.100.50.242
++            #   sNssaiUpfInfos:
++            #     - sNssai:
++            #         sst: 1
++            #         sd: 010203
++            #       dnnUpfInfoList:
++            #         - dnn: internet
++            #           pools:
++            #           - cidr: 10.1.0.0/17
++            #   interfaces:
++            #     - interfaceType: N9
++            #       endpoints:
++            #         - 10.100.50.226
++            #       networkInstances:
++            #         - internet # Data Network Name (DNN)
++            # upf2:
++            #   type: UPF
++            #   nodeID: 10.100.50.243
++            #   sNssaiUpfInfos:
++            #     - sNssai:
++            #         sst: 1
++            #         sd: 010203
++            #       dnnUpfInfoList:
++            #         - dnn: internet
++            #           pools:
++            #           - cidr: 10.1.128.0/17
++            #   interfaces:
++            #     - interfaceType: N9
++            #       endpoints:
++            #         - 10.100.50.227
++            #       networkInstances:
++            #         - internet # Data Network Name (DNN)
+           links:
+             - A: gNB1
+               B: upfb
+-            - A: upfb
+-              B: upf1
+-            - A: upfb
+-              B: upf2
++            # - A: upfb
++            #   B: upf1
++            # - A: upfb
++            #   B: upf2
+         locality: area1
+         ulcl: true
+         t3591:
+diff --git a/docs/deployments/free5gc-ulcl/global.yaml b/docs/deployments/free5gc-ulcl/global.yaml
+index 1886325..63e38e8 100644
+--- a/docs/deployments/free5gc-ulcl/global.yaml
++++ b/docs/deployments/free5gc-ulcl/global.yaml
+@@ -12,35 +12,35 @@ global:
+       ipAddress: 10.100.50.244
+   n2network:
+     name: n2network
+-    masterIf: ens3
++    masterIf: eth0
+     subnetIP: 10.100.50.248
+     cidr: 29
+     gatewayIP: 10.100.50.254
+     excludeIP: 10.100.50.254
+   n3network:
+     name: n3network
+-    masterIf: ens3
++    masterIf: eth0
+     subnetIP: 10.100.50.232
+     cidr: 28
+     gatewayIP: 10.100.50.238
+     excludeIP: 10.100.50.238
+   n4network:
+     name: n4network
+-    masterIf: ens3
++    masterIf: eth0
+     subnetIP: 10.100.50.240
+     cidr: 29
+     gatewayIP: 10.100.50.246
+     excludeIP: 10.100.50.246
+   n6network:
+     name: n6network
+-    masterIf: ens3
++    masterIf: eth0
+     subnetIP: 10.100.100.0
+     cidr: 24
+     gatewayIP: 10.100.100.1
+     excludeIP: 10.100.100.254
+   n9network:
+     name: n9network
+-    masterIf: ens3
++    masterIf: eth0
+     subnetIP: 10.100.50.224
+     cidr: 28
+     gatewayIP: 10.100.50.230
+diff --git a/docs/deployments/free5gc-ulcl/netad-ueransim.yaml b/docs/deployments/free5gc-ulcl/netad-ueransim.yaml
+index c009002..16b57df 100644
+--- a/docs/deployments/free5gc-ulcl/netad-ueransim.yaml
++++ b/docs/deployments/free5gc-ulcl/netad-ueransim.yaml
+@@ -7,7 +7,7 @@ metadata:
+ spec:
+   config: >-
+     { "cniVersion": "0.3.1", "plugins": [ { "type": "ipvlan", "capabilities": {
+-    "ips": true }, "master": "ens3", "mode": "l2", "ipam": { "type": "static" } } ] }
++    "ips": true }, "master": "eth0", "mode": "l2", "ipam": { "type": "static" } } ] }
+ 
+ ---
+ apiVersion: k8s.cni.cncf.io/v1
+@@ -17,4 +17,4 @@ metadata:
+ spec:
+   config: >-
+     { "cniVersion": "0.3.1", "plugins": [ { "type": "ipvlan", "capabilities": {
+-    "ips": true }, "master": "ens3", "mode": "l2", "ipam": { "type": "static" } } ] }
++    "ips": true }, "master": "eth0", "mode": "l2", "ipam": { "type": "static" } } ] }
