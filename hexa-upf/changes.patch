@@ -1,0 +1,659 @@
+diff --git a/cmd/ebpf/xdp/n3n6_entrypoint.c b/cmd/ebpf/xdp/n3n6_entrypoint.c
+index aaf7a81..9b5ce25 100644
+--- a/cmd/ebpf/xdp/n3n6_entrypoint.c
++++ b/cmd/ebpf/xdp/n3n6_entrypoint.c
+@@ -48,7 +48,7 @@
+ static __always_inline enum xdp_action send_to_gtp_tunnel(struct packet_context *ctx, int srcip, int dstip, __u8 tos, __u8 qfi, int teid) {
+     if (-1 == add_gtp_over_ip4_headers(ctx, srcip, dstip, tos, qfi, teid))
+         return XDP_ABORTED;
+-    upf_printk("upf: send gtp pdu %pI4 -> %pI4", &ctx->ip4->saddr, &ctx->ip4->daddr);
++    bpf_printk("upf: send gtp pdu %pI4 -> %pI4", &ctx->ip4->saddr, &ctx->ip4->daddr);
+     increment_counter(ctx->n3_n6_counter, tx_n3);
+     return route_ipv4(ctx->xdp_ctx, ctx->eth, ctx->ip4);
+ }
+@@ -59,7 +59,7 @@ static __always_inline __u16 handle_n6_packet_ipv4(struct packet_context *ctx) {
+     const struct iphdr *ip4 = ctx->ip4;
+     struct pdr_info *pdr = bpf_map_lookup_elem(&pdr_map_downlink_ip4, &ip4->daddr);
+     if (!pdr) {
+-        upf_printk("upf: no downlink session for ip:%pI4", &ip4->daddr);
++        bpf_printk("upf: no downlink session for ip:%pI4", &ip4->daddr);
+         return DEFAULT_XDP_ACTION;
+     }
+     
+@@ -69,7 +69,7 @@ static __always_inline __u16 handle_n6_packet_ipv4(struct packet_context *ctx) {
+     if (pdr->sdf_mode) {
+         struct sdf_filter *sdf = &pdr->sdf_rules.sdf_filter;
+         if(match_sdf_filter_ipv4(ctx, sdf)) {
+-            upf_printk("Packet with source ip:%pI4 and destination ip:%pI4 matches SDF filter", &ip4->saddr, &ip4->daddr);
++            bpf_printk("Packet with source ip:%pI4 and destination ip:%pI4 matches SDF filter", &ip4->saddr, &ip4->daddr);
+             far_id = pdr->sdf_rules.far_id;
+             qer_id = pdr->sdf_rules.qer_id;
+             //outer_header_removal = pdr->sdf_rules.outer_header_removal;
+@@ -80,11 +80,11 @@ static __always_inline __u16 handle_n6_packet_ipv4(struct packet_context *ctx) {
+ 
+     struct far_info *far = bpf_map_lookup_elem(&far_map, &far_id);
+     if (!far) {
+-        upf_printk("upf: no downlink session far for ip:%pI4 far:%d", &ip4->daddr, far_id);
++        bpf_printk("upf: no downlink session far for ip:%pI4 far:%d", &ip4->daddr, far_id);
+         return XDP_DROP;
+     }
+ 
+-    upf_printk("upf: downlink session for ip:%pI4  far:%d action:%d", &ip4->daddr, far_id, far->action);
++    bpf_printk("upf: downlink session for ip:%pI4  far:%d action:%d", &ip4->daddr, far_id, far->action);
+ 
+     // Only forwarding action is supported at the moment
+     if (!(far->action & FAR_FORW))
+@@ -96,11 +96,11 @@ static __always_inline __u16 handle_n6_packet_ipv4(struct packet_context *ctx) {
+ 
+     struct qer_info *qer = bpf_map_lookup_elem(&qer_map, &qer_id);  
+     if (!qer) {
+-        upf_printk("upf: no downlink session qer for ip:%pI4 qer:%d", &ip4->daddr, qer_id);
++        bpf_printk("upf: no downlink session qer for ip:%pI4 qer:%d", &ip4->daddr, qer_id);
+         return XDP_DROP;
+     }
+ 
+-    upf_printk("upf: qer:%d gate_status:%d mbr:%d", qer_id, qer->dl_gate_status, qer->dl_maximum_bitrate);
++    bpf_printk("upf: qer:%d gate_status:%d mbr:%d", qer_id, qer->dl_gate_status, qer->dl_maximum_bitrate);
+ 
+     if (qer->dl_gate_status != GATE_STATUS_OPEN)
+         return XDP_DROP;
+@@ -111,7 +111,7 @@ static __always_inline __u16 handle_n6_packet_ipv4(struct packet_context *ctx) {
+ 
+     __u8 tos = far->transport_level_marking >> 8;
+ 
+-    upf_printk("upf: use mapping %pI4 -> TEID:%d", &ip4->daddr, far->teid);
++    bpf_printk("upf: use mapping %pI4 -> TEID:%d", &ip4->daddr, far->teid);
+     return send_to_gtp_tunnel(ctx, far->localip, far->remoteip, tos, qer->qfi, far->teid);
+ }
+ 
+@@ -119,7 +119,7 @@ static __always_inline enum xdp_action handle_n6_packet_ipv6(struct packet_conte
+     const struct ipv6hdr *ip6 = ctx->ip6;
+     struct pdr_info *pdr = bpf_map_lookup_elem(&pdr_map_downlink_ip6, &ip6->daddr);
+     if (!pdr) {
+-        upf_printk("upf: no downlink session for ip:%pI6c", &ip6->daddr);
++        bpf_printk("upf: no downlink session for ip:%pI6c", &ip6->daddr);
+         return DEFAULT_XDP_ACTION;
+     }
+ 
+@@ -129,7 +129,7 @@ static __always_inline enum xdp_action handle_n6_packet_ipv6(struct packet_conte
+     if (pdr->sdf_mode) {
+         struct sdf_filter *sdf = &pdr->sdf_rules.sdf_filter;
+         if(match_sdf_filter_ipv6(ctx, sdf)) {
+-            upf_printk("Packet with source ip:%pI6c and destination ip:%pI6c matches SDF filter", &ip6->saddr, &ip6->daddr);
++            bpf_printk("Packet with source ip:%pI6c and destination ip:%pI6c matches SDF filter", &ip6->saddr, &ip6->daddr);
+             far_id = pdr->sdf_rules.far_id;
+             qer_id = pdr->sdf_rules.qer_id;
+             //outer_header_removal = pdr->sdf_rules.outer_header_removal;
+@@ -140,11 +140,11 @@ static __always_inline enum xdp_action handle_n6_packet_ipv6(struct packet_conte
+ 
+     struct far_info *far = bpf_map_lookup_elem(&far_map, &far_id);
+     if (!far) {
+-        upf_printk("upf: no downlink session far for ip:%pI6c far:%d", &ip6->daddr, far_id);
++        bpf_printk("upf: no downlink session far for ip:%pI6c far:%d", &ip6->daddr, far_id);
+         return XDP_DROP;
+     }
+ 
+-    upf_printk("upf: downlink session for ip:%pI6c far:%d action:%d", &ip6->daddr, far_id, far->action);
++    bpf_printk("upf: downlink session for ip:%pI6c far:%d action:%d", &ip6->daddr, far_id, far->action);
+ 
+     // Only forwarding action supported at the moment
+     if (!(far->action & FAR_FORW))
+@@ -156,11 +156,11 @@ static __always_inline enum xdp_action handle_n6_packet_ipv6(struct packet_conte
+ 
+     struct qer_info *qer = bpf_map_lookup_elem(&qer_map, &qer_id);  
+     if (!qer) {
+-        upf_printk("upf: no downlink session qer for ip:%pI6c qer:%d", &ip6->daddr, qer_id);
++        bpf_printk("upf: no downlink session qer for ip:%pI6c qer:%d", &ip6->daddr, qer_id);
+         return XDP_DROP;
+     }
+ 
+-    upf_printk("upf: qer:%d gate_status:%d mbr:%d", qer_id, qer->dl_gate_status, qer->dl_maximum_bitrate);
++    bpf_printk("upf: qer:%d gate_status:%d mbr:%d", qer_id, qer->dl_gate_status, qer->dl_maximum_bitrate);
+ 
+     if (qer->dl_gate_status != GATE_STATUS_OPEN)
+         return XDP_DROP;
+@@ -171,13 +171,13 @@ static __always_inline enum xdp_action handle_n6_packet_ipv6(struct packet_conte
+ 
+     __u8 tos = far->transport_level_marking >> 8;
+ 
+-    upf_printk("upf: use mapping %pI6c -> TEID:%d", &ip6->daddr, far->teid);
++    bpf_printk("upf: use mapping %pI6c -> TEID:%d", &ip6->daddr, far->teid);
+     return send_to_gtp_tunnel(ctx, far->localip, far->remoteip, tos, qer->qfi, far->teid);
+ }
+ 
+ static __always_inline enum xdp_action handle_gtp_packet(struct packet_context *ctx) {
+     if (!ctx->gtp) {
+-        upf_printk("upf: unexpected packet context. no gtp header");
++        bpf_printk("upf: unexpected packet context. no gtp header");
+         return DEFAULT_XDP_ACTION;
+     }
+ 
+@@ -187,7 +187,7 @@ static __always_inline enum xdp_action handle_gtp_packet(struct packet_context *
+     __u32 teid = bpf_htonl(ctx->gtp->teid);
+     struct pdr_info *pdr = bpf_map_lookup_elem(&pdr_map_uplink_ip4, &teid);
+     if (!pdr) {
+-        upf_printk("upf: no session for teid:%d", teid);
++        bpf_printk("upf: no session for teid:%d", teid);
+         return DEFAULT_XDP_ACTION;
+     }
+ 
+@@ -209,23 +209,23 @@ static __always_inline enum xdp_action handle_gtp_packet(struct packet_context *
+             {
+                 int ip_protocol = parse_ip4(&inner_context);
+                 if (-1 == ip_protocol) {
+-                    upf_printk("upf: unable to parse IPv4 header");
++                    bpf_printk("upf: unable to parse IPv4 header");
+                     return DEFAULT_XDP_ACTION;
+                 }
+ 
+                 if( -1 == parse_l4(ip_protocol, &inner_context)) {
+-                    upf_printk("upf: unable to parse L4 header");
++                    bpf_printk("upf: unable to parse L4 header");
+                     return DEFAULT_XDP_ACTION;
+                 }
+ 
+                 const struct sdf_filter *sdf = &pdr->sdf_rules.sdf_filter;
+                 if(match_sdf_filter_ipv4(&inner_context, sdf)) {
+-                    upf_printk("upf: sdf filter matches teid:%d", teid);
++                    bpf_printk("upf: sdf filter matches teid:%d", teid);
+                     far_id = pdr->sdf_rules.far_id;
+                     qer_id = pdr->sdf_rules.qer_id;
+                     outer_header_removal = pdr->sdf_rules.outer_header_removal;
+                 } else {
+-                    upf_printk("upf: sdf filter doesn't match teid:%d", teid);
++                    bpf_printk("upf: sdf filter doesn't match teid:%d", teid);
+                     if(pdr->sdf_mode & 1)
+                         return DEFAULT_XDP_ACTION;     
+                 }
+@@ -235,30 +235,30 @@ static __always_inline enum xdp_action handle_gtp_packet(struct packet_context *
+             {
+                 int ip_protocol = parse_ip6(&inner_context);
+                 if (ip_protocol == -1) {
+-                    upf_printk("upf: unable to parse IPv6 header");
++                    bpf_printk("upf: unable to parse IPv6 header");
+                     return DEFAULT_XDP_ACTION;
+                 }
+ 
+                 if( -1 == parse_l4(ip_protocol, &inner_context)) {
+-                    upf_printk("upf: unable to parse L4 header");
++                    bpf_printk("upf: unable to parse L4 header");
+                     return DEFAULT_XDP_ACTION;
+                 }
+ 
+                 const struct sdf_filter *sdf = &pdr->sdf_rules.sdf_filter;
+                 if(match_sdf_filter_ipv6(&inner_context, sdf)) {
+-                    upf_printk("upf: sdf filter matches teid:%d", teid);
++                    bpf_printk("upf: sdf filter matches teid:%d", teid);
+                     far_id = pdr->sdf_rules.far_id;
+                     qer_id = pdr->sdf_rules.qer_id;
+                     outer_header_removal = pdr->sdf_rules.outer_header_removal;
+                 } else {
+-                    upf_printk("upf: sdf filter doesn't match teid:%d", teid);
++                    bpf_printk("upf: sdf filter doesn't match teid:%d", teid);
+                     if(pdr->sdf_mode & 1)
+                         return DEFAULT_XDP_ACTION;
+                 }
+                 break;
+             }
+             default:
+-                upf_printk("upf: unsupported inner ethernet protocol: %d", eth_protocol);
++                bpf_printk("upf: unsupported inner ethernet protocol: %d", eth_protocol);
+                 if(pdr->sdf_mode & 1)
+                     return DEFAULT_XDP_ACTION;
+                 break;
+@@ -270,11 +270,11 @@ static __always_inline enum xdp_action handle_gtp_packet(struct packet_context *
+      */
+     struct far_info *far = bpf_map_lookup_elem(&far_map, &far_id);
+     if (!far) {
+-        upf_printk("upf: no session far for teid:%d far:%d", teid, far_id);
++        bpf_printk("upf: no session far for teid:%d far:%d", teid, far_id);
+         return XDP_DROP;
+     }
+ 
+-    upf_printk("upf: far:%d action:%d outer_header_creation:%d", far_id, far->action, far->outer_header_creation);
++    bpf_printk("upf: far:%d action:%d outer_header_creation:%d", far_id, far->action, far->outer_header_creation);
+ 
+     // Only forwarding action supported at the moment
+     if (!(far->action & FAR_FORW))
+@@ -285,11 +285,11 @@ static __always_inline enum xdp_action handle_gtp_packet(struct packet_context *
+      */
+     struct qer_info *qer = bpf_map_lookup_elem(&qer_map, &qer_id);
+     if (!qer) {
+-        upf_printk("upf: no session qer for teid:%d qer:%d", teid, qer_id);
++        bpf_printk("upf: no session qer for teid:%d qer:%d", teid, qer_id);
+         return XDP_DROP;
+     }
+ 
+-    upf_printk("upf: qer:%d gate_status:%d mbr:%d", qer_id, qer->ul_gate_status, qer->ul_maximum_bitrate);
++    bpf_printk("upf: qer:%d gate_status:%d mbr:%d", qer_id, qer->ul_gate_status, qer->ul_maximum_bitrate);
+ 
+     if (qer->ul_gate_status != GATE_STATUS_OPEN)
+         return XDP_DROP;
+@@ -298,17 +298,17 @@ static __always_inline enum xdp_action handle_gtp_packet(struct packet_context *
+     if (XDP_DROP == limit_rate_sliding_window(packet_size, &qer->ul_start, qer->ul_maximum_bitrate))
+         return XDP_DROP;
+ 
+-    upf_printk("upf: session for teid:%d far:%d outer_header_removal:%d", teid, pdr->far_id, outer_header_removal);
++    bpf_printk("upf: session for teid:%d far:%d outer_header_removal:%d", teid, pdr->far_id, outer_header_removal);
+ 
+     // N9: Only outer header GTP/UDP/IPv4 is supported at the moment
+     if (far->outer_header_creation & OHC_GTP_U_UDP_IPv4)
+     {
+-        upf_printk("upf: session for teid:%d -> %d remote:%pI4", teid, far->teid, &far->remoteip);
++        bpf_printk("upf: session for teid:%d -> %d remote:%pI4", teid, far->teid, &far->remoteip);
+         update_gtp_tunnel(ctx, far->localip, far->remoteip, 0, far->teid);
+     } else if (outer_header_removal == OHR_GTP_U_UDP_IPv4) {
+         long result = remove_gtp_header(ctx);
+         if (result) {
+-            upf_printk("upf: handle_gtp_packet: can't remove gtp header: %d", result);
++            bpf_printk("upf: handle_gtp_packet: can't remove gtp header: %d", result);
+             return XDP_ABORTED;
+         }
+     }
+@@ -321,7 +321,7 @@ static __always_inline enum xdp_action handle_gtp_packet(struct packet_context *
+     //     if (-1 == add_icmp_over_ip4_headers(ctx, far->localip, ctx->ip4->saddr))
+     //         return XDP_ABORTED;
+ 
+-    //     upf_printk("upf: send icmp ttl exeeded %pI4 -> %pI4", &ctx->ip4->saddr, &ctx->ip4->daddr);
++    //     bpf_printk("upf: send icmp ttl exeeded %pI4 -> %pI4", &ctx->ip4->saddr, &ctx->ip4->daddr);
+     //     return handle_n6_packet_ipv4(ctx);
+     // }
+ 
+@@ -330,11 +330,11 @@ static __always_inline enum xdp_action handle_gtp_packet(struct packet_context *
+      */
+     if(ctx->ip4 && ctx->ip4->daddr == far->localip && ctx->ip4->protocol == IPPROTO_ICMP)
+     {
+-        upf_printk("upf: prepare icmp ping reply to request %pI4 -> %pI4", &ctx->ip4->saddr, &ctx->ip4->daddr);
++        bpf_printk("upf: prepare icmp ping reply to request %pI4 -> %pI4", &ctx->ip4->saddr, &ctx->ip4->daddr);
+         if (-1 == prepare_icmp_echo_reply(ctx, far->localip, ctx->ip4->saddr))
+             return XDP_ABORTED;
+ 
+-        upf_printk("upf: send icmp ping reply %pI4 -> %pI4", &ctx->ip4->saddr, &ctx->ip4->daddr);
++        bpf_printk("upf: send icmp ping reply %pI4 -> %pI4", &ctx->ip4->saddr, &ctx->ip4->daddr);
+         return handle_n6_packet_ipv4(ctx);
+     }
+ 
+@@ -355,15 +355,17 @@ static __always_inline enum xdp_action handle_gtp_packet(struct packet_context *
+ 
+ static __always_inline enum xdp_action handle_gtpu(struct packet_context *ctx) {
+     int pdu_type = parse_gtp(ctx);
++    bpf_printk("in handle gtpu and pdu type is %d", pdu_type);
+     switch (pdu_type) {
+         case GTPU_G_PDU:
+             increment_counter(ctx->counters, rx_gtp_pdu);
++            bpf_printk("in gtpu_g_pdu");
+             return handle_gtp_packet(ctx);
+         case GTPU_ECHO_REQUEST:
+             increment_counter(ctx->counters, rx_gtp_echo);
+-            // upf_printk("upf: gtp header [ version=%d, pt=%d, e=%d]", gtp->version, gtp->pt, gtp->e);
+-            // upf_printk("upf: gtp echo request [ type=%d ]", pdu_type);
+-            upf_printk("upf: gtp echo request [ %pI4 -> %pI4 ]", &ctx->ip4->saddr, &ctx->ip4->daddr);
++            // bpf_printk("upf: gtp header [ version=%d, pt=%d, e=%d]", gtp->version, gtp->pt, gtp->e);
++            // bpf_printk("upf: gtp echo request [ type=%d ]", pdu_type);
++            bpf_printk("upf: gtp echo request [ %pI4 -> %pI4 ]", &ctx->ip4->saddr, &ctx->ip4->daddr);
+             return handle_echo_request(ctx);
+         case GTPU_ECHO_RESPONSE:
+             return XDP_PASS; //Pass echo response to userspace program
+@@ -374,28 +376,32 @@ static __always_inline enum xdp_action handle_gtpu(struct packet_context *ctx) {
+             return DEFAULT_XDP_ACTION;
+         default:
+             increment_counter(ctx->counters, rx_gtp_unexp);
+-            upf_printk("upf: unexpected gtp message: type=%d", pdu_type);
++            bpf_printk("upf: unexpected gtp message: type=%d", pdu_type);
+             return DEFAULT_XDP_ACTION;
+     }
+ }
+ 
+ static __always_inline enum xdp_action handle_ip4(struct packet_context *ctx) {
+     int l4_protocol = parse_ip4(ctx);
++    bpf_printk("in handleip4 and the ip is %d",l4_protocol);
+     switch (l4_protocol) {
+         case IPPROTO_ICMP: {
+             increment_counter(ctx->counters, rx_icmp);
++            bpf_printk("in iproto icmp case");
+             break;
+         }
+         case IPPROTO_UDP:
+             increment_counter(ctx->counters, rx_udp);
++            bpf_printk("in iproto udp");
+             if (GTP_UDP_PORT == parse_udp(ctx)) {
+-                upf_printk("upf: gtp-u received");
++                bpf_printk("upf: gtp-u received");
+                 increment_counter(ctx->n3_n6_counter, rx_n3);
+                 return handle_gtpu(ctx);
+             }
+             break;
+         case IPPROTO_TCP:
+             increment_counter(ctx->counters, rx_tcp);
++            bpf_printk("in iproto tcp");
+             break;
+         default:
+             increment_counter(ctx->counters, rx_other);
+@@ -410,7 +416,7 @@ static __always_inline enum xdp_action handle_ip6(struct packet_context *ctx) {
+     int l4_protocol = parse_ip6(ctx);
+     switch (l4_protocol) {
+         case IPPROTO_ICMPV6:  // Let kernel stack take care
+-            upf_printk("upf: icmp received. passing to kernel");
++            bpf_printk("upf: icmp received. passing to kernel");
+             increment_counter(ctx->counters, rx_icmp6);
+             return XDP_PASS;
+         case IPPROTO_UDP:
+@@ -418,7 +424,7 @@ static __always_inline enum xdp_action handle_ip6(struct packet_context *ctx) {
+             // Don't expect GTP over IPv6 at the moment
+             // if (GTP_UDP_PORT == parse_udp(ctx))
+             // {
+-            //     upf_printk("upf: gtp-u received");
++            //     bpf_printk("upf: gtp-u received");
+             //     return handle_gtpu(ctx);
+             // }
+             break;
+@@ -434,18 +440,24 @@ static __always_inline enum xdp_action handle_ip6(struct packet_context *ctx) {
+ }
+ 
+ static __always_inline enum xdp_action process_packet(struct packet_context *ctx) {
++    bpf_printk("in process packet");
++
+     __u16 l3_protocol = parse_ethernet(ctx);
+     switch (l3_protocol) {
+         case ETH_P_IPV6:
+             increment_counter(ctx->counters, rx_ip6);
++            bpf_printk("in eth ipv6 case]");
++
+             return handle_ip6(ctx);
+         case ETH_P_IP:
+             increment_counter(ctx->counters, rx_ip4);
++            bpf_printk("in ip4");
++
+             return handle_ip4(ctx);
+         case ETH_P_ARP:  // Let kernel stack takes care
+         {
+             increment_counter(ctx->counters, rx_arp);
+-            upf_printk("upf: arp received. passing to kernel");
++            bpf_printk("upf: arp received. passing to kernel");
+             return XDP_PASS;
+         }
+     }
+@@ -456,7 +468,8 @@ static __always_inline enum xdp_action process_packet(struct packet_context *ctx
+ // Combined N3 & N6 entrypoint. Use for "on-a-stick" interfaces
+ SEC("xdp/upf_ip_entrypoint")
+ int upf_ip_entrypoint_func(struct xdp_md *ctx) {
+-    // upf_printk("upf n3 & n6 combined entrypoint start");
++    bpf_printk("upf n3 & n6 combined entrypoint start");
++    bpf_printk("upf n3,n6 combined printed using bpf printk");
+     const __u32 key = 0;
+     struct upf_statistic *statistic = bpf_map_lookup_elem(&upf_ext_stat, &key);
+     if (!statistic) {
+diff --git a/cmd/ebpf/xdp/utils/routing.h b/cmd/ebpf/xdp/utils/routing.h
+index afc9335..11bfd26 100644
+--- a/cmd/ebpf/xdp/utils/routing.h
++++ b/cmd/ebpf/xdp/utils/routing.h
+@@ -101,13 +101,14 @@ static __always_inline enum xdp_action route_ipv4(struct xdp_md *ctx, struct eth
+     const __u32 key = 0;
+     struct route_stat *statistic = bpf_map_lookup_elem(&upf_route_stat, &key);
+     if (!statistic) {
+-        return XDP_ABORTED;
++        bpf_printk("boom passed your packet ");
++        return XDP_PASS;
+     }
+ 
+ #ifdef ENABLE_ROUTE_CACHE
+     struct route_record *cache = bpf_map_lookup_elem(&upf_route_cache_ip4, &ip4->daddr);
+     if (cache) {
+-        upf_printk("upf: bpf_fib_lookup %pI4 -> %pI4: cached ifindex: %d", &ip4->saddr, &ip4->daddr, cache->ifindex);
++        bpf_printk("upf: bpf_fib_lookup %pI4 -> %pI4: cached ifindex: %d", &ip4->saddr, &ip4->daddr, cache->ifindex);
+         statistic->fib_lookup_ip4_cache += 1;
+         return do_route_ipv4(ctx, eth, cache->ifindex, &cache->smac, &cache->dmac);
+     }
+@@ -125,9 +126,10 @@ static __always_inline enum xdp_action route_ipv4(struct xdp_md *ctx, struct eth
+     fib_params.ifindex = ctx->ingress_ifindex;
+ 
+     int rc = bpf_fib_lookup(ctx, &fib_params, sizeof(fib_params), 0 /*BPF_FIB_LOOKUP_OUTPUT*/);
++    bpf_printk("starting switch ccase rc is %d", rc);
+     switch (rc) {
+         case BPF_FIB_LKUP_RET_SUCCESS:
+-            upf_printk("upf: bpf_fib_lookup %pI4 -> %pI4: nexthop: %pI4", &ip4->saddr, &ip4->daddr, &fib_params.ipv4_dst);
++            bpf_printk("upf: bpf_fib_lookup %pI4 -> %pI4: nexthop: %pI4", &ip4->saddr, &ip4->daddr, &fib_params.ipv4_dst);
+             statistic->fib_lookup_ip4_ok += 1;
+ 
+ #ifdef ENABLE_ROUTE_CACHE
+@@ -138,16 +140,16 @@ static __always_inline enum xdp_action route_ipv4(struct xdp_md *ctx, struct eth
+         case BPF_FIB_LKUP_RET_BLACKHOLE:
+         case BPF_FIB_LKUP_RET_UNREACHABLE:
+         case BPF_FIB_LKUP_RET_PROHIBIT:
+-            upf_printk("upf: bpf_fib_lookup %pI4 -> %pI4: %d", &ip4->saddr, &ip4->daddr, rc);
++            bpf_printk("upf: bpf_fib_lookup %pI4 -> %pI4: %d", &ip4->saddr, &ip4->daddr, rc);
+             statistic->fib_lookup_ip4_error_drop += 1;
+-            return XDP_DROP;
++            return XDP_PASS;
+         case BPF_FIB_LKUP_RET_NOT_FWDED:
+         case BPF_FIB_LKUP_RET_FWD_DISABLED:
+         case BPF_FIB_LKUP_RET_UNSUPP_LWT:
+         case BPF_FIB_LKUP_RET_NO_NEIGH:
+         case BPF_FIB_LKUP_RET_FRAG_NEEDED:
+         default:
+-            upf_printk("upf: bpf_fib_lookup %pI4 -> %pI4: %d", &ip4->saddr, &ip4->daddr, rc);
++            bpf_printk("upf: bpf_fib_lookup %pI4 -> %pI4: %d", &ip4->saddr, &ip4->daddr, rc);
+             statistic->fib_lookup_ip4_error_pass += 1;
+             return XDP_PASS; /* Let's kernel takes care */
+     }
+@@ -174,12 +176,12 @@ static __always_inline enum xdp_action route_ipv6(struct xdp_md *ctx, struct eth
+     int rc = bpf_fib_lookup(ctx, &fib_params, sizeof(fib_params), 0 /*BPF_FIB_LOOKUP_OUTPUT*/);
+     switch (rc) {
+         case BPF_FIB_LKUP_RET_SUCCESS:
+-            upf_printk("upf: bpf_fib_lookup %pI6c -> %pI6c: nexthop: %pI4", &ip6->saddr, &ip6->daddr, &fib_params.ipv4_dst);
++            bpf_printk("upf: bpf_fib_lookup %pI6c -> %pI6c: nexthop: %pI4", &ip6->saddr, &ip6->daddr, &fib_params.ipv4_dst);
+             statistic->fib_lookup_ip6_ok += 1;
+             //_decr_ttl(ether_proto, l3hdr);
+             __builtin_memcpy(eth->h_dest, fib_params.dmac, ETH_ALEN);
+             __builtin_memcpy(eth->h_source, fib_params.smac, ETH_ALEN);
+-            upf_printk("upf: bpf_redirect: if=%d %lu -> %lu", fib_params.ifindex, fib_params.smac, fib_params.dmac);
++            bpf_printk("upf: bpf_redirect: if=%d %lu -> %lu", fib_params.ifindex, fib_params.smac, fib_params.dmac);
+ 
+             if (fib_params.ifindex == ctx->ingress_ifindex)
+                 return XDP_TX;
+@@ -188,7 +190,7 @@ static __always_inline enum xdp_action route_ipv6(struct xdp_md *ctx, struct eth
+         case BPF_FIB_LKUP_RET_BLACKHOLE:
+         case BPF_FIB_LKUP_RET_UNREACHABLE:
+         case BPF_FIB_LKUP_RET_PROHIBIT:
+-            upf_printk("upf: bpf_fib_lookup %pI6c -> %pI6c: %d", &ip6->saddr, &ip6->daddr, rc);
++            bpf_printk("upf: bpf_fib_lookup %pI6c -> %pI6c: %d", &ip6->saddr, &ip6->daddr, rc);
+             statistic->fib_lookup_ip6_error_drop += 1;
+             return XDP_DROP;
+         case BPF_FIB_LKUP_RET_NOT_FWDED:
+@@ -197,7 +199,7 @@ static __always_inline enum xdp_action route_ipv6(struct xdp_md *ctx, struct eth
+         case BPF_FIB_LKUP_RET_NO_NEIGH:
+         case BPF_FIB_LKUP_RET_FRAG_NEEDED:
+         default:
+-            upf_printk("upf: bpf_fib_lookup %pI6c -> %pI6c: %d", &ip6->saddr, &ip6->daddr, rc);
++            bpf_printk("upf: bpf_fib_lookup %pI6c -> %pI6c: %d", &ip6->saddr, &ip6->daddr, rc);
+             statistic->fib_lookup_ip6_error_pass += 1;
+             return XDP_PASS; /* Let's kernel takes care */
+     }
+diff --git a/docs/deployments/free5gc-ulcl/Makefile b/docs/deployments/free5gc-ulcl/Makefile
+index 7b09891..c78325b 100644
+--- a/docs/deployments/free5gc-ulcl/Makefile
++++ b/docs/deployments/free5gc-ulcl/Makefile
+@@ -1,5 +1,5 @@
+-NAMESPACE?=free5gculcl
+-HELM_ARGS?=--wait --timeout 100s --create-namespace
++NAMESPACE?=free5gc
++HELM_ARGS?=--create-namespace
+ HELM_ACTION?=install
+ 
+ free5gc:
+diff --git a/docs/deployments/free5gc-ulcl/eupf-b.yaml b/docs/deployments/free5gc-ulcl/eupf-b.yaml
+index 00f0ade..6ee5ed9 100644
+--- a/docs/deployments/free5gc-ulcl/eupf-b.yaml
++++ b/docs/deployments/free5gc-ulcl/eupf-b.yaml
+@@ -144,7 +144,7 @@ extraDeploy:
+             {
+               "type": "ipvlan",
+               "capabilities": { "ips": true },
+-              "master": "ens3",
++              "master": "eth1",
+               "mode": "l2",
+               "ipam": {
+                 "type": "static"
+@@ -164,7 +164,7 @@ extraDeploy:
+             {
+               "type": "ipvlan",
+               "capabilities": { "ips": true },
+-              "master": "ens3",
++              "master": "eth1",
+               "mode": "l2",
+               "ipam": {
+                 "type": "static"
+diff --git a/docs/deployments/free5gc-ulcl/free5gc.yaml b/docs/deployments/free5gc-ulcl/free5gc.yaml
+index 84f51a7..20cfba4 100644
+--- a/docs/deployments/free5gc-ulcl/free5gc.yaml
++++ b/docs/deployments/free5gc-ulcl/free5gc.yaml
+@@ -78,47 +78,47 @@ free5gc-smf:
+                     - 10.100.50.233
+                   networkInstances:
+                     - internet # Data Network Name (DNN)
+-            upf1:
+-              type: UPF
+-              nodeID: 10.100.50.242
+-              sNssaiUpfInfos:
+-                - sNssai:
+-                    sst: 1
+-                    sd: 010203
+-                  dnnUpfInfoList:
+-                    - dnn: internet
+-                      pools:
+-                      - cidr: 10.1.0.0/17
+-              interfaces:
+-                - interfaceType: N9
+-                  endpoints:
+-                    - 10.100.50.226
+-                  networkInstances:
+-                    - internet # Data Network Name (DNN)
+-            upf2:
+-              type: UPF
+-              nodeID: 10.100.50.243
+-              sNssaiUpfInfos:
+-                - sNssai:
+-                    sst: 1
+-                    sd: 010203
+-                  dnnUpfInfoList:
+-                    - dnn: internet
+-                      pools:
+-                      - cidr: 10.1.128.0/17
+-              interfaces:
+-                - interfaceType: N9
+-                  endpoints:
+-                    - 10.100.50.227
+-                  networkInstances:
+-                    - internet # Data Network Name (DNN)
++            # upf1:
++            #   type: UPF
++            #   nodeID: 10.100.50.242
++            #   sNssaiUpfInfos:
++            #     - sNssai:
++            #         sst: 1
++            #         sd: 010203
++            #       dnnUpfInfoList:
++            #         - dnn: internet
++            #           pools:
++            #           - cidr: 10.1.0.0/17
++            #   interfaces:
++            #     - interfaceType: N9
++            #       endpoints:
++            #         - 10.100.50.226
++            #       networkInstances:
++            #         - internet # Data Network Name (DNN)
++            # upf2:
++            #   type: UPF
++            #   nodeID: 10.100.50.243
++            #   sNssaiUpfInfos:
++            #     - sNssai:
++            #         sst: 1
++            #         sd: 010203
++            #       dnnUpfInfoList:
++            #         - dnn: internet
++            #           pools:
++            #           - cidr: 10.1.128.0/17
++            #   interfaces:
++            #     - interfaceType: N9
++            #       endpoints:
++            #         - 10.100.50.227
++            #       networkInstances:
++            #         - internet # Data Network Name (DNN)
+           links:
+             - A: gNB1
+               B: upfb
+-            - A: upfb
+-              B: upf1
+-            - A: upfb
+-              B: upf2
++            # - A: upfb
++            #   B: upf1
++            # - A: upfb
++            #   B: upf2
+         locality: area1
+         ulcl: true
+         t3591:
+diff --git a/docs/deployments/free5gc-ulcl/global.yaml b/docs/deployments/free5gc-ulcl/global.yaml
+index 1886325..63e38e8 100644
+--- a/docs/deployments/free5gc-ulcl/global.yaml
++++ b/docs/deployments/free5gc-ulcl/global.yaml
+@@ -12,35 +12,35 @@ global:
+       ipAddress: 10.100.50.244
+   n2network:
+     name: n2network
+-    masterIf: ens3
++    masterIf: eth0
+     subnetIP: 10.100.50.248
+     cidr: 29
+     gatewayIP: 10.100.50.254
+     excludeIP: 10.100.50.254
+   n3network:
+     name: n3network
+-    masterIf: ens3
++    masterIf: eth0
+     subnetIP: 10.100.50.232
+     cidr: 28
+     gatewayIP: 10.100.50.238
+     excludeIP: 10.100.50.238
+   n4network:
+     name: n4network
+-    masterIf: ens3
++    masterIf: eth0
+     subnetIP: 10.100.50.240
+     cidr: 29
+     gatewayIP: 10.100.50.246
+     excludeIP: 10.100.50.246
+   n6network:
+     name: n6network
+-    masterIf: ens3
++    masterIf: eth0
+     subnetIP: 10.100.100.0
+     cidr: 24
+     gatewayIP: 10.100.100.1
+     excludeIP: 10.100.100.254
+   n9network:
+     name: n9network
+-    masterIf: ens3
++    masterIf: eth0
+     subnetIP: 10.100.50.224
+     cidr: 28
+     gatewayIP: 10.100.50.230
+diff --git a/docs/deployments/free5gc-ulcl/netad-ueransim.yaml b/docs/deployments/free5gc-ulcl/netad-ueransim.yaml
+index c009002..16b57df 100644
+--- a/docs/deployments/free5gc-ulcl/netad-ueransim.yaml
++++ b/docs/deployments/free5gc-ulcl/netad-ueransim.yaml
+@@ -7,7 +7,7 @@ metadata:
+ spec:
+   config: >-
+     { "cniVersion": "0.3.1", "plugins": [ { "type": "ipvlan", "capabilities": {
+-    "ips": true }, "master": "ens3", "mode": "l2", "ipam": { "type": "static" } } ] }
++    "ips": true }, "master": "eth0", "mode": "l2", "ipam": { "type": "static" } } ] }
+ 
+ ---
+ apiVersion: k8s.cni.cncf.io/v1
+@@ -17,4 +17,4 @@ metadata:
+ spec:
+   config: >-
+     { "cniVersion": "0.3.1", "plugins": [ { "type": "ipvlan", "capabilities": {
+-    "ips": true }, "master": "ens3", "mode": "l2", "ipam": { "type": "static" } } ] }
++    "ips": true }, "master": "eth0", "mode": "l2", "ipam": { "type": "static" } } ] }
