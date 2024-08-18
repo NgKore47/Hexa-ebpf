@@ -1,0 +1,82 @@
+diff --git a/pfcp/handler/handler.go b/pfcp/handler/handler.go
+index 293d5ef..dca6728 100644
+--- a/pfcp/handler/handler.go
++++ b/pfcp/handler/handler.go
+@@ -9,7 +9,6 @@ package handler
+ import (
+ 	"context"
+ 	"fmt"
+-	"net"
+ 
+ 	mi "github.com/omec-project/metricfunc/pkg/metricinfo"
+ 	"github.com/omec-project/openapi/models"
+@@ -139,6 +138,7 @@ func HandlePfcpAssociationSetupResponse(msg *pfcpUdp.Message) {
+ 		//Get NodeId from Seq:NodeId Map
+ 		seq := msg.PfcpMessage.Header.SequenceNumber
+ 		nodeID = pfcp_message.FetchPfcpTxn(seq)
++		logger.PfcpLog.Infof("node ID from sequence number (%s)", nodeID.ResolveNodeIdToIp().String())
+ 
+ 		if nodeID == nil {
+ 			logger.PfcpLog.Errorf("No pending pfcp Assoc req for sequence no: %v", seq)
+@@ -179,24 +179,43 @@ func HandlePfcpAssociationSetupResponse(msg *pfcpUdp.Message) {
+ 			upf.UPFunctionFeatures = rsp.UPFunctionFeatures
+ 		}
+ 
+-		if rsp.UserPlaneIPResourceInformation != nil {
+-			upf.UPIPInfo = *rsp.UserPlaneIPResourceInformation
+-
+-			if upf.UPIPInfo.Assosi && upf.UPIPInfo.Assoni && upf.UPIPInfo.SourceInterface == pfcpType.SourceInterfaceAccess &&
+-				upf.UPIPInfo.V4 && !upf.UPIPInfo.Ipv4Address.Equal(net.IPv4zero) {
+-				logger.PfcpLog.Infof("UPF[%s] received N3 interface IP[%v], network instance[%v] and TEID[%v]",
+-					upf.NodeID.ResolveNodeIdToIp().String(), upf.UPIPInfo.Ipv4Address,
+-					string(upf.UPIPInfo.NetworkInstance), upf.UPIPInfo.TeidRange)
+-
+-				//reset the N3 interface of UPF
+-				upf.N3Interfaces = make([]smf_context.UPFInterfaceInfo, 0)
+-
+-				//Insert N3 interface info from UPF
+-				n3Interface := smf_context.UPFInterfaceInfo{}
+-				n3Interface.NetworkInstance = string(upf.UPIPInfo.NetworkInstance)
+-				n3Interface.IPv4EndPointAddresses = append(n3Interface.IPv4EndPointAddresses, upf.UPIPInfo.Ipv4Address)
+-				upf.N3Interfaces = append(upf.N3Interfaces, n3Interface)
+-			}
++		if rsp.UserPlaneIPResourceInformation == nil {
++			//upf.UPIPInfo = *rsp.UserPlaneIPResourceInformation
++
++			// if upf.UPIPInfo.Assosi && upf.UPIPInfo.Assoni && upf.UPIPInfo.SourceInterface == pfcpType.SourceInterfaceAccess &&
++			// 	upf.UPIPInfo.V4 && !upf.UPIPInfo.Ipv4Address.Equal(net.IPv4zero) {
++			// 	logger.PfcpLog.Infof("UPF[%s] received N3 interface IP[%v], network instance[%v] and TEID[%v]",
++			// 		upf.NodeID.ResolveNodeIdToIp().String(), upf.UPIPInfo.Ipv4Address,
++			// 		string(upf.UPIPInfo.NetworkInstance), upf.UPIPInfo.TeidRange)
++
++			// 	//reset the N3 interface of UPF
++			// 	upf.N3Interfaces = make([]smf_context.UPFInterfaceInfo, 0)
++
++			// 	//Insert N3 interface info from UPF
++			// 	n3Interface := smf_context.UPFInterfaceInfo{}
++			// 	n3Interface.NetworkInstance = string(upf.UPIPInfo.NetworkInstance)
++			// 	n3Interface.IPv4EndPointAddresses = append(n3Interface.IPv4EndPointAddresses, upf.UPIPInfo.Ipv4Address)
++			// 	upf.N3Interfaces = append(upf.N3Interfaces, n3Interface)
++			// }
++			upf.N3Interfaces = make([]smf_context.UPFInterfaceInfo, 0)
++			logger.PfcpLog.Infof("make upf.n3interface execute")
++
++			//Insert N3 interface info from UPF
++			n3Interface := smf_context.UPFInterfaceInfo{}
++			logger.PfcpLog.Infof("n3Interface := smf_context.UPFInterfaceInfo{} executed")
++
++			n3Interface.NetworkInstance = string("internet")
++			logger.PfcpLog.Infof("	n3Interface.NetworkInstance = string(internet )executed ")
++
++			upf.UPIPInfo.Ipv4Address = []byte{192, 168, 252, 3}
++			logger.PfcpLog.Infof("			upf.UPIPInfo.Ipv4Address = []byte{192, 168, 252, 3} executed")
++
++			logger.PfcpLog.Infof("ipv4 address [%v]", upf.UPIPInfo.Ipv4Address)
++			n3Interface.IPv4EndPointAddresses = append(n3Interface.IPv4EndPointAddresses, upf.UPIPInfo.Ipv4Address)
++			logger.PfcpLog.Infof("ipv4 address [%v]", n3Interface.IPv4EndPointAddresses)
++
++			upf.N3Interfaces = append(upf.N3Interfaces, n3Interface)
++			logger.PfcpLog.Infof("ipv4 address [%v]", upf.N3Interfaces)
+ 
+ 			logger.PfcpLog.Infof("UPF(%s)[%s] setup association success",
+ 				upf.NodeID.ResolveNodeIdToIp().String(), upf.UPIPInfo.NetworkInstance)
